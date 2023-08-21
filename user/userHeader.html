@@ -13,12 +13,7 @@
 }
 
 
-.hero{
-  width:100%;
-  min-height:100vh;
-  background:#eceaff;
-  color:#525252;
-}
+
 
 nav{
   background:#a5a1d7;
@@ -44,6 +39,7 @@ nav{
 nav ul{
   width:100%;
   text-align: right;
+  margin-top: 10px;
 }
 
 nav ul li{
@@ -75,6 +71,8 @@ nav ul li a{
   background:#fff;
   padding:20px;
   margin:10px;
+  position: relative;
+  z-index: 10; 
 }
 
 .user-info{
@@ -104,13 +102,14 @@ nav ul li a{
 .sub-menu-link{
   display:flex;
   align-items:center;
-  text-decoration: none;
+  text-decoration: none !important;
   color:#525252;
   margin:12px 0;
 }
 
 .sub-menu-link p{
   width:100%;
+  padding-top: 10px;
 }
 
 .sub-menu-link img{
@@ -132,6 +131,7 @@ nav ul li a{
 
 .sub-menu-link:hover p{
   font-weight:600;
+  
 }
 
 
@@ -145,7 +145,6 @@ nav ul li a{
 </head>
 <body>
 
-  <div class="hero">
     <nav>
       <img src="../images/LOGO.png" class="logo">
       <ul>
@@ -198,7 +197,6 @@ nav ul li a{
 
    
 
-  </div>
   <script>
     let subMenu=document.getElementById("subMenu");
 
