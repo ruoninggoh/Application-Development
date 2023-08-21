@@ -18,11 +18,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['role'] = $user['role']; // Assuming role is stored as 'role' in the User table
 
 
-        header("location:../main_session.php");
+        header("location:../userDashboard.php");
         exit();
     } else {
         $error = "<script>
-                var signInAgain = confirm('Wrong Username/Password!'); 
+                var signInAgain = confirm('Wrong Username/ Password/ Role! Please try again...'); 
                 if (signInAgain) {
                     window.location.href = '../signin.php';
                 }
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
     $error = "<script>
-            var signInAgain = confirm('Wrong Username/Password!'); 
+            var signInAgain = confirm('Wrong Username/ Password/ Role! Please try again...'); 
             if (signInAgain) {
                 window.location.href = '../signin.php';
             } 

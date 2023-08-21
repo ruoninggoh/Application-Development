@@ -24,7 +24,7 @@
      
     <title>Login Form</title>
     <link rel="stylesheet" href="css/recover_psw.css">
-    <?php include("css/landingHeader.html"); ?>
+    <?php include("landingHeader.html"); ?>
 </head>
 <body>
 
