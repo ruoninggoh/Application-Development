@@ -1,10 +1,12 @@
-body{
+body {
+    background-image: url("../image/landing.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
-    background-image: url("image/landing.png");
-  }
+}
 
 .mainIntro {
     color: rgb(117, 116, 116);
@@ -22,17 +24,30 @@ body{
     font-style: italic;
 }
 
-.btn-black {
-    background-color: rgb(122, 152, 222);
+.button {
+    background-color: rgb(45, 27, 209);
+    border-radius: 5px;
     color: white;
-    border: none;
+    border-color:rgb(122, 152, 222); ;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
     cursor: pointer;
+}
 
-}
-.btn-black:hover {
+.button:hover {
     background-color: #606060;
+    color: white;
 }
-.center-container{
+
+.center-container {
     text-align: left;
     margin-left: 52px;
+}
+
+ul{
+    margin:0px;
 }

@@ -3,14 +3,12 @@
 
 <head>
   <title>User</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   <style>
-    
     nav {
-      background: #a5a1d7;
+      background: #8084e1;
       width: 100%;
-      padding: 10px 10%;
+      padding: 3px 10%;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -43,6 +41,26 @@
       color: #fff;
       text-decoration: none;
     }
+
+    .btn-primary{
+      background-color: rgb(253, 253, 253);
+      border-radius: 5px;
+      border-color: #a5a1d7;
+      color: rgb(0, 0, 0);
+      padding: 8px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 3px 2px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background-color: #3a4ee6;
+      color: white;
+    }
   </style>
 </head>
 
@@ -50,16 +68,17 @@
 
   <div class="hero">
     <nav>
-      <img src="./image/LOGO.png" class="logo">
+      <img src="image/LOGO.png" class="logo" alt="">
       <ul>
         <li><a href="main.php">Home</a> </li>
         <li><a href="about.php">About</a></li>
         <li><a href="contact.php">Contact</a></li>
-        <li><button class="btn btn-outline-secondary ml-auto" type="button"
-            onclick="window.location.href='signin.php'">Sign
+        <li><button type="button" class="btn btn-primary" onclick="window.location.href='signin.php'">Sign
             In</button></li>
       </ul>
 
     </nav>
 
   </div>
+</body>
+</html>

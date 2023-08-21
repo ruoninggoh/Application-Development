@@ -1,0 +1,123 @@
+body {
+    background-image: url("../image/signin.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.card {
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 50px auto;
+}
+
+.navbar-brand {
+    padding-right: 100px;
+}
+
+.nav-item {
+    margin-right: 40px;
+}
+
+.form-control:focus {
+    border-color: rgb(52, 104, 188);
+    box-shadow: none;
+}
+
+.app {
+    margin-left: 50px;
+}
+
+h4 {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.center-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.role-button {
+    background-color: rgb(84, 121, 212);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+    /* Add a transition effect for smoother change */
+}
+
+.role-button.active {
+    background-color: #606060;
+}
+
+.text-left {
+    text-align: left;
+    margin-top: 10px;
+}
+
+.text-center {
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+.custom-btn-signin {
+    background-color: #007BFF;
+    border-radius: 5px;
+    border-color: #a5a1d7;
+    color: white;
+    padding: 8px 130px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: auto; 
+    max-width: 100%;
+
+}
+
+.custom-btn-signin:hover {
+    background-color: #6322ee;
+    color: white;
+}
+
+ul {
+    margin: 0px;
+}
+
+.custom-btn-signup {
+    background-color: #007BFF;
+    border-radius: 5px;
+    border-color: #a5a1d7;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    max-width: 100%;
+    width: auto;
+    padding: 8px 130px; 
+}
+
+.custom-btn-signup:hover {
+    background-color: #6322ee;
+    color: white;
+}
