@@ -55,4 +55,5 @@ $sql = "CREATE TABLE contactForm (
 mysqli_query($con, $sql);
 
 mysqli_close($con);
+
 ?>
