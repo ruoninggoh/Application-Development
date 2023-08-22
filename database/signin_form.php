@@ -10,13 +10,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($con, $sql);
     $user = mysqli_fetch_assoc($result);
 
+
     if ($user && password_verify($_POST['password'], $user['password'])) {
         session_start();
         $_SESSION['login'] = "YES";
         $_SESSION['userID'] = $user['userID'];
         $_SESSION['email'] = $user['email'];
         $_SESSION['role'] = $user['role']; // Assuming role is stored as 'role' in the User table
-
+        $userid=$_SESSION['userID'];
 
         header("location:../userDashboard.php");
         exit();

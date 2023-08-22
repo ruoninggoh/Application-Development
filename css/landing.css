@@ -1,5 +1,5 @@
 body {
-    background-image: url("../image/landing.png");
+    background-image: url("../image/landing.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -9,7 +9,7 @@ body {
 }
 
 .mainIntro {
-    color: rgb(117, 116, 116);
+    color: rgb(0, 0, 0);
     margin-top: 120px;
     margin-left: 50px;
 }
