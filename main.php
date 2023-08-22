@@ -23,9 +23,7 @@
         </div>
         <br>
         <div class="center-container">
-            <form action="sigin.php">
-                <button type="button" class="btn button">Make Appointment</button>
-            </form>
+                <a href="signin.php" class="btn button">Make Appointment</a>
         </div>
 
 </body>
