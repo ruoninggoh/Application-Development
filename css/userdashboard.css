@@ -9,7 +9,7 @@
 .hero{
   width:100%;
   min-height:100vh;
-  background:#eceaff;
+  background-image: url("../images/signin.jpg");
   color:#525252;
 }
 
@@ -128,5 +128,138 @@ nav ul li a{
 }
 
 
+.dash-body {
+  width: 100%;
+  padding: 50px;
+  padding-bottom: 2px;
+}
+
+table {
+  width: 100%;
+}
+
+.nav-bar {
+  width: 100px; /* Adjust the width as needed */
+}
+
+.btn-label{
+  align-items:center;
+}
+
+.date-wrapper {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px; /* Adjust the margin as needed */
+  margin-bottom: 5px;
+}
 
 
+.dashboard-items{
+  border: 2px solid #181f3e;
+  border-radius: 10px;
+  color: var(--primarycolor);
+  background-color: #ffffff ;
+  padding:20px;
+  margin:auto;
+  display:flex;
+  width:90%;
+  margin-top: 20px;
+  /*box-shadow: 0 3px 5px 0 rgba(95, 95, 97, 0.3);*/
+  /*style="margin:auto; width:95%; display:flex"*/
+}
+
+
+.h1-dashboard{
+  margin: 0;
+  padding: 0;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 0;
+  padding-top: 20px;
+}
+
+.h3-dashboard{
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 500;
+  color: #212529e3;
+}
+
+.filter-container{
+  border:none;
+  border:0;
+}
+
+.filter-container p{
+  font-size:20px;
+  font-weight:600;
+  text-align:left;
+  padding-left: 35px;
+  padding-top:50px;
+ 
+}
+
+
+.btn-icon-back1{
+  background-image: url('../images/doctors.svg');
+  background-position: 18px 50%;
+  background-repeat: no-repeat;
+  transition: 0.5s;
+  padding: 8px 20px 8px 40px;
+}
+
+.btn-icon-back1:hover{
+  background-image: url('../images/doctors-hover.svg');
+}
+
+
+.btn-icon-back2:hover{
+  background-image: url('../images/patients-hover.svg');
+}
+
+
+.btn-icon-back2{
+  background-image: url('../images/patients.svg');
+  background-position: 18px 50%;
+  background-repeat: no-repeat;
+  transition: 0.5s;
+  padding: 8px 20px 8px 40px;
+}
+
+.btn-icon-back3:hover{
+  background-image: url('../images/book-hover.svg');
+}
+
+.btn-icon-back3{
+  background-image: url('../images/book.svg');
+  background-position: 18px 50%;
+  background-repeat: no-repeat;
+  transition: 0.5s;
+  padding: 8px 20px 8px 40px;
+}
+
+
+.btn-icon-back4:hover{
+  background-image: url('../images/session-iceblue.svg');
+}
+
+.btn-icon-back4{
+  background-image: url('../images/session.svg');
+  background-position: 18px 50%;
+  background-repeat: no-repeat;
+  transition: 0.5s;
+  padding: 8px 20px 8px 40px;
+}
+
+
+
+.dashboard-icons{
+  background-color: rgba(184, 184, 184, 0.247);
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-radius: 7px;
+  margin-left: 40px;
+  margin-right: 0px;
+  
+}

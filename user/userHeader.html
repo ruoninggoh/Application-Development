@@ -16,7 +16,7 @@
 
 
 nav{
-  background:#a5a1d7;
+  background:#DBE2EF;
   width:100%;
   padding:10px 10%;
   display:flex;
@@ -49,8 +49,8 @@ nav ul li{
 }
 
 nav ul li a{
-  color:#fff;
-  text-decoration:none;
+  color: rgb(0, 0, 0);
+  text-decoration:none !important;
 }
 
 .sub-menu-wrap{
@@ -148,10 +148,10 @@ nav ul li a{
     <nav>
       <img src="../images/LOGO.png" class="logo">
       <ul>
-        <li><a href="#">Home</a> </li>
+        <li><a href="./userdashboard.php">Home</a> </li>
         <li><a href="#">Appointment</a></li>
         <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="contactuser.php">Contact</a></li>
       </ul>
       <img src="../images/patients.png" class="user-pic" onclick="toggleMenu()">
 
@@ -182,7 +182,7 @@ nav ul li a{
               <span>></span>
             </a>
 
-            <a href="#" class=sub-menu-link>
+            <a href="../sign_out.php" class=sub-menu-link>
               <img src="../images/logout.png">
               <p>Logout</p>
               <span>></span>
