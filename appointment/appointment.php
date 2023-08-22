@@ -27,7 +27,7 @@
             die("Connection failed: ". mysqli_connect_error());
         }
 
-        $sql = "INSERT INTO Appointment(_date, _time, reason) VALUES ('$date', '$time', '$reason')";
+        $sql = "INSERT INTO Appointment(_date, _time, reason,user_id) VALUES ('$date', '$time', '$reason', '$userid')";
 
         if (mysqli_query($conn,$sql)){
             echo "<script>alert('Appointment booked successfully')</script>";
