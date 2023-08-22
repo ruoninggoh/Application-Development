@@ -18,7 +18,7 @@
     $isSlotAvailable = checkTimeSlotAvailability($date,$time);
 
     if(!$isSlotAvailable){
-        echo "The selected tiem slot is not available. Please choose another time slot";
+        echo "<script>alert(The selected time slot is not available. Please choose another time slot)<script>";
     } else{
 
         $conn = mysqli_connect($servername,$username,$password,$dbname);
