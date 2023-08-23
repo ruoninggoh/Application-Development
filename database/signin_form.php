@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 include("connectdb.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

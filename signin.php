@@ -42,7 +42,7 @@
                             </div>
                             <div>
                                 <div class="text-left mt-3">
-                                    <a href="recover_psw.php">Forgot Passowrd?</a></h>
+                                    <a href="recover_psw.php">Forgot Password?</a></h>
                                 </div><br>
                                 <button type="submit" class="btn custom-btn-signin">Sign In</button>
                                 <div class="text-center mt-3">

@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,7 +100,7 @@
                       </table>
                     </p>
                     <div>
-                      <a href="">
+                      <a href="./appointment_form.php">
                         Book an Appointment
                       </a>
                     </div>
@@ -144,7 +148,7 @@
         
                     </p>
                     <div>
-                      <a href="">
+                      <a href="./appointment_form.php">
                        Book an Appointment
                       </a>
                     </div>
@@ -192,7 +196,7 @@
         
                     </p>
                     <div>
-                      <a href="">
+                      <a href="./appointment_form.php">
                         Book an Appointment
                       </a>
                     </div>
