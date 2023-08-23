@@ -32,8 +32,8 @@
         $sql = "INSERT INTO Appointment(_date, _time, reason,user_id) VALUES ('$date', '$time', '$reason', '$userid')";
 
         if (mysqli_query($conn,$sql)){
-            echo "<script>alert('Appointment booked successfully')</script>";
-            header("Location:userdashboard.php");
+            echo "<script>alert('Appointment booked successfully'); window.location.href = '../user/userdashboard.php';</script>";
+
         } else{
             echo "Error: " . mysqli_error($conn);
         }
