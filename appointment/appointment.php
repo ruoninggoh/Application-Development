@@ -2,7 +2,7 @@
     session_start();
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if (!isset($_SESSION["userID"])){
-            header("Location:userdashboard.php");
+            header("Location:signin_form.php");
             exit();
         }
     }
@@ -19,6 +19,7 @@
 
     if(!$isSlotAvailable){
         echo "<script>alert(The selected time slot is not available. Please choose another time slot)<script>";
+        header("Location:appointment_form.php");
     } else{
 
         $conn = mysqli_connect($servername,$username,$password,$dbname);
@@ -31,6 +32,7 @@
 
         if (mysqli_query($conn,$sql)){
             echo "<script>alert('Appointment booked successfully')</script>";
+            header("Location:userdashboard.php");
         } else{
             echo "Error: " . mysqli_error($conn);
         }
