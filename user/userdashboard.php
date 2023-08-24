@@ -354,11 +354,11 @@ session_start();
 
 
         <td>
-          <p style="font-size:20px; font-weight:800;padding-left:40px;padding-top:30px; padding-bottom:20px;"class="anime">Your Upcoming Booking&nbsp;
+          <p style="font-size:20px; font-weight:800;padding-left:40px;padding-top:70px; padding-bottom:20px;"class="anime">Your Upcoming Booking&nbsp;
           <img src="../images/calendar.svg" style="padding-bottom:5px;">
         </p>
           <center>
-            <div class="abc scroll" style="height:250px;padding:0;margin:0;padding-left:50px">
+            <div class="abc scroll" style="height:250px;padding:0;margin:0;padding-left:80px">
             <table width="85%" class="sub-table scrolldown" border="0">
               <thead>
                 <tr>
@@ -402,7 +402,7 @@ session_start();
                        $numappointm++;
                
                        echo '<tr>';
-                       echo '<td>' . $numappointm . '</td>'; // Display the appointment number
+                       echo '<td style="padding-left:60px">' . $numappointm . '</td>'; // Display the appointment number
                        echo '<td>' . $row['_time'] . '</td>'; // Display the appointment time
                        echo '<td>' . $row['_date'] . '</td>'; // Display the appointment date
                        echo '</tr>';
