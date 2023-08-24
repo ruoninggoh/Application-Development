@@ -8,6 +8,6 @@ if (!mysqli_query($con, $sql)) {
 }
 
 mysqli_close($con);
-header("Location:../user/contactuser.php?submitted=true");
+header("Location:../contactuser.php?submitted=true");
 exit();
 ?>

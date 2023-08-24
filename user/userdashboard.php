@@ -1,5 +1,6 @@
 <?php
-  session_start();
+ob_start();
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +35,16 @@
 
   <div class="hero">
     <?php
+    include("../database/connectdb.php");
     include("userHeader.html");
+    if(!isset($_SESSION['userID'])){
+      header("Location:../database/signin_form.php");
+      exit();
+    }
+      //If userID is set
+      //import database
+      include("../database/connectdb.php");
+
     ?>
     <div class="dash-body" >
       <table>
@@ -50,6 +60,42 @@
             date_default_timezone_set('Asia/Kuala_Lumpur');
             $today=date('Y-m-d');
             echo $today;
+
+            $userrow=mysqli_query($con, "select*from user");
+            $numUser=mysqli_num_rows($userrow);
+
+
+            $doctorrow=mysqli_query($con,"select * from doctor");
+            $numDoc=mysqli_num_rows($doctorrow);
+
+            $numbooking=0;
+            $bookingrow=mysqli_query($con, "select * from appointment");
+            while($row=mysqli_fetch_assoc($bookingrow)){
+              if(strtotime($row['_date'])>=strtotime(date('Y-m-d 00:00:00'))){
+                $numbooking++;
+              }
+            }
+
+
+            $numappointm = 0;
+          $today = date('Y-m-d'); // Get the current date in 'Y-m-d' format
+
+          // Use prepared statement to query appointments for the current day
+          $query = "SELECT * FROM appointment WHERE DATE(_date) = ?";
+          $stmt = mysqli_prepare($con, $query);
+          mysqli_stmt_bind_param($stmt, 's', $today);
+          mysqli_stmt_execute($stmt);
+          $appointmentrow = mysqli_stmt_get_result($stmt);
+
+          // Loop through the results and count the appointments
+          while ($row = mysqli_fetch_assoc($appointmentrow)) {
+            $numappointm++;
+          }
+
+          // Close the prepared statement
+          mysqli_stmt_close($stmt);
+
+            
             ?>
 <b>
       </div>
@@ -238,7 +284,7 @@
           <div class="dashboard-items" >
             <div>
               <div class="h1-dashboard">
-                <!--php-->
+                <?php echo $doctorrow->num_rows ?>
               </div><br>
               <div class="h3-dashboard">
                 All Doctors &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -255,6 +301,7 @@
           <div  class="dashboard-items" >
               <div>
                       <div class="h1-dashboard">
+                      <?php echo $userrow->num_rows ?>
                        
                       </div><br>
                       <div class="h3-dashboard">
@@ -270,7 +317,7 @@
           <div  class="dashboard-items" >
               <div>
                       <div class="h1-dashboard" >
-                         <!-- <?php    echo $appointmentrow ->num_rows  ?>-->
+                        <?php echo $numbooking;?>
                       </div><br>
                       <div class="h3-dashboard" >
                           NewBooking &nbsp;&nbsp;
@@ -285,15 +332,18 @@
           <div  class="dashboard-items">
               <div>
                       <div class="h1-dashboard">
-                         <!--  <?php    echo $schedulerow ->num_rows  ?>-->
+                      <?php echo $numappointm; ?>
                       </div><br>
-                      <div class="h3-dashboard" >
+                      <div class="h3-dashboard" style="font-size: 19px">
                           Today Sessions
                       </div>
               </div>
                       <div class="btn-icon-back4 dashboard-icons"></div>
           </div>
       </td>
+
+
+      
       
   </tr>
 </table>
@@ -304,7 +354,7 @@
 
 
         <td>
-          <p style="font-size:20px; font-weight:800;padding-left:40px;padding-top:30px;"class="anime">Your Upcoming Booking&nbsp;
+          <p style="font-size:20px; font-weight:800;padding-left:40px;padding-top:30px; padding-bottom:20px;"class="anime">Your Upcoming Booking&nbsp;
           <img src="../images/calendar.svg" style="padding-bottom:5px;">
         </p>
           <center>
@@ -317,7 +367,7 @@
                   </th>
                   
                   <th class="table-headin">
-                    Session Title
+                    Session Time
                   </th>
 
                   <th class="table-headin">
@@ -329,27 +379,59 @@
               </thead>
 
               <tbody>
-              <!--
+             
                 <?php
-                $nextweek=date("Y-m-d", strtotime("+1 week"));
-                //php
-
-                if($result->num_rows==0){
-                  echo '<tr>
+               $numappointm = 0;
+               $today = date('Y-m-d'); // Get the current date in 'Y-m-d' format
+               
+               // Get the specific user's ID from the session
+               $userID = $_SESSION['userID'];
+               
+               // Use prepared statement to query appointments for the current day and specific user
+               $query = "SELECT * FROM appointment WHERE user_id = ? AND  _date >= ? ORDER BY _date ASC, _time ASC";
+               $stmt = mysqli_prepare($con, $query);
+               mysqli_stmt_bind_param($stmt, 'ss', $userID, $today);
+               mysqli_stmt_execute($stmt);
+               $appointmentrow = mysqli_stmt_get_result($stmt);
+               
+               // Check if there are appointments for the current date and specific user
+               if (mysqli_num_rows($appointmentrow) > 0) {
+               
+                   // Loop through the results and display the appointments' date and time
+                   while ($row = mysqli_fetch_assoc($appointmentrow)) {
+                       $numappointm++;
+               
+                       echo '<tr>';
+                       echo '<td>' . $numappointm . '</td>'; // Display the appointment number
+                       echo '<td>' . $row['_time'] . '</td>'; // Display the appointment time
+                       echo '<td>' . $row['_date'] . '</td>'; // Display the appointment date
+                       echo '</tr>';
+                   }
+               } else {
+                echo '<tr>
                   <td colspan="4">
-                  <br><br><br><br>
+                  <br><br>
                   <center>
-                  <img src="../images/notfound.svg" width="25%">
+                  <img src="../images/notfound.svg" width="30%">
+                  <br>
+                  <p class="heading-main12" style="margin-left:30px; font-size:20px; color:rgb(49,49,49)">Nothing to show here! </p>
+                  
+                  <a class="non-style-link" href="appointment_form.php">
+                  <button class= "login-btn btn-primary-soft btn" style="display:flex; justify-content:center; align-items:center; margin-left:20px;">
+                  &nbsp; Make an Appointment &nbsp;
+                  
+                  </button>
+                  </a>
+                  </center>
+                  <br><br><br><br>
+              
                   </td>
                   </tr>';
-                }
+               }
+               
+               // Close the prepared statement
+               mysqli_stmt_close($stmt);
                 ?>
-
-              -->
-
-                  
-
-
           
         
         </td>
@@ -359,12 +441,10 @@
 </tr>
 
 
-
-
-
-
-
 </div>
+</body>
+</html>
+
   <script>
     let subMenu=document.getElementById("subMenu");
 
