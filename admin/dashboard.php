@@ -1,11 +1,32 @@
 <?php
-  session_start();
+session_start();
+
+// Check for update success message
+if (isset($_SESSION['update'])) {
+    echo $_SESSION['update'];
+    unset($_SESSION['update']); // Clear the message
+}
+
+// Check for MySQL error message
+if (isset($_SESSION['mysql_error'])) {
+    echo $_SESSION['mysql_error'];
+    unset($_SESSION['mysql_error']); // Clear the message
+}
+
+if(isset($_SESSION['upload'])){
+    echo $_SESSION['upload'];
+    unset($_SESSION['upload']);
+}
+
+
+// ... rest of your dashboard.php code
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>User Dashboard</title>
+  <title>Admin Dashboard</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../css/userdashboard.css">
@@ -35,23 +56,19 @@
   <div class="hero">
     <?php
     include("../database/connectdb.php");
-    include("userHeader.html");
+    include("./adminHeader.html");
+    /*
 
-
-    if(isset($_SESSION['userID'])){
-      header("Location:sigin_form.php");
-      exit();
-
-      //import database
-      include("../database/connectdb.php");
-
-      $sqlmain="select * from user where userID=?";
-      $stmt=$database->prepare($sqlmain);
-      
-
-
-
+    if(isset($_SESSION['update'])){
+        echo $_SESSION['update'];
+        unset($_SESSION['update']);
     }
+    if(!isset($_SESSION['userID'])){
+      header("Location:../database/signin_form.php");
+      exit();
+    }
+    */
+
     ?>
     <div class="dash-body" >
       <table>
@@ -114,6 +131,8 @@
 
 
   <!-- slider section -->
+  
+        
   <section class=" slider_section position-relative">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -359,69 +378,81 @@
           </center>
         </td>
 
-
-        <td>
-          <p style="font-size:20px; font-weight:800;padding-left:40px;padding-top:30px;"class="anime">Your Upcoming Booking&nbsp;
-          <img src="../images/calendar.svg" style="padding-bottom:5px;">
-        </p>
-          <center>
-            <div class="abc scroll" style="height:250px;padding:0;margin:0;padding-left:50px">
-            <table width="85%" class="sub-table scrolldown" border="0">
-              <thead>
-                <tr>
-                  <th class="table-headin">
-                    Appointment No
-                  </th>
-                  
-                  <th class="table-headin">
-                    Session Time
-                  </th>
-
-                  <th class="table-headin">
-                    Scheduled Date 
-                  </th>
-                
-                  </tr>
-
-              </thead>
-
-              <tbody>
-              <!--
-                <?php
-                $nextweek=date("Y-m-d", strtotime("+1 week"));
-                //php
-
-                if($result->num_rows==0){
-                  echo '<tr>
-                  <td colspan="4">
-                  <br><br><br><br>
-                  <center>
-                  <img src="../images/notfound.svg" width="25%">
-                  </td>
-                  </tr>';
-                }
-                ?>
-
-              -->
-
-                  
-
-
-          
         
+
+        
+       
+        <table>
+        <tr>
+
+        <?php
+            $result=mysqli_query($con, "SELECT * FROM dashboard");
+            $count=mysqli_num_rows($result);
+            $num=0;
+            if($count!=0){
+                while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $id=$row['id'];
+                $title=$row['title'];
+                $description = $row['description']; // Fetch description from the database
+                $image=$row['image'];
+                $num++;
+                
+            ?>
+
+        <div class="edit-button-container" style="text-align:right; padding-top:50px; padding-right:80px;">
+        <a href="edit_dashboard.php?id=<?php echo $id; ?>"class="edit-button" style="background-color: #B31312;  color: #fff;
+            border: none; padding: 10px 20px;   display: inline-block; border-radius: 5px;  font-size: 16px;  text-decoration: none;
+            cursor: pointer;transition: background-color 0.3s ease;"
+            onmouseover="this.style.backgroundColor='#E74646';"
+            onmouseout="this.style.backgroundColor='#B31312';" >Edit Information</a>
+        </div>
+
+        
+      
+            <tr>
+
+            <td colspan="4">
+            <p style="padding-left: 35px;"><b><?php echo $num ?>. Additional Information </b></p>
+
+                <div class="additional-content"style="padding:20px 40px;display:flex; align-items:center;">
+                    <br><br>
+                    <?php 
+                    if($image==""){
+                        echo"<div>Image is not added</div>";
+                    }else{
+                        echo"<img class='dashboardPhoto' style='width:600px; margin-right:20px; margin-top:40px;margin-bottom:60px;height:400px;' src=../images/dashboard/$image />";
+
+                    }
+                    ?>
+                    <div>
+                        <h2 style="margin-left:50px; flex:1;"><b><?php echo $title ?></b></h2>
+                        <p style="margin-left:50px;margin-right:20px; margin-top:40px;font-weight:40px;flex:1;"><?php echo $description?></p>
+        </div>
+        </div>
         </td>
-      </tr>
-    </table>
+        </tr>
+        <?php
+                }
+            }
+        ?>
+        </table>
+    
+    
+
+
   </td>
+  
 </tr>
 
 
 
-
-
-
-
 </div>
+
+
+
+</body>
+</html>
+
   <script>
     let subMenu=document.getElementById("subMenu");
 

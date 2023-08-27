@@ -410,11 +410,11 @@ session_start();
                } else {
                 echo '<tr>
                   <td colspan="4">
-                  <br><br>
+                
                   <center>
                   <img src="../images/notfound.svg" width="30%">
                   <br>
-                  <p class="heading-main12" style="margin-left:30px; font-size:20px; color:rgb(49,49,49)">Nothing to show here! </p>
+                  <p class="heading-main12" style="margin-left:30px; padding-bottom:20px;font-size:20px; color:rgb(49,49,49)">Nothing to show here! </p>
                   
                   <a class="non-style-link" href="appointment_form.php">
                   <button class= "login-btn btn-primary-soft btn" style="display:flex; justify-content:center; align-items:center; margin-left:20px;">
@@ -423,7 +423,7 @@ session_start();
                   </button>
                   </a>
                   </center>
-                  <br><br><br><br>
+                
               
                   </td>
                   </tr>';
@@ -436,9 +436,65 @@ session_start();
         
         </td>
       </tr>
+      
     </table>
+   
+    <tr>
+    <table>
+        <tr>
+
+        <?php
+            $result=mysqli_query($con, "SELECT * FROM dashboard");
+            $count=mysqli_num_rows($result);
+            $num=0;
+            if($count!=0){
+                while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $id=$row['id'];
+                $title=$row['title'];
+                $description = $row['description']; // Fetch description from the database
+                $image=$row['image'];
+                $num++;
+                
+            ?>
+
+       
+        
+      
+            <tr>
+
+            <td colspan="4">
+            <p style="padding-left: 35px;padding-top:50px;"><b>Additional Information </b></p>
+
+                <div class="additional-content"style="padding:20px 40px;display:flex; align-items:center;">
+                    <br><br>
+                    <?php 
+                    if($image==""){
+                        echo"<div>Image is not added</div>";
+                    }else{
+                        echo"<img class='dashboardPhoto' style='width:600px; margin-right:20px; margin-top:40px;margin-bottom:60px;height:400px;' src=../images/dashboard/$image />";
+
+                    }
+                    ?>
+                    <div>
+                        <h2 style="margin-left:50px; flex:1;"><b><?php echo $title ?></b></h2>
+                        <p style="margin-left:50px;margin-right:20px; margin-top:40px;font-weight:40px;flex:1;"><?php echo $description?></p>
+        </div>
+        </div>
+        </td>
+        </tr>
+        <?php
+                }
+            }
+        ?>
+        </table>
+          </tr>
+    
+    
+
   </td>
+  
 </tr>
+
 
 
 </div>

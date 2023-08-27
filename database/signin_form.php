@@ -20,8 +20,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['role'] = $user['role']; // Assuming role is stored as 'role' in the User table
         $userid=$_SESSION['userID'];
 
-        header("location:../user/userdashboard.php");
-        exit();
+        if($row['role']==='admin'){
+            header("Location:./admin/dashboard.php");
+          }else{
+            header("location:../user/userdashboard.php");
+          }
+
+          exit();
+
+    
     } else {
         $error = "<script>
                 var signInAgain = confirm('Wrong Username/ Password/ Role! Please try again...'); 

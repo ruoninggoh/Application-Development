@@ -1,0 +1,54 @@
+.editDashboardForm{
+    width: 550px;
+    background-color: #a9bad7;
+    border-radius: 10px;
+    padding: 30px 20px;
+    margin: 35px auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+body{
+  background-image: url("../images/signin.jpg");
+  background-size: cover; 
+  background-repeat: no-repeat; 
+}
+
+.form-content h1{
+  padding:10px 10px 15px;
+  margin-top: 10;
+  font-size: 33px;
+}
+
+.form-content td{
+  padding:20px 15px;
+  vertical-align: top;
+}
+
+.form-content input[type="text"],
+.form-content textarea{
+  border:none;
+  box-shadow: 2px 4px 10px #bebebe;
+  padding:10px;
+  width:300px;
+}
+
+.submitbtnStyle{
+  text-align: center;
+  padding-top:10px;
+}
+
+.submitbtn{
+  border-radius:20px;
+  padding:10px 20px;
+  border:none;
+  background-color: #354b6f;
+  color:#bebebe;
+}
+
+.submitbtn:hover{
+  cursor:pointer;
+  background-color: rgb(87, 110, 124);
+}
+
+
+
