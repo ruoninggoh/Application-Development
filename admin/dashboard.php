@@ -412,7 +412,7 @@ if(isset($_SESSION['upload'])){
             <tr>
 
             <td colspan="4">
-            <p style="padding-left: 35px;"><b><?php echo $num ?>. Additional Information </b></p>
+            <p style="padding-left: 35px;"><b> Additional Information </b></p>
 
                 <div class="additional-content"style="padding:20px 40px;display:flex; align-items:center;">
                     <br><br>
