@@ -1,5 +1,5 @@
 body {
-    background-image: url("../images/signin.jpg");
+    background-image: url("../image/signin.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -14,7 +14,7 @@ body {
     padding: 20px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 400px;
-    margin: 50px auto;
+    margin: 40px auto;
 }
 
 .navbar-brand {
@@ -120,4 +120,56 @@ ul {
 .custom-btn-signup:hover {
     background-color: #6322ee;
     color: white;
+}
+
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;;
+}
+
+.error-box {
+    border: 2px solid red;
+    padding: 5px;
+    background-color: #ffebee; /* Light red background color */
+    text-align: center;
+}
+
+.error-message {
+    color: red;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.form-group {
+    position: relative; /* Ensure the relative position for the parent */
+}
+
+.form-group i.fa-eye {
+    position: absolute;
+    right: 10px; /* Adjust the position as needed */
+    top: 75%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999; /* Default color for the icon */
+    transition: color 0.3s ease;
+}
+
+.form-group i.fa-eye:hover {
+    color: #181818; /* Change color on hover */
+}
+
+.form-group i.fa-eye-slash {
+    position: absolute;
+    right: 10px; /* Adjust the position as needed */
+    top: 75%;
+    transform: translateY(-60%);
+    cursor: pointer;
+    color: #999; /* Default color for the icon */
+    transition: color 0.3s ease;
+}
+
+.form-group i.fa-eye-slash:hover {
+    color: #181818; /* Change color on hover */
 }
