@@ -61,7 +61,7 @@ session_start();
             $today=date('Y-m-d');
             echo $today;
 
-            $userrow=mysqli_query($con, "select*from user");
+            $userrow=mysqli_query($con, "select*from user WHERE role = 'Patient'");
             $numUser=mysqli_num_rows($userrow);
 
 
