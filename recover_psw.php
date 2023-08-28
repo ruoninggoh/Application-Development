@@ -79,6 +79,8 @@
             $token = bin2hex(random_bytes(50));
 
             //session_start ();
+
+
             $_SESSION['token'] = $token;
             $_SESSION['email'] = $email;
 
