@@ -20,16 +20,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['role'] = $user['role']; // Assuming role is stored as 'role' in the User table
         $userid=$_SESSION['userID'];
 
-        if($user['role']==='Staff'){
-            header("Location:./admin/dashboard.php");
-          }else{
+        
+        if($user['role']=='Patient'){
             header("location:../user/userdashboard.php");
           }
-
-          exit();
-
     
     } else {
+
+        if($user['role']=='Staff'){
+            header("Location:../admin/dashboard.php");
+          }
+
         $error = "<script>
                 var signInAgain = confirm('Wrong Username/ Password/ Role! Please try again...'); 
                 if (signInAgain) {
@@ -39,6 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo $error;
     }
 } else {
+
+
     $error = "<script>
             var signInAgain = confirm('Wrong Username/ Password/ Role! Please try again...'); 
             if (signInAgain) {
