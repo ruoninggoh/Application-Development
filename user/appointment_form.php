@@ -22,6 +22,7 @@
           <div class="user-input-box">
             <label for="_time">Time</label>
             <select id="time" name="time" required>
+                <option value=" ">Select Time</option>
                 <option value="08:00:00">08:00 AM</option>
                 <option value="08:30:00">08:30 AM</option>
                 <option value="09:00:00">09:00 AM</option>

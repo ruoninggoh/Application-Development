@@ -402,7 +402,7 @@ session_start();
                        $numappointm++;
                
                        echo '<tr>';
-                       echo '<td style="padding-left:60px;">' . $numappointm . '</td>'; // Display the appointment number
+                       echo '<td style="padding-left:50px;padding-bottom:20px;">' . $numappointm . '</td>'; // Display the appointment number
                        echo '<td>' . $row['_time'] . '</td>'; // Display the appointment time
                        echo '<td>' . $row['_date'] . '</td>'; // Display the appointment date
                        echo '</tr>';

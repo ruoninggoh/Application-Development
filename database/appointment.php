@@ -18,8 +18,7 @@
     $isSlotAvailable = checkTimeSlotAvailability($date,$time);
 
     if(!$isSlotAvailable){
-        echo "<script>alert(The selected time slot is not available. Please choose another time slot)<script>";
-        header("Location:../user/userdashboard.php");
+        echo "<script>alert('The selected time slot is not available. Please choose another time slot'); window.location.href = '../user/appointment_form.php'</script>";
     } else{
         $userid = $_SESSION["userID"]; // Retrieve user ID from session
 
@@ -48,6 +47,17 @@
         $conn = mysqli_connect($servername, $username, $password, $dbname);
         if (!$conn){
             die("Connection failed: " . mysqli_connect_error());
+        }
+
+        if ($time == NULL){
+            echo "<script>alert('Please select a time slot'); window.location.href = '../user/appointment_form.php'</script>";
+        }
+        $userDate = date_create($date);
+        $currentDate = date_create();
+        date_time_set($currentDate,0,0,0);
+        if ($userDate < $currentDate){
+            echo "<script>alert('Please choose a valid date'); window.location.href = '../user/appointment_form.php'</script>";
+            
         }
 
         $sql = "SELECT * FROM Appointment WHERE _date = '$date' AND _time = '$time'";
