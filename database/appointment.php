@@ -60,7 +60,7 @@
             
         }
 
-        $sql = "SELECT * FROM Appointment WHERE _date = '$date' AND _time = '$time'";
+        $sql = "SELECT * FROM Appointment WHERE _date = '$date' AND _time = '$time' AND requestStatus = 'Approved'";
         $result = mysqli_query($conn, $sql);
 
         if(mysqli_num_rows($result) > 0){

@@ -14,8 +14,7 @@ include("../database/connectdb.php");
 </head>
 <body>
   <?php
-  $dashboardTitle = ""; // Initialize the variable
-  $dashboardDescription="";
+
 
 
   if(isset($_GET['id'])){
@@ -94,13 +93,15 @@ include("../database/connectdb.php");
           $ext=end($dashboardImg);
           $dashboardImg="Dashboard-".rand(0000,9999).'.'.$ext;
           $src_path=$_FILES['image']['tmp_name'];
-          $des_path="../image/dashboard/".$dashboardImg;
+          $des_path="../images/dashboard/".$dashboardImg;
 
           $upload=move_uploaded_file($src_path, $des_path);
 
           if($upload==false){
             $_SESSION['upload']="<div class='error'><img src='../images/cross.png' width='16px' alt='cross icon'/>Failed to upload new Image.</div>";
+            echo $_SESSION['upload'];
             header('location:dashboard.php');
+        
             die();
           }
 
@@ -131,15 +132,13 @@ include("../database/connectdb.php");
   $res3 = mysqli_query($con, $sql3);
 
   if ($res3) {
-    $_SESSION['update'] = "<div class='success'><img src='../images/tick.png' width='16px' alt='tick' />Food Updated Successfully.</div>";
-    header("Location: dashboard.php");
-    exit(); // Add this line to prevent further execution
+    echo "<script>alert('Dashboard Updated Successfully'); window.location.href='dashboard.php';</script>";
+
 } else {
-    $_SESSION['update'] = "<div class='error'><img src='../images/cross.png' width='16px' alt='cross'/>Failed to Update Food.</div>";
-    header("Location: dashboard.php");
-    exit(); // Add this line to prevent further execution
+    echo "<script>alert('Failed to Update Dashboard.'); window.location.href='dashboard.php';</script>";
 }
-    
+
+
   }
   
   

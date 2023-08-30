@@ -6,6 +6,10 @@ if (isset($_SESSION['update'])) {
     echo $_SESSION['update'];
     unset($_SESSION['update']); // Clear the message
 }
+if(isset($_SESSION['remove-failed'])){
+  echo $_SESSION['remove-failed'];
+  unset($_SESSION['remove-failed']);
+}
 
 // Check for MySQL error message
 if (isset($_SESSION['mysql_error'])) {
@@ -420,7 +424,7 @@ if(isset($_SESSION['upload'])){
                     if($image==""){
                         echo"<div>Image is not added</div>";
                     }else{
-                        echo"<img class='dashboardPhoto' style='width:600px; margin-right:20px; margin-top:40px;margin-bottom:60px;height:400px;' src=../images/dashboard/$image />";
+                        echo"<img class='dashboardPhoto' style='width:500px; margin-right:20px; margin-top:40px;margin-bottom:60px;height:400px;' src=../images/dashboard/$image />";
 
                     }
                     ?>
