@@ -40,8 +40,8 @@
 
     function checkTimeSlotAvailability($date, $time){
         $servername = "localhost";
-        $username = "Tan";
-        $password = "abc123";
+        $username = "root";
+        $password = "";
         $dbname = "unihealth";
 
         $conn = mysqli_connect($servername, $username, $password, $dbname);
