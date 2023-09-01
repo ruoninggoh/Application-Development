@@ -31,6 +31,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location:../admin/dashboard.php");
           }
 
+        else{
+            header("Location:../doctor/dashboard.php");
+        }
+
         $error = "<script>
                 var signInAgain = confirm('Wrong Username/ Password/ Role! Please try again...'); 
                 if (signInAgain) {

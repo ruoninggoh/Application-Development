@@ -65,7 +65,7 @@ session_start();
             $numUser=mysqli_num_rows($userrow);
 
 
-            $doctorrow=mysqli_query($con,"select * from doctor");
+            $doctorrow=mysqli_query($con,"select * from user WHERE role = 'Doctor'");
             $numDoc=mysqli_num_rows($doctorrow);
 
             $numbooking=0;
