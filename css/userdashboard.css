@@ -1,0 +1,296 @@
+*{
+  margin:0;
+  padding: 0;
+  font-family:'Poppins', sans-serif;
+  box-sizing:border-box;
+}
+
+
+.hero{
+  width:100%;
+  min-height:100vh;
+  background-image: url("../images/signin.jpg");
+  background-size: cover; 
+  background-repeat: no-repeat;
+  color:#525252;
+}
+
+nav{
+  background:#a5a1d7;
+  width:100%;
+  padding:10px 10%;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.logo{
+  width:150px;
+}
+
+.user-pic{
+  width:40px;
+  border-radius:150%;
+  cursor:pointer;
+  margin-left:30px;
+}
+
+nav ul{
+  width:100%;
+  text-align: right;
+}
+
+nav ul li{
+  display: inline-block;
+  list-style:none;
+  margin:10px 20px;
+}
+
+nav ul li a{
+  color:#fff;
+  text-decoration:none;
+}
+
+.sub-menu-wrap{
+  position:absolute;
+  top:100%;
+  right:10%;
+  width:320px;
+  max-height: 0px;
+  overflow:hidden;
+  transition:max-height 0.5s;
+}
+
+.sub-menu-wrap.open-menu{
+  max-height: 400px;
+
+}
+.sub-menu{
+  background:#fff;
+  padding:20px;
+  margin:10px;
+}
+
+.user-info{
+  display:flex;
+  align-items:center;
+}
+
+.user-info h3{
+  font-weight:500;
+}
+
+.user-info img{
+  width:40px;
+  border-radius:50%;
+  margin-right:15px;
+}
+
+.sub-menu hr{
+  border:0;
+  height:1px;
+  width:100%;
+  background:#ccc;
+  margin:15px 0 10px; 
+
+}
+
+.sub-menu-link{
+  display:flex;
+  align-items:center;
+  text-decoration: none;
+  color:#525252;
+  margin:12px 0;
+}
+
+.sub-menu-link p{
+  width:100%;
+}
+
+.sub-menu-link img{
+  width:40px;
+  background:#e5e5e5;
+  border-radius: 50%;
+  padding:8px;
+  margin-right:15px;
+}
+
+.sub-menu-link span{
+  font-size:20px;
+  transition:transform 0.5s;
+}
+
+.sub-menu-link:hover span{
+  transform:translateX(5px);
+}
+
+.sub-menu-link:hover p{
+  font-weight:600;
+}
+
+
+.dash-body {
+  width: 100%;
+  padding: 50px;
+  padding-bottom: 2px;
+}
+
+table {
+  width: 100%;
+}
+
+.nav-bar {
+  width: 100px; /* Adjust the width as needed */
+}
+
+.btn-label{
+  align-items:center;
+}
+
+.date-wrapper {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px; /* Adjust the margin as needed */
+  margin-bottom: 5px;
+}
+
+
+.dashboard-items{
+  border: 2px solid #181f3e;
+  border-radius: 10px;
+  color: var(--primarycolor);
+  background-color: #ffffff ;
+  padding:20px;
+  margin:auto;
+  display:flex;
+  width:90%;
+  margin-top: 20px;
+  /*box-shadow: 0 3px 5px 0 rgba(95, 95, 97, 0.3);*/
+  /*style="margin:auto; width:95%; display:flex"*/
+}
+
+
+.h1-dashboard{
+  margin: 0;
+  padding: 0;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 0;
+  padding-top: 20px;
+}
+
+.h3-dashboard{
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 500;
+  color: #212529e3;
+}
+
+.filter-container{
+  border:none;
+  border:0;
+}
+
+.filter-container p{
+  font-size:20px;
+  font-weight:600;
+  text-align:left;
+  padding-left: 35px;
+  padding-top:50px;
+ 
+}
+
+
+.btn-icon-back1{
+  background-image: url('../images/doctors-hover.svg');
+  background-position: 18px 50%;
+  background-repeat: no-repeat;
+  transition: 0.5s;
+  padding: 8px 20px 8px 40px;
+}
+
+.btn-icon-back1:hover{
+  background-image: url('../images/doctors.svg ');
+}
+
+
+.btn-icon-back2:hover{
+  background-image: url('../images/patients.svg');
+}
+
+
+.btn-icon-back2{
+  background-image: url('../images/patients-hover.svg');
+  background-position: 18px 50%;
+  background-repeat: no-repeat;
+  transition: 0.5s;
+  padding: 8px 20px 8px 40px;
+}
+
+.btn-icon-back3:hover{
+  background-image: url('../images/book.svg');
+}
+
+.btn-icon-back3{
+  background-image: url('../images/book-hover.svg');
+  background-position: 18px 50%;
+  background-repeat: no-repeat;
+  transition: 0.5s;
+  padding: 8px 20px 8px 40px;
+}
+
+
+.btn-icon-back4:hover{
+  background-image: url('../images/session.svg');
+}
+
+.btn-icon-back4{
+  background-image: url('../images/session-iceblue.svg');
+  background-position: 18px 50%;
+  background-repeat: no-repeat;
+  transition: 0.5s;
+  padding: 8px 20px 8px 40px;
+}
+
+
+
+.dashboard-icons{
+  background-color: rgba(184, 184, 184, 0.247);
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-radius: 7px;
+  margin-left: 40px;
+  margin-right: 0px;
+  
+}
+
+.heading-main12{
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.non-style-link:link, .non-style-link:visited, .non-style-link:hover, .non-style-link:active{
+  text-decoration: none;
+  color: rgb(43, 43, 43);
+}
+
+.login-btn {
+  background-color: #2c2c2c !important; 
+  border: 1px solid #2c2c2c;
+  color: white !important;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #8eb3db !important;
+}
+
+.table-headin{
+  padding-bottom: 20px;
+}

@@ -1,0 +1,54 @@
+body {
+    background-image: url("../images/landing2.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.mainIntro {
+    color: rgb(0, 0, 0);
+    margin-top: 120px;
+    margin-left: 50px;
+}
+
+.mainIntro h1 {
+    font-size: 60px;
+    font-weight: 550;
+}
+
+.mainIntro h5 {
+    font-weight: 400;
+    font-style: italic;
+}
+
+.button {
+    background-color: rgb(45, 27, 209);
+    border-radius: 5px;
+    color: white;
+    border-color:rgb(122, 152, 222); ;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #606060;
+    color: white;
+}
+
+.center-container {
+    text-align: left;
+    margin-left: 52px;
+}
+
+ul{
+    margin:0px;
+}
