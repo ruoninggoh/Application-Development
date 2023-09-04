@@ -70,17 +70,16 @@ $sql = "CREATE TABLE contactForm (
 mysqli_query($con, $sql);
 
 
-$sql = "CREATE TABLE Appointment(
-    appointID int NOT NULL AUTO_INCREMENT, PRIMARY KEY(appointID),
+$sql = "CREATE TABLE Appointment (
+    appointID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     _date DATE NOT NULL,
     _time TIME NOT NULL,
     reason varchar(150) NOT NULL,
-    requestStatus varchar(30) DEFAULT 'Pending'),
+    requestStatus varchar(30) DEFAULT 'Pending',
     user_id int NOT NULL,
     doctor_id int,
-    FOREIGN KEY (user_id) REFERENCES user_profiles(user_id)";
-    
-
+    FOREIGN KEY (user_id) REFERENCES user_profiles(user_id)
+)";
 mysqli_query($con,$sql);
 
 mysqli_close($con);

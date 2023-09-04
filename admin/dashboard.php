@@ -93,7 +93,7 @@ if(isset($_SESSION['upload'])){
             $numUser=mysqli_num_rows($userrow);
 
 
-            $doctorrow=mysqli_query($con,"select * from doctor");
+            $doctorrow=mysqli_query($con,"select * from doctor_profiles");
             $numDoc=mysqli_num_rows($doctorrow);
 
             $numbooking=0;
