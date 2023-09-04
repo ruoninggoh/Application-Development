@@ -73,7 +73,6 @@ mysqli_close($con);
 <body>
     <div class="container mt-5">
     <a href="userdashboard.php" class="btn btn-back"><i class="arrow left"></i> Back</a>
-        <?php if (!empty($profileData)): ?>
             <div class="profile-card">
                 <div class="profile-header">
                     <div class="profile-image">
@@ -128,7 +127,7 @@ mysqli_close($con);
                             <th>Address</th>
                             <td>
                                 <?= !empty($profileData['street']) ? $profileData['street'] : '-' ?><br>
-                                <?= !empty($profileData['city']) ? $profileData['city'] . ', ' . $profileData['zip_code']. ' '. $profileData['state'] : '-' ?>
+                                <?= !empty($profileData['city']) ? $profileData['city'] . ', ' . $profileData['zip_code']. ' '. $profileData['state'] : ' ' ?>
                             </td>
                         </tr>
 
@@ -136,7 +135,6 @@ mysqli_close($con);
                     </table>
                 </div>
             </div>
-        <?php endif; ?>
 
         <div class="profile-actions">
             <a href="profile-edit.php" class="btn btn-edit">Edit Profile</a>
