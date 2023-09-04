@@ -40,7 +40,11 @@ if (mysqli_num_rows($checkUsernameResult) > 0) {
     if (mysqli_num_rows($checkEmailResult) > 0) {
         // Email already exists, set a flag
         $emailTaken = true;
-    } else {
+    } 
+    if (strpos($email, '@graduate.utm.my') === false) {
+            $emailError = "Please register with a UTM email address (example@graduate.utm.my).";
+    }
+    else {
         // Username and email are both unique, proceed with registration
         $defaultRole = "Patient"; // Set default role to "Patient"
         $insertQuery = "INSERT INTO User(username, password, email, role)
@@ -69,6 +73,9 @@ mysqli_close($con);
             <?php } else if (isset($emailTaken) && $emailTaken) { ?>
                 alert("Email '<?php echo $email; ?>' is already registered. Please use a different email.");
                 window.location.href = '../signup.php';
+            <?php } else if (isset($emailError) && $emailError) { ?>
+                alert("Email '<?php echo $email; ?>' Please register with a UTM email address (example@graduate.utm.my).");
+                window.location.href = '../signup.php';
             <?php } else if (isset($signupSuccessful) && $signupSuccessful) { ?>
                 var promptMessage = 'Sign up successful. Please sign in again.';
                 var signInAgain = confirm(promptMessage);
@@ -77,8 +84,8 @@ mysqli_close($con);
                     // Redirect to the sign-in page
                     window.location.href = '../signin.php';
                 }
-            <?php } ?>
-        }
+            <?php } ?>        
+        
     </script>
 </head>
 <body>
