@@ -88,8 +88,8 @@ mysqli_close($con);
                 <?php endif; ?>
                     </div>
                     <div class="profile-name">
-    <?= isset($userData1['username']) ? $userData1['username'] : 'Username not found' ?>
-</div>
+                        <?= $userData1['username'] ?>
+                    </div>
                 </div>
                 <div class="profile-details">
                     <h3 class="section-title">Profile Details</h3>
