@@ -1,6 +1,4 @@
-<?php
-  session_start();
-?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,7 +7,7 @@
   </head>
   <body>
     <?php
-      include("userHeader.html");
+      include("userHeader.php");
     ?>
     <div class="container">
       <h1 class="form-title">Registration</h1>

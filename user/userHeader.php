@@ -1,3 +1,38 @@
+<?php
+session_start();
+include('../database/connectdb.php');
+
+if (!isset($_SESSION['userID'])) {
+  header("Location:../database/signin_form.php");
+  exit();
+}
+
+$userID = $_SESSION['userID'];
+
+// Fetch user's profile data
+$sqlProfile = "SELECT * FROM user_profiles WHERE user_id = $userID";
+$resultProfile = mysqli_query($con, $sqlProfile);
+
+if ($resultProfile) {
+    $profileData = mysqli_fetch_assoc($resultProfile);
+}
+
+$sqlUser = "SELECT full_name, picture FROM user_profiles WHERE user_id = $userID";
+$resultUser = mysqli_query($con, $sqlUser);
+
+// Define default values
+$defaultUserName = "User";
+$defaultProfilePicture = "../images/patients.png"; 
+
+if (!empty($profileData)) {
+    $userName = $profileData['full_name'];
+    $profilePicture = $profileData['picture']; 
+} else {
+    $userName = $defaultUserName;
+    $profilePicture = $defaultProfilePicture;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -214,12 +249,12 @@ nav ul li a:hover {
       <div class="sub-menu-wrap" id="subMenu">
         <div class="sub-menu">
           <div class="user-info">
-            <img src="../images/patients.png">
-            <h3>User</h3>
+          <img src="<?php echo $profilePicture; ?>">
+          <h3 style="font-size:22px; padding-top:5px;"><?php echo $userName; ?></h3>
             </div>
             <hr>
 
-            <a href="viewprofile.php" class="sub-menu-link">
+            <a href="./viewprofile.php" class="sub-menu-link">
               <img src="../images/profile.png">
               <p>Edit Profile</p>
               <span>></span>

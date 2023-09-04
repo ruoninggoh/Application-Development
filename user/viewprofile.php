@@ -1,12 +1,11 @@
 <?php
-session_start();
 
 // Include your database connection file.
 include('../database/connectdb.php');
 
 // Check if the user is logged in. Redirect to the login page if not.
 if (!isset($_SESSION['userID'])) {
-    header("Location: login.php"); // Replace with your login page URL
+    header("Location:../database/signin_form.php");
     exit();
 }
 
@@ -67,7 +66,7 @@ mysqli_close($con);
     <title>View Profile</title>
     <!-- Link to your custom CSS file -->
     <link rel="stylesheet" type="text/css" href="profile.css">
-    <?php include("./userHeader.html");?>
+    <?php include("userHeader.php");?>
 </head>
 
 <body>

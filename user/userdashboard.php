@@ -1,8 +1,3 @@
-<?php
-ob_start();
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +31,7 @@ session_start();
   <div class="hero">
     <?php
     include("../database/connectdb.php");
-    include("userHeader.html");
+    include("userHeader.php");
     if(!isset($_SESSION['userID'])){
       header("Location:../database/signin_form.php");
       exit();
