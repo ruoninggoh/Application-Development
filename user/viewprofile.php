@@ -72,7 +72,7 @@ mysqli_close($con);
 
 <body>
     <div class="container mt-5">
-    <a href="dashboard.php" class="btn btn-back">Back</a>
+    <a href="userdashboard.php" class="btn btn-back">Back</a>
         <?php if (!empty($profileData)): ?>
             <div class="profile-card">
                 <div class="profile-header">
