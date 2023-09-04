@@ -72,7 +72,7 @@ mysqli_close($con);
 
 <body>
     <div class="container mt-5">
-    <a href="dashboard.php" class="btn btn-back">Back</a>
+    <a href="dashboard.php" class="btn btn-back"><i class="arrow left"></i> Back</a>
         <?php if (!empty($profileData)): ?>
             <div class="profile-card">
                 <div class="profile-header">
@@ -136,8 +136,6 @@ mysqli_close($con);
                     </table>
                 </div>
             </div>
-        <?php else: ?>
-            <p>No profile information found for this user.</p>
         <?php endif; ?>
 
         <div class="profile-actions">

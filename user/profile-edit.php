@@ -28,8 +28,6 @@ if ($resultUsername) {
     $userData = mysqli_fetch_assoc($resultUsername);
 }
 
-$profilePicture = empty($profileData['picture']) ? '../profile-pictures/profile-image.jpeg' : $profileData['picture'];
-
 mysqli_close($con);
 ?>
 <!DOCTYPE html>
@@ -51,7 +49,7 @@ mysqli_close($con);
                 <div class="h2">Edit Profile</div>
                 <form action="update_process.php" method="POST" enctype="multipart/form-data">
                     <div class="profile-picture-container">
-                        <img id="preview" src="../profile-pictures/<?php echo $profilePicture; ?>" alt="Profile Picture"
+                        <img id="preview" src="../profile-pictures/<?php echo empty($profileData['picture']) ? '../profile-pictures/profile-image.jpeg' : $profileData['picture']; ?>" alt="Profile Picture"
                             class="rounded-circle">
                     </div>
                     <div class="form-group">
@@ -126,7 +124,7 @@ mysqli_close($con);
                             value="<?php echo isset($profileData['zip_code']) ? $profileData['zip_code'] : ''; ?>" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="viewprofile.php" class="btn btn-secondary">Back</a>
+                    <a href="viewprofile.php" class="btn btn-secondary" onclick="return confirm('Are you want to leave the profile?');">Back</a>
                 </form>
             </div>
         </div>

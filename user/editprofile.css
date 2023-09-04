@@ -5,11 +5,13 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f4f4f4; /* Light gray background */
+    background-color: #f4f4f4;
+    /* Light gray background */
     border-radius: 10px;
     margin-top: 50px;
     margin-bottom: 100px;
-    background-color: #fff; /* White background for the profile container */
+    background-color: #fff;
+    /* White background for the profile container */
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -20,7 +22,7 @@
     height: 180px;
     object-fit: cover;
     border-radius: 50%;
-    border: 3px solid #0073e6; 
+    border: 3px solid #0073e6;
     margin: 0 auto;
     display: block;
     background-color: #f5f5f5;
@@ -31,7 +33,8 @@
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #0073e6; /* LinkedIn blue color */
+    color: #0073e6;
+    /* LinkedIn blue color */
 }
 
 /* Input text styles */
@@ -43,17 +46,20 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width:95%;
+    width: 95%;
     font-size: 16px;
     color: #333;
-    background-color: #f5f5f5; /* Light gray background for inputs */
+    background-color: #f5f5f5;
+    /* Light gray background for inputs */
     transition: border-color 0.3s ease;
 }
 
 /* Add focus styles for input text */
 .form-control:focus {
-    border-color: #0073e6; /* Change the border color on focus to LinkedIn blue */
-    box-shadow: 0 0 5px rgba(0, 115, 230, 0.5); /* Add a subtle box shadow on focus */
+    border-color: #0073e6;
+    /* Change the border color on focus to LinkedIn blue */
+    box-shadow: 0 0 5px rgba(0, 115, 230, 0.5);
+    /* Add a subtle box shadow on focus */
 }
 
 /* Error message styles */
@@ -66,13 +72,15 @@
 
 /* Button styles */
 .btn-primary {
-    background-color: #0073e6;
+    background-color: #007bff;
     color: #fff;
-    padding: 10px 20px;
     border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
     border-radius: 5px;
-    text-decoration: none;
     margin-right: 10px;
+    font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
@@ -81,10 +89,12 @@
 }
 
 .btn-secondary {
-    background-color: #ccc;
-    color: #333;
-    padding: 10px 20px;
+    background-color: #6c757d;
+    color: #fff;
     border: none;
+    padding: 10px 22px;
+    font-size: 16px;
+    cursor: pointer;
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease;
@@ -113,18 +123,26 @@ body {
     font-family: 'Poppins', sans-serif;
     background-image: url("../images/signin.jpg");
 }
+
 .rounded-circle {
     border-radius: 50%;
-    border: 2px solid #0077b5; /* Add a border around the image */
-    width: 150px; /* Set the width of the image */
-    height: 150px; /* Set the height of the image */
-    object-fit: cover; /* Ensure the image covers the entire circle */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow to the image */
+    border: 2px solid #0077b5;
+    /* Add a border around the image */
+    width: 150px;
+    /* Set the width of the image */
+    height: 150px;
+    /* Set the height of the image */
+    object-fit: cover;
+    /* Ensure the image covers the entire circle */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    /* Add a shadow to the image */
     background-color: #fff;
 }
+
 .profile-picture-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px; /* Add spacing between the picture and other form fields */
+    margin-bottom: 20px;
+    /* Add spacing between the picture and other form fields */
 }

@@ -69,6 +69,17 @@ h2 {
     margin-bottom: 20px;
 }
 
+.arrow {
+    border: solid rgb(210, 210, 210);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
 /* Profile details styles */
 .profile-details table {
     width: 100%;
@@ -97,7 +108,8 @@ h2 {
 /* Profile actions styles */
 .profile-actions {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 40px;
+    margin-bottom: 30px;
 }
 
 /* Edit button styles */
