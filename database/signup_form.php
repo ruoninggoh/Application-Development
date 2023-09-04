@@ -78,7 +78,6 @@ mysqli_close($con);
                     window.location.href = '../signin.php';
                 }
             <?php } ?>
-        }
     </script>
 </head>
 <body>
