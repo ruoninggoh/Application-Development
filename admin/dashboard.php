@@ -72,6 +72,19 @@ if(isset($_SESSION['upload'])){
       exit();
     }
     */
+    $userID = $_SESSION['userID'];
+    $sqlProfile = "SELECT * FROM admin_profiles WHERE admin_id = $userID";
+    $resultProfile = mysqli_query($con, $sqlProfile);
+   
+   if (mysqli_num_rows($resultProfile) === 0) {
+       // User profile is empty, display confirmation message and redirect
+       echo '<script>
+           if (confirm("Your profile is empty. Do you must update your profile first.")) {
+               window.location.href = "profile-edit.php";
+           }
+       </script>';
+       // Additional logic or message if needed
+   } 
 
     ?>
     <div class="dash-body" >

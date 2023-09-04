@@ -44,6 +44,20 @@ session_start();
       //If userID is set
       //import database
       include("../database/connectdb.php");
+      $userID = $_SESSION['userID'];
+
+      $sqlProfile = "SELECT * FROM doctor_profiles WHERE doctor_id = $userID";
+      $resultProfile = mysqli_query($con, $sqlProfile);
+   
+      if (mysqli_num_rows($resultProfile) === 0) {
+       // User profile is empty, display confirmation message and redirect
+       echo '<script>
+           if (confirm("Your profile is empty. Do you must update your profile first.")) {
+               window.location.href = "profile-edit.php";
+           }
+       </script>';
+       // Additional logic or message if needed
+   } 
 
     ?>
     <div class="dash-body" >
