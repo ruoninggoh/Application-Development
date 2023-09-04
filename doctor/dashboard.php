@@ -147,7 +147,7 @@ session_start();
                     </p>
                     <div>
                       <a href="./appointment_form.php">
-                        Book an Appointment
+                        View My Appointment
                       </a>
                     </div>
                   </div>
@@ -195,7 +195,7 @@ session_start();
                     </p>
                     <div>
                       <a href="./appointment_form.php">
-                       Book an Appointment
+                      View My Appointment
                       </a>
                     </div>
                   </div>
@@ -243,7 +243,7 @@ session_start();
                     </p>
                     <div>
                       <a href="./appointment_form.php">
-                        Book an Appointment
+                      View My Appointment
                       </a>
                     </div>
                   </div>
@@ -267,14 +267,14 @@ session_start();
 
 <table style="margin-left:20px">
 <tr>
-  <td colspan="4">
+  <td colspan="6">
     <table border="0" width="100%">
       <tr>
         <td width="50%">
           <center>
           <table class="filter-container">
       <tr>
-          <td colspan="4">
+          <td colspan="6">
               <p><b>Status</b></p>
           </td>
       </tr>
@@ -342,6 +342,7 @@ session_start();
           </div>
       </td>
 
+      
 
       
       
@@ -353,85 +354,6 @@ session_start();
         </td>
 
 
-        <td>
-          <p style="font-size:20px; font-weight:800;padding-left:40px;padding-top:70px; padding-bottom:20px;"class="anime">Your Upcoming Booking&nbsp;
-          <img src="../images/calendar.svg" style="padding-bottom:5px;">
-        </p>
-          <center>
-            <div class="abc scroll" style="height:250px;padding:0;margin:0;padding-left:80px">
-            <table width="85%" class="sub-table scrolldown" border="0">
-              <thead>
-                <tr>
-                  <th class="table-headin">
-                    Appointment No
-                  </th>
-                  
-                  <th class="table-headin">
-                    Session Time
-                  </th>
-
-                  <th class="table-headin">
-                    Scheduled Date 
-                  </th>
-                
-                  </tr>
-
-              </thead>
-
-              <tbody >
-             
-                <?php
-               $numappointm = 0;
-               $today = date('Y-m-d'); // Get the current date in 'Y-m-d' format
-               
-               // Get the specific user's ID from the session
-               $userID = $_SESSION['userID'];
-               
-               // Use prepared statement to query appointments for the current day and specific user
-               $query = "SELECT * FROM appointment WHERE user_id = ? AND  _date >= ? ORDER BY _date ASC, _time ASC";
-               $stmt = mysqli_prepare($con, $query);
-               mysqli_stmt_bind_param($stmt, 'ss', $userID, $today);
-               mysqli_stmt_execute($stmt);
-               $appointmentrow = mysqli_stmt_get_result($stmt);
-               
-               // Check if there are appointments for the current date and specific user
-               if (mysqli_num_rows($appointmentrow) > 0) {
-               
-                   // Loop through the results and display the appointments' date and time
-                   while ($row = mysqli_fetch_assoc($appointmentrow)) {
-                       $numappointm++;
-               
-                       echo '<tr>';
-                       echo '<td style="padding-left:50px;padding-bottom:20px;">' . $numappointm . '</td>'; // Display the appointment number
-                       echo '<td>' . $row['_time'] . '</td>'; // Display the appointment time
-                       echo '<td>' . $row['_date'] . '</td>'; // Display the appointment date
-                       echo '</tr>';
-                   }
-               } else {
-                echo '<tr>
-                  <td colspan="4">
-                
-                  <center>
-                  <img src="../images/notfound.svg" width="30%">
-                  <br>
-                  <p class="heading-main12" style="margin-left:30px; padding-bottom:20px;font-size:20px; color:rgb(49,49,49)">Nothing to show here! </p>
-                  
-                  <a class="non-style-link" href="appointment_form.php">
-                  <button class= "login-btn btn-primary-soft btn" style="display:flex; justify-content:center; align-items:center; margin-left:20px;">
-                  &nbsp; Make an Appointment &nbsp;
-                  
-                  </button>
-                  </a>
-                  </center>
-                
-              
-                  </td>
-                  </tr>';
-               }
-               
-               // Close the prepared statement
-               mysqli_stmt_close($stmt);
-                ?>
           
         
         </td>
