@@ -9,7 +9,6 @@
 
 body{
   min-height:100vh;
-  display:flex;
   align-items:center;
   justify-content: center;
   background-image: url("../images/signin.jpg");
@@ -24,7 +23,7 @@ body{
   width:100%;
   border-radius:6px;
   padding:30px;
-  margin: 0 15px;
+  margin: 30px auto;
   background-color: #F9F7F7;
   box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
