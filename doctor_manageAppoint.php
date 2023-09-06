@@ -9,6 +9,7 @@
     <body>
         <?php
             session_start();
+            include("userHeader.html");
             $conn = mysqli_connect("localhost", "root", "", "unihealth");
             if(!$conn){
                 die("Connection failed:" . mysqli_connect_errno());
