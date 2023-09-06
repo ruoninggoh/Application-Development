@@ -9,7 +9,7 @@
     <body>
         <?php
             session_start();
-            include("doctorHeader.html");
+             include("doctorHeader.html");
             $conn = mysqli_connect("localhost", "root", "", "unihealth");
             if(!$conn){
                 die("Connection failed:" . mysqli_connect_errno());
@@ -22,8 +22,7 @@
 
             $result = mysqli_query($conn, $sql);
         ?>
-        <div class="menu-bar">
-            <div class="bus-selector">
+        
                 <div class="tabs">
                     <div class="tab active" onclick="toggleTab('Pending')" data-tab="Pending">Pending</div>
                     <div class="tab" onclick="toggleTab('My')" data-tab="My">My</div>
@@ -49,7 +48,7 @@
                                     echo "<td colspan='2'>" . $row['username'] . "</td>";
                                     echo "<td>" . $row['_date'] . "</td>";
                                     echo "<td>" . $row['_time'] . "</td>";
-                                    echo "<td><button class='details-button' data-reason='" . $row['reason'] . "'><img src='details.png' alt='Details'></button></td>";
+                                    echo "<td><button class='details-button' data-reason='" . $row['reason'] . "'><img src='../images/details.png' alt='Details'></button></td>";
                                     echo "<td>
                                             <table style='border:none;'>
                                                 <tr>
@@ -114,13 +113,11 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-        <script>
             
-        </script>
         <script>
-            function toggleTab(tabText){
+      
+            document.addEventListener("DOMContentLoaded", function(){
+                function toggleTab(tabText){
                 var tabContents = document.querySelectorAll('.tab-content');
                 tabContents.forEach(function(tabContent){
                     //tabContent.classList.remove('active');
@@ -146,6 +143,33 @@
                 var selectedTab = document.querySelector('.tab[data-tab="' + tabText + '"]');
                 selectedTab.classList.add('active');
             }
+            })
+            // function toggleTab(tabText){
+            //     var tabContents = document.querySelectorAll('.tab-content');
+            //     tabContents.forEach(function(tabContent){
+            //         //tabContent.classList.remove('active');
+            //         tabContent.style.transition = 'opacity 0.3 ease';
+            //         tabContent.style.opacity = '0';
+            //         tabContent.style.display = 'none';
+                    
+            //     });
+
+            //     var selectedTabContent = document.querySelector('.tab-content[data-tab="' + tabText + '"]');
+            //     selectedTabContent.style.display = 'block';
+            //     setTimeout(function(){
+            //         selectedTabContent.style.opacity ='1';
+            //         //selectedTabContent.classList.add('active');
+            //     }, 10);
+                
+
+            //     var tabs = document.querySelectorAll('.tab');
+            //     tabs.forEach(function(tab){
+            //         tab.classList.remove('active');
+            //     });
+
+            //     var selectedTab = document.querySelector('.tab[data-tab="' + tabText + '"]');
+            //     selectedTab.classList.add('active');
+            // }
             $(document).ready(function(){
                 $('.details-button').click(function(){
                     var reason = $(this).data('reason');
@@ -195,7 +219,7 @@
 
             $("table").on("click", ".insert", function(){
                 // var appointID = $(this).data("appointid");
-                window.locaion.href = "";
+                window.location.href = "";
             });
 
             $("table").on("click", ".downlaod", function(){
