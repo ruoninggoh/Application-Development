@@ -5,7 +5,7 @@ include('../database/connectdb.php');
 
 // Check if the user is logged in. Redirect to the login page if not.
 if (!isset($_SESSION['userID'])) {
-    header("Location: login.php"); // Replace with your login page URL
+    header("Location: ../signin.php"); // Replace with your login page URL
     exit();
 }
 
