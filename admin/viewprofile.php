@@ -127,7 +127,7 @@ mysqli_close($con);
                             <th>Address</th>
                             <td>
                                 <?= !empty($profileData['street']) ? $profileData['street'] : '-' ?><br>
-                                <?= !empty($profileData['city']) ? $profileData['city'] . ', ' . $profileData['zip_code']. ' '. $profileData['state'] : ' ' ?>
+                                <?= !empty($profileData['zip_code']) ? $profileData['zip_code'] . ' ' . $profileData['city']. ', '. $profileData['state'] : ' ' ?>
                             </td>
                         </tr>
 

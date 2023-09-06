@@ -108,7 +108,7 @@ mysqli_close($con);
                     <div class="form-group">
                         <label for="contactNo">Contact No: </label><br>
                         <input type="tel" class="form-control" id="contactNo" name="contactNo"
-                            placeholder="Enter your email (e.g., abc@gmail.com)"
+                        placeholder="Enter your contact number (e.g., (+60)12345678)"
                             value="<?php echo isset($profileData['phone']) ? $profileData['phone'] : ''; ?>" required>
                     </div>
                     <div class="form-group">
