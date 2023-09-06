@@ -27,7 +27,7 @@ include("../database/connectdb.php")
       <form action="#">
         <div class="form first">
           <div class="details personal">
-            <span class="title">Personal Details</span>
+            <span class="title"><b>Personal Details<b></span>
 
             <div class="fields">
 
