@@ -18,7 +18,7 @@
         $status = mysqli_real_escape_string($conn, $_POST["status"]);
         $sql = "UPDATE appointment SET requestStatus = ?, doctor_id = ? WHERE appointID = ?";
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "si", $status, $appointID);
+        mysqli_stmt_bind_param($stmt, "sii", $status, $doctor_id, $appointID);
 
         if (mysqli_stmt_execute($stmt)){
             echo "success";

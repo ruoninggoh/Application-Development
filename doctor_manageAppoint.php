@@ -63,12 +63,12 @@
                             ?>
                         </tbody>
                     </table>
-                    <div class="modal" id="reasonModal">
+                    <!-- <div class="modal" id="reasonModal">
                         <div class="modal-content">
                             <span id="closeModal" style="float: right; cursor: pointer;">&times;</span>
                             <p id="reasonText"></p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="tab-content" data-tab="My">
                         <!--Testing for my approved tab-->
@@ -143,63 +143,65 @@
                 var selectedTab = document.querySelector('.tab[data-tab="' + tabText + '"]');
                 selectedTab.classList.add('active');
             }
+        </script>
+        <script>
 
-            $(document).ready(function(){
-                $('.details-button').click(function(){
-                    var reason = $(this).data('reason');
-                    $('#reasonText').text(reason);
-                    $('#reasonModal').css('display', 'block');
-                });
+            // $(document).ready(function(){
+            //     $('.details-button').click(function(){
+            //         var reason = $(this).data('reason');
+            //         $('#reasonText').text(reason);
+            //         $('#reasonModal').css('display', 'block');
+            //     });
 
-                $('#closeModal').click(function(){
-                    $('#reasonModal').css('display', 'none');
-                });
-            });
+            //     $('#closeModal').click(function(){
+            //         $('#reasonModal').css('display', 'none');
+            //     });
+            // });
 
-            $("table").on("click", ".approve", function () {
-                var appointID = $(this).data("appointid");
-                //var $row = $(this).closest("tr");
-                var date = $(this).closest("tr").find("td:eq(3)").text();
-                var time = $(this).closest("tr").find("td:eq(4)").text();
+            // $("table").on("click", ".approve", function () {
+            //     var appointID = $(this).data("appointid");
+            //     //var $row = $(this).closest("tr");
+            //     var date = $(this).closest("tr").find("td:eq(3)").text();
+            //     var time = $(this).closest("tr").find("td:eq(4)").text();
 
-                $.ajax({
-                    type: "POST",
-                    url: "update_status.php",
-                    data: {appointID: appointID, status: "Approved"},
-                    success: function(response){
-                        if (response === "success"){
-                            $("table tbody tr").each(function (){
-                                var $currentRow = $(this);
-                                var rowDate = $currentRow.find("td:eq(3)").text();
-                                var rowTime = $currentRow.find("td:eq(4)").text();
+            //     $.ajax({
+            //         type: "POST",
+            //         url: "update_status.php",
+            //         data: {appointID: appointID, status: "Approved"},
+            //         success: function(response){
+            //             if (response === "success"){
+            //                 $("table tbody tr").each(function (){
+            //                     var $currentRow = $(this);
+            //                     var rowDate = $currentRow.find("td:eq(3)").text();
+            //                     var rowTime = $currentRow.find("td:eq(4)").text();
                                 
-                                if(rowDate === date && rowTime === time){
-                                    var rejectLink = $currentRow.find(".reject");
-                                    var appointIDToReject = rejectLink.data("appointid");
+            //                     if(rowDate === date && rowTime === time){
+            //                         var rejectLink = $currentRow.find(".reject");
+            //                         var appointIDToReject = rejectLink.data("appointid");
 
-                                    if(rejectLink.length > 0){
-                                        $.ajax({
-                                            type:"POST",
-                                            url:"update_status.php",
-                                            data: {appointID: appointIDToReject, status: "Rejected"},
-                                        });
-                                    }
-                                }
-                            });
-                        }
-                    }
-                });             
-            });
+            //                         if(rejectLink.length > 0){
+            //                             $.ajax({
+            //                                 type:"POST",
+            //                                 url:"update_status.php",
+            //                                 data: {appointID: appointIDToReject, status: "Rejected"},
+            //                             });
+            //                         }
+            //                     }
+            //                 });
+            //             }
+            //         }
+            //     });             
+            // });
 
-            $("table").on("click", ".insert", function(){
-                // var appointID = $(this).data("appointid");
-                window.locaion.href = "";
-            });
+            // $("table").on("click", ".insert", function(){
+            //     // var appointID = $(this).data("appointid");
+            //     window.locaion.href = "";
+            // });
 
-            $("table").on("click", ".downlaod", function(){
-                // var appointID = $(this).data("appointid");
-                window.location.href = "";
-            })
+            // $("table").on("click", ".downlaod", function(){
+            //     // var appointID = $(this).data("appointid");
+            //     window.location.href = "";
+            // })
         </script>
     </body>
 </html>
