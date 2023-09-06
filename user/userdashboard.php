@@ -30,17 +30,32 @@
 
   <div class="hero">
     <?php
-    include("../database/connectdb.php");
-    include("userHeader.php");
-    if(!isset($_SESSION['userID'])){
-      header("Location:../database/signin_form.php");
-      exit();
-    }
-      //If userID is set
-      //import database
-      include("../database/connectdb.php");
-
-    ?>
+   session_start();
+   include("../database/connectdb.php");
+   include("userHeader.php");
+   
+   if (!isset($_SESSION['userID'])) {
+       header("Location: ../database/signin_form.php");
+       exit();
+   }
+   
+   $userID = $_SESSION['userID'];
+   
+   // Check if user_profiles table has data for the user
+   $sqlProfile = "SELECT * FROM user_profiles WHERE user_id = $userID";
+   $resultProfile = mysqli_query($con, $sqlProfile);
+   
+   if (mysqli_num_rows($resultProfile) === 0) {
+       // User profile is empty, display confirmation message and redirect
+       echo '<script>
+           if (confirm("Your profile is empty. Do you must update your profile first.")) {
+               window.location.href = "profile-edit.php";
+           }
+       </script>';
+       // Additional logic or message if needed
+   } 
+?>
+    
     <div class="dash-body" >
       <table>
       <tr>
@@ -495,6 +510,23 @@
 </div>
 </body>
 </html>
+<?php
+ $userID = $_SESSION['userID'];
+   
+ // Check if user_profiles table has data for the user
+ $sqlProfile = "SELECT * FROM user_profiles WHERE user_id = $userID";
+ $resultProfile = mysqli_query($con, $sqlProfile);
+ 
+ if (mysqli_num_rows($resultProfile) === 0) {
+     // User profile is empty, display confirmation message and redirect
+     echo '<script>
+         if (confirm("Your profile is empty. Do you must update your profile first.")) {
+             window.location.href = "profile-edit.php";
+         }
+     </script>';
+     // Additional logic or message if needed
+ } 
+ ?>
 
   <script>
     let subMenu=document.getElementById("subMenu");
@@ -549,3 +581,4 @@
       }
     });
   </script>
+  

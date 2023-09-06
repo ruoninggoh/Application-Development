@@ -5,13 +5,37 @@ include('../database/connectdb.php');
 
 // Check if the user is logged in. Redirect to the login page if not.
 if (!isset($_SESSION['userID'])) {
-    header("Location: login.php"); // Replace with your login page URL
+    header("Location: ../signin.php"); // Replace with your login page URL
     exit();
 }
 
 // Retrieve the user's profile information based on the user ID from the session.
 $userID = $_SESSION['userID'];
 
+$sqlUserRole = "SELECT role FROM User WHERE userID = $userID";
+$resultUserRole = mysqli_query($con, $sqlUserRole);
+
+if ($resultUserRole) {
+    $userData = mysqli_fetch_assoc($resultUserRole);
+    $userRole = $userData['role'];
+
+    if ($userRole === 'Staff') {
+        // Check if the user already has a profile in user_profiles
+        $sqlCheckProfile = "SELECT * FROM admin_profiles WHERE admin_id = $userID";
+        $resultCheckProfile = mysqli_query($con, $sqlCheckProfile);
+
+        if (!$resultCheckProfile || mysqli_num_rows($resultCheckProfile) == 0) {
+            // User is a Staff and doesn't have a profile in user_profiles, so create one
+            $sqlCreateProfile = "INSERT INTO admin_profiles (admin_id) VALUES ($userID)";
+            if (mysqli_query($con, $sqlCreateProfile)) {
+                // Profile created successfully or already existed
+                // You can add further logic here if needed
+            } else {
+                echo "Error creating staff profile: " . mysqli_error($con);
+            }
+        }
+    }
+}
 // Fetch user's profile data
 $sqlProfile = "SELECT * FROM admin_profiles WHERE admin_id = $userID";
 $resultProfile = mysqli_query($con, $sqlProfile);
@@ -51,7 +75,7 @@ mysqli_close($con);
                 <div class="h2">Edit Profile</div>
                 <form action="update_process.php" method="POST" enctype="multipart/form-data">
                     <div class="profile-picture-container">
-                        <img id="preview" src="../profile-pictures/<?php echo $profilePicture; ?>" alt="Profile Picture"
+                        <img id="preview" src="../profile-pictures/<?php echo empty($profileData['picture']) ? '../profile-pictures/profile-image.jpeg' : $profileData['picture']; ?>" alt="Profile Picture"
                             class="rounded-circle">
                     </div>
                     <div class="form-group">
@@ -84,7 +108,7 @@ mysqli_close($con);
                     <div class="form-group">
                         <label for="contactNo">Contact No: </label><br>
                         <input type="tel" class="form-control" id="contactNo" name="contactNo"
-                            placeholder="Enter your email (e.g., abc@gmail.com)"
+                        placeholder="Enter your contact number (e.g., (+60)12345678)"
                             value="<?php echo isset($profileData['phone']) ? $profileData['phone'] : ''; ?>" required>
                     </div>
                     <div class="form-group">
@@ -126,7 +150,7 @@ mysqli_close($con);
                             value="<?php echo isset($profileData['zip_code']) ? $profileData['zip_code'] : ''; ?>" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="viewprofile.php" class="btn btn-secondary">Back</a>
+                    <a href="viewprofile.php" class="btn btn-secondary" onclick="return confirm('Are you want to leave the profile?');">Back</a>
                 </form>
             </div>
         </div>

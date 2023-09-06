@@ -97,7 +97,8 @@ h2 {
 /* Profile actions styles */
 .profile-actions {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 40px;
+    margin-bottom: 30px;
 }
 
 /* Edit button styles */
@@ -105,12 +106,23 @@ h2 {
 .btn-edit {
     background-color: #e6b209; /* Change to your desired color */
     color: #fff;
-    padding: 10px 20px;
+    padding: 13px 22px;
     border: none;
     border-radius: 5px;
     text-decoration: none;
     margin-right: 10px;
     transition: background-color 0.3s ease;
+}
+
+.arrow {
+    border: solid rgb(210, 210, 210);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
 }
 
 .btn-edit:hover {

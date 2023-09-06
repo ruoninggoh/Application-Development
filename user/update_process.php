@@ -5,7 +5,7 @@ include('../database/connectdb.php');
 
 // Check if the user is logged in. Redirect to the login page if not.
 if (!isset($_SESSION['userID'])) {
-    header("Location: login.php"); // Replace with your login page URL
+    header("Location: ../signin.php"); // Replace with your login page URL
     exit();
 }
 
@@ -45,8 +45,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = mysqli_real_escape_string($con, $email);
     $contactNo = mysqli_real_escape_string($con, $contactNo);
     $gender = mysqli_real_escape_string($con, $gender);
-    $age = (int)$age; // Ensure age is an integer
+    $age = (int) $age; // Ensure age is an integer
 
+    if (strpos($email, "@graduate.utm.my") === false) {
+        echo '<script>';
+        echo 'alert("Email must end with @graduate.utm.my");';
+        echo 'window.location.href = "profile-edit.php";'; // Change the URL as needed
+        echo '</script>';
+        exit(); // Exit the script
+    }
+    $emailExistsQuery = "SELECT COUNT(*) FROM User WHERE email = '$email' AND userID != $userID";
+    $usernameExistsQuery = "SELECT COUNT(*) FROM User WHERE username = '$username' AND userID != $userID";
+
+    $emailExistsResult = mysqli_query($con, $emailExistsQuery);
+    $usernameExistsResult = mysqli_query($con, $usernameExistsQuery);
+
+    if (!$emailExistsResult || !$usernameExistsResult) {
+        echo "Error checking email and username existence: " . mysqli_error($con);
+        exit(); // Exit the script
+    }
+
+    $emailExists = mysqli_fetch_row($emailExistsResult)[0];
+    $usernameExists = mysqli_fetch_row($usernameExistsResult)[0];
+
+
+    if ($emailExists > 0) {
+        echo '<script>';
+        echo 'alert("Email already exists. Please choose a different one.");';
+        echo 'window.location.href = "profile-edit.php";'; // Change the URL as needed
+        echo '</script>';
+        exit(); // Exit the script
+    } elseif ($usernameExists > 0) {
+        echo '<script>';
+        echo 'alert("Username already exists. Please choose a different one.");';
+        echo 'window.location.href = "profile-edit.php";'; // Change the URL as needed
+        echo '</script>';
+        exit(); // Exit the script
+    }
     // Check for empty values and construct the update queries
     $updateProfile = "UPDATE user_profiles 
                       SET full_name = '$fullname', phone = '$contactNo', gender = '$gender',
