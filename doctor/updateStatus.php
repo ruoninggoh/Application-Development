@@ -1,8 +1,8 @@
 <?php
     session_start();
 
-    if(isset($_SESSION['doctor_id'])){
-        $doctor_id = $_SESSION['user_id'];
+    if(isset($_SESSION['userID'])){
+        $doctor_id = $_SESSION['userID'];
     } else {
         echo "Error: You are not logged in";
         exit();
@@ -13,7 +13,7 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST"){
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $appointID = mysqli_real_escape_string($conn, $_POST["appointID"]);
         $status = mysqli_real_escape_string($conn, $_POST["status"]);
         $sql = "UPDATE appointment SET requestStatus = ?, doctor_id = ? WHERE appointID = ?";
