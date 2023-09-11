@@ -150,7 +150,7 @@ session_start();
         <div class="tab active" onclick="toggleTab('Pending')" data-tab="Pending">Pending</div>
         <div class="tab" onclick="toggleTab('My')" data-tab="My">My</div>
     </div>
-    <div class="tab-content active" data-tab="Pending">
+    <div class="tab-content active" data-tab="Pending" style="overflow-x: auto;">
         <table>
             <thead>
                 <tr>
@@ -171,11 +171,11 @@ session_start();
                     echo "<td colspan='2'>" . $row['username'] . "</td>";
                     echo "<td>" . $row['_date'] . "</td>";
                     echo "<td>" . $row['_time'] . "</td>";
-                    echo "<td style= 'padding-left:50px;'><button style='border:none; background-color: white;' class='details-button' data-reason='" . $row['reason'] . "'><img class= 'detail-images' src='../images/details.png' alt='Details'></button></td>";
+                    echo "<td><button style='border:none; background-color: white;' class='details-button' data-reason='" . $row['reason'] . "'><img class= 'detail-images' src='../images/details.png' alt='Details'></button></td>";
                     echo "<td>
                                             <table>
                                                 <tr >
-                                                <td style='border:none; padding-left: 70px;'><a href='#' class='approve' data-appointid='$row[appointID]'><i class='fas fa-check-circle' style= 'font-size: 35px;'></i></a></td>
+                                                <td style='border:none;'><a href='#' class='approve' data-appointid='$row[appointID]'><i class='fas fa-check-circle' style= 'font-size: 35px;'></i></a></td>
                                                 <td style='border:none;'><a href='#' class='reject' data-appointid='$row[appointID]'><i class='fas fa-times-circle' style= 'font-size: 35px;'></i></a></td>
                                                 </tr>
                                             </table>
@@ -192,7 +192,7 @@ session_start();
             </div>
         </div>
     </div>
-    <div class="tab-content" data-tab="My">
+    <div class="tab-content" data-tab="My" style="overflow-x: auto;">
         <!-- Testing for my approved tab -->
         <table>
             <thead>
@@ -220,11 +220,11 @@ session_start();
                     echo "<td colspan='2'>" . $row['username'] . "</td>";
                     echo "<td>" . $row['_date'] . "</td>";
                     echo "<td>" . $row['_time'] . "</td>";
-                    echo "<td style= 'padding-left:70px;'><button style='border:none; background-color: white;' class='details-button' data-reason='" . $row['reason'] . "'><img class= 'detail-images' src='../images/details.png' alt='Details'></button></td>";
+                    echo "<td><button style='border:none; background-color: white;' class='details-button' data-reason='" . $row['reason'] . "'><img class= 'detail-images' src='../images/details.png' alt='Details'></button></td>";
                     echo "<td>
                                             <table>
                                                 <tr>
-                                                <td style='border:none; padding-left: 70px;'><a href='insertdiagnose.php' class='approve' data-appointid='$row[appointID]'><i class='fa fa-book fa-2x'></i></a></td>
+                                                <td style='border:none;'><a href='#' class='approve' data-appointid='$row[appointID]'><i class='fa fa-book fa-2x'></i></a></td>
                                                 <td style='border:none;'><a href='#' class='download' data-appointid='$row[appointID]'><i class='fa fa-download fa-2x'></i></a></td>
                                                 </tr>
                                             </table>
