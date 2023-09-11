@@ -4,26 +4,30 @@ session_start();
 include("doctorHeader.html");
 include("../database/connectdb.php");
 
-if(isset($_SESSION['userID'])){
-  $userID = $_SESSION['userID'];
+    if(isset($_GET['appointID'])){
+      $appointID=$_GET['appointID'];
 
-  $sqlUser="SELECT * FROM user_profiles INNER JOIN appointment ON user_profiles.user_id = appointment.user_id
-                                        INNER JOIN diagnose ON appointment.appointID = diagnose.appointID
-                                        WHERE appointment.user_id = 3";
+      $sqlUser="SELECT * FROM user_profiles
+                INNER JOIN appointment ON user_profiles.user_id=appointment.user_id
+                INNER JOIN diagnose ON appointment.appointID = diagnose.appointID
+                WHERE appointment.appointID = $appointID";
 
-  $resultUser=mysqli_query($con, $sqlUser);
+      $resultUser = mysqli_query($con, $sqlUser);
 
-  if($resultUser && mysqli_num_rows($resultUser) > 0){
-    $userData = mysqli_fetch_assoc($resultUser);
-    $name=$userData['full_name'];
-    $age=$userData['age'];
-    $gender=$userData['gender'];
-  }
-  else{
-    $errorMsg = "Error: Unable to retrieve user information.";
+      if($resultUser && mysqli_num_rows($resultUser)>0){
+        $userData=mysqli_fetch_assoc($resultUser);
+        $name=$userData['full_name'];
+        $age=$userData['age'];
+        $gender=$userData['gender'];
+      }else{
+        $errorMsg="Error: Unable to retrieve user information.";
+      }
+    }else{
+      $errorMsg="Error: No appointID provided in the URL";
+    }
+  
 
-  }
-}
+
 ?>
 
 
@@ -61,7 +65,7 @@ if(isset($_SESSION['userID'])){
                         </tr>-->
               <div class="input-field">
               <label>Full Name</label>
-              <input type="text"name="name" id="full_name" value="<?php echo $name?>" placeholder="Enter your name" required>
+              <input type="text" name="full_name" id="full_name" value="<?php echo $name; ?>" placeholder="Enter your name" required>
               </div>
 
             <div class="input-field">
