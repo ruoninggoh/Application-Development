@@ -224,7 +224,7 @@ session_start();
                     echo "<td>
                                             <table>
                                                 <tr>
-                                                <td style='border:none;'><a href='#' class='approve' data-appointid='$row[appointID]'><i class='fa fa-book fa-2x'></i></a></td>
+                                                <td style='border:none;'><a href='insertdiagnose.php' class='insert' data-appointid='$row[appointID]'><i class='fa fa-book fa-2x'></i></a></td>
                                                 <td style='border:none;'><a href='#' class='download' data-appointid='$row[appointID]'><i class='fa fa-download fa-2x'></i></a></td>
                                                 </tr>
                                             </table>
