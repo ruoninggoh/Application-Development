@@ -38,8 +38,9 @@ table {
 
 td {
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    padding-left: 20px;
+
     border: 2px solid #ccc;
+    text-align: center;
 }
 
 th {
