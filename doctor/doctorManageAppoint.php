@@ -118,8 +118,6 @@
         </div>
         <script>
             
-        </script>
-        <script>
             function toggleTab(tabText){
                 var tabContents = document.querySelectorAll('.tab-content');
                 tabContents.forEach(function(tabContent){
@@ -165,7 +163,7 @@
                 var time = $(this).closest("tr").find("td:eq(4)").text();
 
                 $.ajax({
-                    type: "POST",
+                    type: "POST",   
                     url: "updateStatus.php",
                     data: {appointID: appointID, status: "Approved"},
                     success: function(response){
@@ -195,7 +193,7 @@
 
             $("table").on("click", ".insert", function(){
                 // var appointID = $(this).data("appointid");
-                window.locaion.href = "";
+                window.location.href = "";
             });
 
             $("table").on("click", ".downlaod", function(){
