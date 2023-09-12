@@ -119,7 +119,7 @@ session_start();
 
         $("table").on("click", ".insert", function() {
             var appointID = $(this).data("appointid");
-            window.location.href = "insertdiagnose.php";
+            window.location.href = "insertdiagnose.php?appointID=" + appointID;
         });
 
         $("table").on("click", ".downlaod", function() {
@@ -224,7 +224,7 @@ session_start();
                     echo "<td>
                                             <table>
                                                 <tr>
-                                                <td style='border:none;'><a href='insertdiagnose.php' class='insert' data-appointid='$row[appointID]'><i class='fa fa-book fa-2x'></i></a></td>
+                                                <td style='border:none ;'><a href='insertdiagnose.php?appointID=$row[appointID]' class='insert' data-appointid='$row[appointID]'><i class='fa fa-book fa-2x'></i></a></td>
                                                 <td style='border:none;'><a href='#' class='download' data-appointid='$row[appointID]'><i class='fa fa-download fa-2x'></i></a></td>
                                                 </tr>
                                             </table>
