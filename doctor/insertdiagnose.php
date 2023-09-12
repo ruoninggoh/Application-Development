@@ -134,7 +134,7 @@ if(isset($_GET['appointID'])){
 
         <div class="form second">
           <div class="details mc">
-            <span class="title"><b>Sijil Cuti Sakit Purpose</b> [No need to fill in If there is not necessary to have it]</span>
+            <span class="title"><b>Sijil Cuti Sakit Purpose</b> </span>
 
             <div class="fields" style="margin:30px;">
 
