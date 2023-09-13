@@ -36,7 +36,7 @@ session_start();
   <div class="hero">
     <?php
     include("../database/connectdb.php");
-    include("doctorHeader.html");
+    include("doctorHeader.php");
     if(!isset($_SESSION['userID'])){
       header("Location:../database/signin_form.php");
       exit();

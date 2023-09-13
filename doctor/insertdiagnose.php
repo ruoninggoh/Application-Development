@@ -2,7 +2,7 @@
 ob_start();
 session_start();
 
-include("doctorHeader.html");
+include("doctorHeader.php");
 include("../database/connectdb.php");
 
 

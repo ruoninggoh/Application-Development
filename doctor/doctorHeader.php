@@ -1,3 +1,38 @@
+<?php 
+if(session_status()===PHP_SESSION_NONE){
+  session_start();
+}
+
+include('../database/connectdb.php');
+
+if(!isset($_SESSION['userID'])){
+  header("Location:../signin.php");
+  exit();
+}
+$userID=$_SESSION['userID'];
+
+$sqlProfile = "SELECT * FROM user_profiles WHERE user_id = $userID";
+$resultProfile = mysqli_query($con, $sqlProfile);
+
+if($resultProfile){
+  $profileData = mysqli_fetch_assoc($resultProfile);
+}
+
+$sqlDoc = "SELECT full_name, picture FROM user_profiles WHERE user_id =$userID";
+$resultDoc = mysqli_query($con, $sqlDoc);
+
+$defaultUserName = "Doctor";
+$defaultProfilePicture = "../images/patients.png";
+
+if(!empty($profileData)){
+  $userName = "Doctor" . $profileData['full_name'];
+  $profilePicture = $profileData['picture'];
+} else{
+  $userName = $defaultUserName;
+  $profilePicture = $defaultProfilePicture;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,7 +131,8 @@ nav ul li a:hover {
 }
 
 .user-info img{
-  width:40px;
+  width:50px;
+  height:50px;
   border-radius:50%;
   margin-right:15px;
 }
@@ -164,8 +200,8 @@ nav ul li a:hover {
       <div class="sub-menu-wrap" id="subMenu">
         <div class="sub-menu">
           <div class="user-info">
-            <img src="../images/patients.png">
-            <h3>Doctor</h3>
+            <img src="<?php echo $profilePicture; ?>">
+            <h3 style="font-size:22px; padding-top:5px;"><?php echo $userName; ?></h3>
             </div>
             <hr>
 

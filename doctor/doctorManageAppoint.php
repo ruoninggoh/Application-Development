@@ -132,7 +132,7 @@ session_start();
 <body>
     <?php
 
-    include("doctorHeader.html");
+    include("doctorHeader.php");
     $conn = mysqli_connect("localhost", "root", "", "unihealth");
     if (!$conn) {
         die("Connection failed:" . mysqli_connect_error());
