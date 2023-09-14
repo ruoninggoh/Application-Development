@@ -6,26 +6,26 @@ if(session_status()===PHP_SESSION_NONE){
 include('../database/connectdb.php');
 
 if(!isset($_SESSION['userID'])){
-  header("Location:../signin.php");
+  header("Location:../database/signin_form.php");
   exit();
 }
 $userID=$_SESSION['userID'];
 
-$sqlProfile = "SELECT * FROM user_profiles WHERE user_id = $userID";
+$sqlProfile = "SELECT * FROM doctor_profiles WHERE doctor_id = $userID";
 $resultProfile = mysqli_query($con, $sqlProfile);
 
 if($resultProfile){
   $profileData = mysqli_fetch_assoc($resultProfile);
 }
 
-$sqlDoc = "SELECT full_name, picture FROM user_profiles WHERE user_id =$userID";
+$sqlDoc = "SELECT full_name, picture FROM doctor_profiles WHERE doctor_id =$userID";
 $resultDoc = mysqli_query($con, $sqlDoc);
 
 $defaultUserName = "Doctor";
 $defaultProfilePicture = "../images/patients.png";
 
 if(!empty($profileData)){
-  $userName = "Doctor" . $profileData['full_name'];
+  $userName = "Dr." ." ". $profileData['full_name'];
   $profilePicture = $profileData['picture'];
 } else{
   $userName = $defaultUserName;
