@@ -1,16 +1,15 @@
-<?php
-if (session_status() === PHP_SESSION_NONE) {
+<?php 
+if(session_status()===PHP_SESSION_NONE){
   session_start();
 }
 
-// Include your database connection file.
 include('../database/connectdb.php');
 
-// Check if the user is logged in. Redirect to the login page if not.
 if (!isset($_SESSION['userID'])) {
-  header("Location: ../signin.php"); // Replace with your login page URL
+  header("Location:../database/signin_form.php");
   exit();
 }
+
 $userID = $_SESSION['userID'];
 
 // Fetch user's profile data
@@ -135,7 +134,8 @@ nav ul li a:hover {
 }
 
 .user-info img{
-  width:40px;
+  width:50px;
+  height:50px;
   border-radius:50%;
   margin-right:15px;
 }

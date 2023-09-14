@@ -64,7 +64,7 @@ mysqli_close($con);
     <title>Edit Profile</title>
     <!-- Include your CSS file -->
     <link rel="stylesheet" type="text/css" href="editprofile.css">
-    <?php include("./doctorHeader.html");?>
+    <?php include("./doctorHeader.php");?>
 </head>
 
 <body>
