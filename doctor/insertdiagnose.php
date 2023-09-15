@@ -9,6 +9,16 @@ include("../database/connectdb.php");
 if(isset($_GET['appointID'])){
   $appointID = $_GET['appointID'];
 
+  
+  // Get the diagnoseID from the URL
+  if(isset($_GET['diagnoseID'])){
+    $diagnoseID = $_GET['diagnoseID'];
+  } else {
+    // If diagnoseID is not in the URL, you might handle this case accordingly (e.g., set it to a default value)
+    $diagnoseID = null; // You can set it to an appropriate default value if needed
+  }
+
+
   $sqlUser="SELECT up.* , u.email, a._date, a._time
   FROM user_profiles up
   INNER JOIN appointment a ON up.user_id=a.user_id
@@ -58,6 +68,7 @@ if(isset($_GET['appointID'])){
       <header>Patient Diagnose Form</header>
 
       <form action="diagnose.php" method="POST">
+
         <div class="form first">
           <div class="details personal">
             <span class="title"><b>Personal Details<b></span>
@@ -154,6 +165,8 @@ if(isset($_GET['appointID'])){
         </div>
 
         <input type="hidden" name="appointID" value="<?php echo $appointID; ?>">
+        <input type="hidden" name="diagnoseID" value="<?php echo $diagnoseID; ?>">
+
 
 
        
@@ -164,6 +177,8 @@ if(isset($_GET['appointID'])){
             <span class="btnText">Back</span>
           </div>
   
+          <input type="hidden" name="editMode" value="true">
+
           <button class="submit">
             <span class="submit">Submit</span>
             <i class="uil uil-navigator"></i>

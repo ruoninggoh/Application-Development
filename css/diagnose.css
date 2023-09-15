@@ -85,7 +85,7 @@ form.secActive .form.first{
 }
 
 #diagnose {
-  height: 65px; /* Adjust the desired height as needed */
+  height: 55px; /* Adjust the desired height as needed */
   font-size: 14px; /* Adjust the font size if needed */
   padding:20px 15px;
   margin-top: 5px;
@@ -98,7 +98,7 @@ form.secActive .form.first{
 
 
 #description{
-  height:100px;
+  height:85px;
   font-size:14px;
   padding:20px 15px;
   width:750px;
