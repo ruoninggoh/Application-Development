@@ -65,7 +65,7 @@ if(isset($_GET['appointID'])){
 
   <body>
     <div class="container">
-      <header>Patient Diagnose Form</header>
+      <header>Patient Diagnosis Form</header>
 
       <form action="diagnose.php" method="POST">
 
