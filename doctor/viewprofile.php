@@ -67,7 +67,7 @@ mysqli_close($con);
     <title>View Profile</title>
     <!-- Link to your custom CSS file -->
     <link rel="stylesheet" type="text/css" href="profile.css">
-    <?php include("./doctorHeader.html");?>
+    <?php include("./doctorHeader.php");?>
 </head>
 
 <body>

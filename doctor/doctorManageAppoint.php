@@ -1,14 +1,54 @@
 <?php
 session_start();
+include("doctorHeader.php");
 ?>
 <!DOCTYPE html>
 <html>
+    <style>
+        .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button {
+    margin: 5px;
+}
+</style>
 
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Manage Appointment</title>
     <link rel="stylesheet" type="text/css" href="../css/manageAppoint.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function toggleTab(tabText) {
             var tabContents = document.querySelectorAll('.tab-content');
@@ -114,25 +154,41 @@ session_start();
                 })
             })
         });
+        $(document).ready(function() {
+    var handled = false;
+
+    $("table").on("click", ".insert", function() {
+        if (handled) return;
+        handled = true;
+
+        console.log("Insert button clicked");
+        var appointID = $(this).data("appointid");
+        var confirmEdit = confirm("Do you want to edit the form?");
+        
+        if (confirmEdit) {
+            window.location.href = "insertdiagnose.php?appointID=" + appointID; 
+        } else {
+            toggleTab('My'); // Switch to the "My" tab
+            
+
+        }
+        event.preventDefault(); // Prevent the default link behavior
+
+    });
+});
 
 
-
-        $("table").on("click", ".insert", function() {
-            var appointID = $(this).data("appointid");
-            window.locaion.href = "";
-        });
-
-        $("table").on("click", ".downlaod", function() {
+        $("table").on("click", ".download", function() {
             var appointID = $(this).data("appointid");
             window.location.href = "";
         })
+
     </script>
 </head>
 
 <body>
-    <?php
 
-    include("doctorHeader.html");
+    <?php
     $conn = mysqli_connect("localhost", "root", "", "unihealth");
     if (!$conn) {
         die("Connection failed:" . mysqli_connect_error());
@@ -224,7 +280,7 @@ session_start();
                     echo "<td>
                                             <table>
                                                 <tr>
-                                                <td style='border:none;'><a href='#' class='approve' data-appointid='$row[appointID]'><i class='fa fa-book fa-2x'></i></a></td>
+                                                <td style='border:none ;'><a href='insertdiagnose.php?appointID=$row[appointID]' class='insert' data-appointid='$row[appointID]'><i class='fa fa-book fa-2x'></i></a></td>
                                                 <td style='border:none;'><a href='#' class='download' data-appointid='$row[appointID]'><i class='fa fa-download fa-2x'></i></a></td>
                                                 </tr>
                                             </table>

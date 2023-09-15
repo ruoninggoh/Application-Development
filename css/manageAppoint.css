@@ -53,9 +53,12 @@ th {
 }
 
 .detail-images{
-    width: 50px;
-    height: 50px;
+    width: 32px;
+    height: 32px;
     text-align: right;
+    margin-top: 12px;
+    margin-bottom: 12px;
+
 }
 
 .modal{

@@ -1,28 +1,50 @@
 <?php
 ob_start();
 session_start();
-include("doctorHeader.html");
+
+include("doctorHeader.php");
 include("../database/connectdb.php");
 
-if(isset($_SESSION['userID'])){
-  $userID = $_SESSION['userID'];
 
-  $sqlUser="SELECT * FROM user_profiles INNER JOIN appointment ON user_profiles.user_id = appointment.user_id
-                                        INNER JOIN diagnose ON appointment.appointID = diagnose.appointID
-                                        WHERE appointment.user_id = 3";
+if(isset($_GET['appointID'])){
+  $appointID = $_GET['appointID'];
 
-  $resultUser=mysqli_query($con, $sqlUser);
+  
+  // Get the diagnoseID from the URL
+  if(isset($_GET['diagnoseID'])){
+    $diagnoseID = $_GET['diagnoseID'];
+  } else {
+    // If diagnoseID is not in the URL, you might handle this case accordingly (e.g., set it to a default value)
+    $diagnoseID = null; // You can set it to an appropriate default value if needed
+  }
 
-  if($resultUser && mysqli_num_rows($resultUser) > 0){
-    $userData = mysqli_fetch_assoc($resultUser);
+
+  $sqlUser="SELECT up.* , u.email, a._date, a._time
+  FROM user_profiles up
+  INNER JOIN appointment a ON up.user_id=a.user_id
+  INNER JOIN User u ON up.user_id = u.userID
+  WHERE a.appointID = $appointID";
+
+  $resultUser = mysqli_query($con, $sqlUser);
+
+  if(!$resultUser) {
+    $errorMsg = "Error: " . mysqli_error($con);
+  }
+
+  if($resultUser && mysqli_num_rows($resultUser)>0){
+    $userData=mysqli_fetch_assoc($resultUser);
     $name=$userData['full_name'];
     $age=$userData['age'];
     $gender=$userData['gender'];
+    $phone=$userData['phone'];
+    $email = $userData['email'];
+    $date = $userData['_date']; 
+    $time = $userData['_time'];
+  } else {
+    $errorMsg="Error: Unable to retrieve user information.";
   }
-  else{
-    $errorMsg = "Error: Unable to retrieve user information.";
-
-  }
+} else {
+  $errorMsg="Error: No appointID provided in the session";
 }
 ?>
 
@@ -42,52 +64,46 @@ if(isset($_SESSION['userID'])){
   </head>
 
   <body>
-   <?php 
-   
-   ?>
-
     <div class="container">
-      <header>Patient Diagnose Form</header>
+      <header>Patient Diagnosis Form</header>
 
-      <form action="#">
+      <form action="diagnose.php" method="POST">
+
         <div class="form first">
           <div class="details personal">
             <span class="title"><b>Personal Details<b></span>
 
             <div class="fields">
-
-            <!--<td><label for="foodName">Name: </label></td>
-                            <td><input type="text" name="foodName" id="foodName" value="<?php echo $name?>" required/></td>
-                        </tr>-->
               <div class="input-field">
               <label>Full Name</label>
-              <input type="text"name="name" id="full_name" value="<?php echo $name?>" placeholder="Enter your name" required>
+              <input type="text" name="full_name" id="full_name" value="<?php echo $name; ?>"  readonly>
               </div>
 
             <div class="input-field">
             <label>Age</label>
-            <input type="number" name="age" id="age"placeholder="Enter your birth date" required>
+            <input type="text" name="age" id="age" value="<?php echo $age; ?>"placeholder="Enter your birth date" readonly>
             </div>
 
           <div class="input-field">
           <label>Email</label>
-          <input type="text"name="email" id="email" placeholder="Enter your email" required>
+          <input type="text"name="email" id="email" value="<?php echo $email; ?>" placeholder="Enter your email" readonly>
           </div>
 
 
         <div class="input-field">
           <label>Phone Number</label>
-          <input type="text" name="phone" id="phone" placeholder="Enter your phone number" required>
+          <input type="text" name="phone" id="phone" value="<?php echo $phone;?>"placeholder="Enter your phone number" readonly>
         </div>
 
         <div class="input-field">
         <label>Gender</label>
-        <input type="text" name="gender" id="gender"placeholder="Enter your gender" required>
+        <input type="text" name="gender" id="gender"value="<?php echo $gender;?>"placeholder="Enter your gender" readonly>
       </div>
 
+    
       <div class="input-field">
-      <label>Today's Date</label>
-      <input type="text" placeholder="Enter your age" required>
+      <label>Today's Date and Time</label>
+      <input type="text" value="<?php echo $date . '. ' . $time; ?>" readonly>
       </div>
 
 
@@ -129,24 +145,27 @@ if(isset($_SESSION['userID'])){
 
         <div class="form second">
           <div class="details mc">
-            <span class="title"><b>Sijil Cuti Sakit Purpose</b> [No need to fill in If there is not necessary to have it]</span>
+            <span class="title"><b>Sijil Cuti Sakit Purpose</b> [If there is only 1day just insert the same date]</span>
 
             <div class="fields" style="margin:30px;">
 
               <div class="input-field">
               <label>Start Date</label>
-              <input type="date"  placeholder="Enter start date for MC" required>
+              <input type="date" name="start_date" required>
               </div>
 
             <div class="input-field">
             <label>End Date</label>
-            <input type="date" placeholder="Enter your end date for MC" required>
+            <input type="date" name="end-date" required>
             </div>
 
          
           </div>
 
         </div>
+
+        <input type="hidden" name="appointID" value="<?php echo $appointID; ?>">
+        <input type="hidden" name="diagnoseID" value="<?php echo $diagnoseID; ?>">
 
 
 
@@ -158,7 +177,9 @@ if(isset($_SESSION['userID'])){
             <span class="btnText">Back</span>
           </div>
   
-          <button class="sumbit">
+          <input type="hidden" name="editMode" value="true">
+
+          <button class="submit">
             <span class="submit">Submit</span>
             <i class="uil uil-navigator"></i>
           </button>

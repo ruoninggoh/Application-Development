@@ -64,7 +64,7 @@ mysqli_close($con);
     <title>Edit Profile</title>
     <!-- Include your CSS file -->
     <link rel="stylesheet" type="text/css" href="editprofile.css">
-    <?php include("./doctorHeader.html");?>
+    <?php include("./doctorHeader.php");?>
 </head>
 
 <body>
@@ -144,7 +144,7 @@ mysqli_close($con);
                     </div>
                     <div class="form-group">
                         <label for="zip_code">Postal Code:</label><br>
-                        <input type="text" class="form-control" id="zip_code" name="zip_code"
+                        <input type="number" class="form-control" id="zip_code" name="zip_code"
                             placeholder="Enter your zip code" maxlength="5"
                             value="<?php echo isset($profileData['zip_code']) ? $profileData['zip_code'] : ''; ?>" required>
                     </div>
