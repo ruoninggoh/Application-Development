@@ -243,7 +243,7 @@ nav ul li a:hover {
           <a href="#" class="dropbtn">Appointment</a>
           <div class="dropdown-content">
             <a href="appointment_form.php">Make Appointment</a>
-            <a href="#">Appointment History</a>
+            <a href="appointment_history.php">Appointment History</a>
           </div>
         </li>
         <li><a href="contactuser.php">Contact Us</a></li>
