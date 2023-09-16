@@ -59,6 +59,9 @@ session_start();
             margin-bottom: 10px;
             margin-top: -20px;
         }
+        .form.second.secActive{
+            margin-top: -50px;
+        }
         form{
             background-color: #F9F7F7;
             margin-top: 16px;
@@ -214,45 +217,9 @@ session_start();
                 $('.form.first').removeClass('hidden');
                 $('.form.second').removeClass('secActive');
             });
-
-           
-                $('.saveBtn').click(function(event){
-                    event.preventDefault();
-
-                    var form = $(this).closest('.form.second');
-
-                    var newDate = form.find('input[name="date"]').val();
-                    var newTime = form.find('input[name="time"]').val();
-                    var newReason = form.find('textarea[name="reason"]').val();
-                    var appointment_id = form.find('input[name="appointment_id"]').val();
-
-                    var formData = {
-                        date: newDate,
-                        time: newTime,
-                        reason: newReason,
-                        appointment_id: appointment_id
-                    };
-                    $.ajax({
-                        type:'POST',
-                        url:'update_appointment.php',
-                        data: formData,
-                        success: function(response){
-                           alert("Edited successfully");
-                           location.reload();
-                        if (response === "success") {
-                            location.reload();
-                        }
-                            
-                            
-                        }
-                        
-                    });
-                });
                 
         });
 
-        
-        //backBtn.addEventListener("click", () => form.classList.remove('secActive'));
     </script>
     
 </head>
@@ -316,7 +283,7 @@ session_start();
                     echo "<div class='modal-content'>";
                     echo "<span class='closeModal' id='closeModal' data-modal-id='reasonModal$index' style='float: right; cursor: pointer;'>&times;</span>";
                     
-                    echo "<form action='update_appointment.php' method='POST'>";
+                    echo "<form>";
                     echo "<div class='form first'>";
                     echo "<header>Appointment Details</header>";
                     echo "<span class='title'><b>Personal Details</b></span>";
@@ -361,7 +328,7 @@ session_start();
                     echo "</div>";
                     
                     // <!-- Reason -->
-                    echo "<div><span class='title'><b>Personal Details</b></span></div>";
+                    echo "<div><span class='title'><b>Appointment Details</b></span></div>";
                     echo "<div class ='fields'>";
                     echo "<div class ='input-field'>";
                     echo "<label>Reason</label>";
@@ -376,8 +343,10 @@ session_start();
                     echo "</button>";
                     echo "</div>";
                     echo "</div>"; 
+                    echo "</form>";
 
                     // editing page
+                    echo "<form action='update_appointment.php' method='POST'>";
                     echo "<div class='form second'>";
                     echo "<header>Appointment Details</header>";
                     echo "<span class='title'><b>Personal Details</b></span>";
@@ -422,7 +391,7 @@ session_start();
                     echo "</div>";
                     
                     // <!-- Reason -->
-                    echo "<div><span class='title'><b>Personal Details</b></span></div>";
+                    echo "<div><span class='title'><b>Appointment Details</b></span></div>";
                     echo "<div class ='fields'>";
                     echo "<div class ='input-field'>";
                     echo "<label>Reason</label>";

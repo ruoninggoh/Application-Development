@@ -51,7 +51,7 @@
                     if (mysqli_stmt_execute($stmt)) {
                         echo "<script>alert('Edited successfully');</script>";
                         header("Location: appointment_history.php");
-                        exit; // Stop further script execution
+                        exit(); // Stop further script execution
                     } else {
                         echo "Error: " . mysqli_error($con);
                     }
