@@ -1,4 +1,5 @@
 <?php
+    
     session_start();
 
     $con = mysqli_connect("localhost", "root", "", "unihealth");
@@ -9,9 +10,10 @@
     if ($_SERVER["REQUEST_METHOD"] === "POST"){
         $userID = $_SESSION['userID'];
         $newDate = mysqli_real_escape_string($con, $_POST['date']);
-    $newTime = mysqli_real_escape_string($con, $_POST['time']);
-    $newReason = mysqli_real_escape_string($con, $_POST['reason']);
-    $appointment_id = mysqli_real_escape_string($con, $_POST['appointment_id']);
+        $newTime = mysqli_real_escape_string($con, $_POST['time']);
+        $newReason = mysqli_real_escape_string($con, $_POST['reason']);
+        $appointment_id = mysqli_real_escape_string($con, $_POST['appointment_id']);
+        $requestStatus = mysqli_real_escape_string($con, $_POST['requestStatus']);
         
 
 
@@ -44,13 +46,16 @@
     
             if ($count > 0) {
                 echo "<script>alert('This time slot had been booked');</script>";
+                echo "<script>window.location.href = 'appointment_history.php';</script>";
             } else {
+                if ($requestStatus == 'Pending'){
                 $sql = "UPDATE appointment SET _date = ?, _time = ?, reason = ? WHERE user_id = ? AND appointID = ?";
                 if ($stmt = mysqli_prepare($con, $sql)) {
                     mysqli_stmt_bind_param($stmt, "sssss", $newDate, $newTime, $newReason, $userID, $appointment_id);
                     if (mysqli_stmt_execute($stmt)) {
+
                         echo "<script>alert('Edited successfully');</script>";
-                        header("Location: appointment_history.php");
+                        echo "<script>window.location.href = 'appointment_history.php';</script>";
                         exit(); // Stop further script execution
                     } else {
                         echo "Error: " . mysqli_error($con);
@@ -59,6 +64,10 @@
                 } else {
                     echo "Error: " . mysqli_error($con);
                 }
+            } else {
+                echo "<script>alert('The request is no longer available');</script>";
+                echo "<script>window.location.href = 'appointment_history.php';</script>";
+            }
             }
         } else {
             echo "Error: " . mysqli_error($con);

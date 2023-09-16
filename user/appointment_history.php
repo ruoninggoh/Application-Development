@@ -397,6 +397,7 @@ session_start();
                     echo "<label>Reason</label>";
                     echo "<textarea id='reason' name='reason' rows='4' value='$reason'>$reason</textarea>";
                     echo "<input type='hidden' name='appointment_id' value='" . $row['appointID'] . "'>";
+                    echo "<input type='hidden' name='requestStatus' value='" . $row['requestStatus'] . "'>";
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";
