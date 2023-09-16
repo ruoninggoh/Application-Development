@@ -1,4 +1,5 @@
 <?php
+    
     session_start();
 
     $con = mysqli_connect("localhost", "root", "", "unihealth");
@@ -44,13 +45,14 @@
     
             if ($count > 0) {
                 echo "<script>alert('This time slot had been booked');</script>";
+                echo "<script>window.location.href = 'appointment_history.php';</script>";
             } else {
                 $sql = "UPDATE appointment SET _date = ?, _time = ?, reason = ? WHERE user_id = ? AND appointID = ?";
                 if ($stmt = mysqli_prepare($con, $sql)) {
                     mysqli_stmt_bind_param($stmt, "sssss", $newDate, $newTime, $newReason, $userID, $appointment_id);
                     if (mysqli_stmt_execute($stmt)) {
                         echo "<script>alert('Edited successfully');</script>";
-                        header("Location: appointment_history.php");
+                        echo "<script>window.location.href = 'appointment_history.php';</script>";
                         exit(); // Stop further script execution
                     } else {
                         echo "Error: " . mysqli_error($con);
