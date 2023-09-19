@@ -48,7 +48,7 @@ session_start();
             padding: 20px;
             width: 60%;
             margin: 100px auto;
-            max-height: 450px;
+            max-height: 70%;
             
         }
         header{
@@ -58,6 +58,9 @@ session_start();
             color: #333;
             margin-bottom: 10px;
             margin-top: -20px;
+        }
+        .form.second.secActive{
+            margin-top: -50px;
         }
         form{
             background-color: #F9F7F7;
@@ -71,10 +74,10 @@ session_start();
             background-color: #fff;
             transition:0.3s ease;
         }
-        form.secActive .form.first{
-            opacity: 0;
-            pointer-events: none;
-            transform: -100%;
+        .form.first{
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
         }
         .fields{
             display: flex;
@@ -117,7 +120,7 @@ session_start();
             font-size: 14px;
             font-weight: 400;
         }
-        .editBtn{
+        .editBtn, .saveBtn{
             margin-top: 20px;
             background-color: #112D4E;
             transition: 0.3s linear;
@@ -133,10 +136,10 @@ session_start();
             
         }
 
-        .editBtn:hover{
+        .editBtn:hover, .saveBtn:hover{
             background-color: #3F72AF;
         }
-        form button i {
+        form button i{
             margin: 0 6px;
         }
         .input-field input:is(:focus, :valid){
@@ -174,17 +177,19 @@ session_start();
                 width: 100%;
             }
         }
-        form.secActive .form.second{
+        .form.secActive{
             opacity: 1;
             pointer-events: auto;
             transform: translateX(0);
         }
-
-        form.secActive .form.first{
-            opacity: 0;
-            pointer-events: none;
-            transform: translateX(-100%);
+        .form.first.hidden{
+            display: none;
         }
+        .form.second .input-field{
+            width: calc(50% -15px);
+            margin: 4px 0;
+        }
+        
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -196,7 +201,12 @@ session_start();
                 //$('#reasonText').text(reason);
                 //$('.modal').css('display', 'none');
                 $('#' + modalID).css('display', 'block');
-
+                $('.editBtn').click(function(){
+                    console.log("Edit button clicked");
+                    $('.form.first').removeClass('secActive');
+                    $('.form.second').addClass('secActive');
+                    $('.form.first').addClass('hidden');
+                });
                     }
                 );
 
@@ -204,15 +214,12 @@ session_start();
                 console.log("close button pressed");
                 var modalID = $(this).data('modal-id');
                 $('#' + modalID).css('display', 'none');
-                
+                $('.form.first').removeClass('hidden');
+                $('.form.second').removeClass('secActive');
             });
+                
         });
-        
-        $('.editBtn').click(function(){
-            const form = document.querySelector("form"),
-            editBtn = form.querySelector("editBtn")
-        })
-        //backBtn.addEventListener("click", () => form.classList.remove('secActive'));
+
     </script>
     
 </head>
@@ -276,7 +283,7 @@ session_start();
                     echo "<div class='modal-content'>";
                     echo "<span class='closeModal' id='closeModal' data-modal-id='reasonModal$index' style='float: right; cursor: pointer;'>&times;</span>";
                     
-                    echo "<form id='reasonForm'>";
+                    echo "<form>";
                     echo "<div class='form first'>";
                     echo "<header>Appointment Details</header>";
                     echo "<span class='title'><b>Personal Details</b></span>";
@@ -284,25 +291,25 @@ session_start();
                         // <!-- Name -->
                     echo "<div class ='input-field'>";
                     echo "<label>Full Name</label>";
-                    echo "<input type= 'text' name='name' value='$name' readonly>";
+                    echo "<input type= 'text' name='name1' value='$name' readonly>";
                     echo "</div>";
                 
                         // <!-- Age -->
                     echo "<div class ='input-field'>";
                     echo "<label>Age</label>";
-                    echo "<input type= 'text' name='age' value='$age' readonly>";
+                    echo "<input type= 'text' name='age1' value='$age' readonly>";
                     echo "</div>";
                 
                     // <!-- Phone Number -->
                     echo "<div class ='input-field'>";
                     echo "<label>Phone Number</label>";
-                    echo "<input type= 'text' name='phone' value='$phone' readonly>";
+                    echo "<input type= 'text' name='phone1' value='$phone' readonly>";
                     echo "</div>";
                 
                     // <!-- Gender -->
                     echo "<div class ='input-field'>";
                     echo "<label>Gender</label>";
-                    echo "<input type= 'text' name='gender' value='$gender' readonly>";
+                    echo "<input type= 'text' name='gender1' value='$gender' readonly>";
                     echo "</div>";
                     
                 
@@ -310,34 +317,36 @@ session_start();
                     // <!-- Date -->
                     echo "<div class ='input-field'>";
                     echo "<label>Date</label>";
-                    echo "<input type= 'text' name='date' value='$date' readonly>";
+                    echo "<input type= 'text' name='date1' value='$date' readonly>";
                     echo "</div>";
                 
                     // <!-- Time -->
                     echo "<div class ='input-field'>";
                     echo "<label>Time</label>";
-                    echo "<input type= 'text' name='time' value='$time' readonly>";
+                    echo "<input type= 'text' name='time1' value='$time' readonly>";
                     echo "</div>";
                     echo "</div>";
                     
                     // <!-- Reason -->
-                    echo "<div><span class='title'><b>Personal Details</b></span></div>";
+                    echo "<div><span class='title'><b>Appointment Details</b></span></div>";
                     echo "<div class ='fields'>";
                     echo "<div class ='input-field'>";
                     echo "<label>Reason</label>";
-                    echo "<textarea id='reason' name='reason' rows='4' value='$reason' readonly>$reason</textarea>";
+                    echo "<textarea id='reason' name='reason1' rows='4' value='$reason' readonly>$reason</textarea>";
                     echo "</div>";
                     echo "</div>";
 
                     echo "<div class='button'>";
-                    echo "<button class='editBtn'>";
+                    echo "<button type='button' class='editBtn'>";
                     echo "<i class='uil uil-edit'></i>";
                     echo "<span class='btnText'>Edit</span>";
                     echo "</button>";
                     echo "</div>";
                     echo "</div>"; 
+                    echo "</form>";
 
                     // editing page
+                    echo "<form action='update_appointment.php' method='POST'>";
                     echo "<div class='form second'>";
                     echo "<header>Appointment Details</header>";
                     echo "<span class='title'><b>Personal Details</b></span>";
@@ -371,24 +380,33 @@ session_start();
                     // <!-- Date -->
                     echo "<div class ='input-field'>";
                     echo "<label>Date</label>";
-                    echo "<input type= 'text' name='date' value='$date' readonly>";
+                    echo "<input type= 'text' name='date' value='$date' >";
                     echo "</div>";
                 
                     // <!-- Time -->
                     echo "<div class ='input-field'>";
                     echo "<label>Time</label>";
-                    echo "<input type= 'text' name='time' value='$time' readonly>";
+                    echo "<input type= 'text' name='time' value='$time' >";
                     echo "</div>";
                     echo "</div>";
                     
                     // <!-- Reason -->
-                    echo "<div><span class='title'><b>Personal Details</b></span></div>";
+                    echo "<div><span class='title'><b>Appointment Details</b></span></div>";
                     echo "<div class ='fields'>";
                     echo "<div class ='input-field'>";
                     echo "<label>Reason</label>";
-                    echo "<textarea id='reason' name='reason' rows='4' value='$reason' readonly>$reason</textarea>";
+                    echo "<textarea id='reason' name='reason' rows='4' value='$reason'>$reason</textarea>";
+                    echo "<input type='hidden' name='appointment_id' value='" . $row['appointID'] . "'>";
+                    echo "<input type='hidden' name='requestStatus' value='" . $row['requestStatus'] . "'>";
                     echo "</div>";
                     echo "</div>";
+                    echo "</div>";
+
+                    echo "<div class='button'>";
+                    echo "<button type='submit' class='saveBtn'>";
+                    echo "<i class='uil uil-check-circle'></i>";
+                    echo "<span class='btnText'>Save</span>";
+                    echo "</button>";
                     echo "</div>";
 
                     echo "</form>";
