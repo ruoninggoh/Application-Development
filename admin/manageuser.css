@@ -17,6 +17,8 @@ body {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+    min-width: 700px;
 }
 
 /* Style the header */
@@ -35,7 +37,6 @@ h2 {
     padding: 10px 20px;
     cursor: pointer;
     text-decoration: none;
-    margin: 50px;
 }
 
 .btn-secondary:hover {
@@ -114,4 +115,78 @@ table th {
     margin-top: 10px;
 }
 
+/* manageuser.css */
+/* Add CSS styles for the search form */
+
+/* Style the search input */
+.input-group input[type="text"] {
+    border-radius: 0; /* Remove rounded corners */
+}
+
+/* Style the search button */
+.input-group .btn-primary {
+    border-radius: 0; /* Remove rounded corners */
+}
+
+/* Style the "New User" button */
+.d-flex .btn-success {
+    border-radius: 0; /* Remove rounded corners */
+}
+
+/* Style the table headers */
+.table thead th {
+    background-color: #333; /* Dark background color */
+    color: #fff; /* Text color */
+}
+
+/* Style the table rows */
+.table tbody tr {
+    background-color: #f9f9f9; /* Alternate row background color */
+}
+
+/* Style the delete buttons */
+.btn-danger {
+    background-color: #d9534f; /* Red background color */
+    border-color: #d9534f; /* Red border color */
+    color: #fff; /* Text color */
+}
+
+/* Hover effect on delete buttons */
+.btn-danger:hover {
+    background-color: #c9302c; /* Darker red background color */
+    border-color: #c9302c; /* Darker red border color */
+}
+
+/* Style the "Back to Dashboard" button */
+.btn-secondary {
+    border-radius: 0; /* Remove rounded corners */
+}
+
+/* Pagination styles */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-link {
+    color: #007BFF;
+    border: 1px solid #007BFF;
+}
+
+.page-link:hover {
+    background-color: #007BFF;
+    color: #fff;
+    border: 1px solid #007BFF;
+}
+
+.page-item.active .page-link {
+    background-color: #007BFF;
+    color: #fff;
+    border: 1px solid #007BFF;
+}
 
