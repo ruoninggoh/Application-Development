@@ -1,8 +1,8 @@
 <?php
 session_start();
+include("../database/connectdb.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include("../database/connectdb.php");
 
     $diagnoseID = mysqli_real_escape_string($con, $_POST['diagnoseID']); 
     $diagnosis = mysqli_real_escape_string($con, $_POST['diagnose']);
