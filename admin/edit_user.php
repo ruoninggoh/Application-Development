@@ -24,16 +24,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newEmail = mysqli_real_escape_string($con, $_POST['newEmail']);
     $newRole = mysqli_real_escape_string($con, $_POST['newRole']);
 
+    // Check if the email ends with "@graduate.utm.my"
+    if (strpos($newEmail, "@graduate.utm.my") === false) {
+        echo '<script>alert("Email must end with @graduate.utm.my");';
+        echo 'window.location.href = "edit_user.php';
+        echo '</script>';
+        exit();
+    }
+
+    // Check if the username or email already exist in the database (excluding the current user)
+    $checkUsernameQuery = "SELECT COUNT(*) FROM User WHERE username = '$newUsername' AND userID != '$userID'";
+    $checkEmailQuery = "SELECT COUNT(*) FROM User WHERE email = '$newEmail' AND userID != '$userID'";
+
+    $usernameExistsResult = mysqli_query($con, $checkUsernameQuery);
+    $emailExistsResult = mysqli_query($con, $checkEmailQuery);
+
+    if (!$usernameExistsResult || !$emailExistsResult) {
+        echo "Error checking username and email existence: " . mysqli_error($con);
+        exit();
+    }
+
+    $usernameExists = mysqli_fetch_row($usernameExistsResult)[0];
+    $emailExists = mysqli_fetch_row($emailExistsResult)[0];
+
+    if ($usernameExists > 0) {
+        echo '<script>';
+        echo 'alert("Username already exists. Please choose a different one.");';
+        echo 'window.location.href = "edit_user.php?userID=' . $userID . '";';
+        echo '</script>';
+        exit();
+    } elseif ($emailExists > 0) {
+        echo '<script>';
+        echo 'alert("Email already exists. Please choose a different one.");';
+        echo 'window.location.href = "edit_user.php?userID=' . $userID . '";';
+        echo '</script>';
+        exit();
+    }
+
+    // Update user details in the database
     $sqlUpdateUser = "UPDATE User SET username = '$newUsername', email = '$newEmail', role = '$newRole' WHERE userID = '$userID'";
     if (mysqli_query($con, $sqlUpdateUser)) {
-        $updateSuccess = true; // Update was successful
-        //header("Location: userManagement.php"); // Comment this line to show the JavaScript alert
+        echo '<script>';
+        echo 'alert("The user information has been updated successfully!");';
+        echo 'window.location.href = "userManagement.php";';
+        echo '</script>';
     } else {
         echo "Error updating user: " . mysqli_error($con);
     }
 }
-
-mysqli_close($con);
 ?>
 <!-- Add an HTML form for editing user details here -->
 
@@ -51,7 +89,7 @@ mysqli_close($con);
 <body>
     <div class="container mt-5">
         <h3>Edit User Details</h3>
-        <?php if ($updateSuccess) : ?>
+        <?php if ($updateSuccess): ?>
             <script>
                 alert("User details updated successfully.");
                 window.location.href = "userManagement.php"; // Redirect after showing the alert
@@ -70,8 +108,15 @@ mysqli_close($con);
             </div>
             <div class="form-group">
                 <label for="newRole">Role:</label>
-                <input type="text" class="form-control" id="newRole" name="newRole"
-                    value="<?php echo $userDetails['role']; ?>" required>
+                <select class="form-control" id="newRole" name="newRole" required>
+                    <option value="select">---Select a role---</option>
+                    <option value="Patient" <?php echo ($userDetails['role'] == 'Patient') ? 'selected' : ''; ?>>Patient
+                    </option>
+                    <option value="Doctor" <?php echo ($userDetails['role'] == 'Doctor') ? 'selected' : ''; ?>>Doctor
+                    </option>
+                    <option value="Staff" <?php echo ($userDetails['role'] == 'Staff') ? 'selected' : ''; ?>>Staff
+                    </option>
+                </select>
             </div>
             <button type="submit" class="btn btn-success">Update User</button>
         </form>

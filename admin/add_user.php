@@ -14,6 +14,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newPassword = mysqli_real_escape_string($con, $_POST['newPassword']);
     $newRole = mysqli_real_escape_string($con, $_POST['newRole']);
 
+    if (strpos($newEmail, "@graduate.utm.my") === false) {
+        echo '<script>alert("Email must end with @graduate.utm.my");';
+        echo 'window.location.href = "add_user.php";';
+        echo '</script>';
+        exit();
+    }
+
+    $emailExistsQuery = "SELECT COUNT(*) FROM User WHERE email = '$newEmail'";
+    $usernameExistsQuery = "SELECT COUNT(*) FROM User WHERE username = '$newUsername'";
+
+    $emailExistsResult = mysqli_query($con, $emailExistsQuery);
+    $usernameExistsResult = mysqli_query($con, $usernameExistsQuery);
+
+    if (!$emailExistsResult || !$usernameExistsResult) {
+        echo "Error checking email and username existence: " . mysqli_error($con);
+        exit();
+    }
+
+    $emailExists = mysqli_fetch_row($emailExistsResult)[0];
+    $usernameExists = mysqli_fetch_row($usernameExistsResult)[0];
+
+    if ($emailExists > 0) {
+        echo '<script>';
+        echo 'alert("Email already exists. Please choose a different one.");';
+        echo 'window.location.href = "add_user.php";';
+        echo '</script>';
+        exit();
+    } elseif ($usernameExists > 0) {
+        echo '<script>';
+        echo 'alert("Username already exists. Please choose a different one.");';
+        echo 'window.location.href = "add_user.php";';
+        echo '</script>';
+        exit();
+    }
+
     // You should hash the password before storing it in the database for security
     $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
@@ -21,12 +56,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                    VALUES ('$newUsername', '$newEmail', '$hashedPassword', '$newRole')";
 
     if (mysqli_query($con, $sqlAddUser)) {
-        // User added successfully, you can redirect to the user management page
-        header("Location: userManagement.php");
-        exit();
+        echo '<script>';
+        echo 'alert("New user successfully add!");';
+        echo 'window.location.href = "userManagement.php";';
+        echo '</script>';
     } else {
         echo "Error adding user: " . mysqli_error($con);
     }
+
 }
 
 mysqli_close($con);
@@ -119,11 +156,17 @@ mysqli_close($con);
             </div>
             <div class="form-group">
                 <label for="newPassword">Password:</label>
-                <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                <input type="password" class="form-control" id="newPassword" name="newPassword" minlength="8" required>
             </div>
             <div class="form-group">
                 <label for="newRole">Role:</label>
-                <input type="text" class="form-control" id="newRole" name="newRole" required>
+                <select class="form-control" id="newRole" name="newRole" required>
+                    <option value="select">---Select a role---</option>
+                    <option value="Patient">Patient</option>
+                    <option value="Doctor">Doctor</option>
+                    <option value="Staff">Staff</option>
+                    <!-- Add more role options as needed -->
+                </select>
             </div>
             <button type="submit" class="btn btn-success">Add User</button>
         </form>

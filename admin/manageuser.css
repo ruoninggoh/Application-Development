@@ -26,11 +26,12 @@ h2 {
     color: #0077b5;
     font-size: 28px;
     margin-bottom: 20px;
+    
 }
 
 /* Style the "Back to Dashboard" button */
 .btn-secondary {
-    background-color: #0077b5;
+    background-color: #838486;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -75,7 +76,7 @@ table {
 table th,
 table td {
     padding: 12px;
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
@@ -91,6 +92,7 @@ table th {
     cursor: pointer;
     border-radius: 5px;
     font-weight: bold;
+
 }
 
 .btn-primary {
@@ -113,6 +115,7 @@ table th {
     background-color: #5cb85c;
     color: #fff;
     margin-top: 10px;
+    border-radius: 5px;
 }
 
 /* Add CSS styles for the search form */
@@ -156,10 +159,7 @@ table th {
     border-color: #c9302c; /* Darker red border color */
 }
 
-/* Style the "Back to Dashboard" button */
-.btn-secondary {
-    border-radius: 0; /* Remove rounded corners */
-}
+
 
 /* Pagination styles */
 .pagination {

@@ -74,6 +74,9 @@ if (isset($_GET['submitted']) && $_GET['submitted'] === 'true') {
               </div>
             </div>
             <div class="form-group mt-3">
+              <input type="number" class="form-control" name="contact" id="contact" placeholder="Contact Number" required>
+            </div>
+            <div class="form-group mt-3">
               <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
             </div>
             <div class="form-group mt-3">

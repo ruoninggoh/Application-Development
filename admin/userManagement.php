@@ -10,19 +10,33 @@ if (!isset($_SESSION['userID'])) {
 $recordsPerPage = 10; // Number of records per page
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-// Fetch the list of users based on search criteria and pagination
+// Fetch the list of users based on search criteria, filter criteria, and pagination
 $searchCriteria = isset($_GET['search']) ? mysqli_real_escape_string($con, $_GET['search']) : '';
+$filterCriteria = isset($_GET['filter']) ? mysqli_real_escape_string($con, $_GET['filter']) : '';
 $offset = ($page - 1) * $recordsPerPage;
-$sqlGetUsers = "SELECT * FROM User 
-                WHERE username LIKE '%$searchCriteria%' 
-                OR role LIKE '%$searchCriteria%'
-                LIMIT $offset, $recordsPerPage";
+
+// SQL query for filtering by role
+$sqlFilter = "SELECT DISTINCT role FROM User";
+$resultFilter = mysqli_query($con, $sqlFilter);
+
+// Fetch the list of users based on search criteria, filter criteria, and pagination
+$sqlGetUsers = "SELECT * FROM User WHERE (username LIKE '%$searchCriteria%' )";
+
+if (!empty($filterCriteria)) {
+    $sqlGetUsers .= " AND role = '$filterCriteria'";
+}
+
+$sqlGetUsers .= " LIMIT $offset, $recordsPerPage";
+
 $resultGetUsers = mysqli_query($con, $sqlGetUsers);
 
-// Count the total number of users based on the search criteria (without LIMIT)
-$sqlCountUsers = "SELECT COUNT(*) as total FROM User 
-                  WHERE username LIKE '%$searchCriteria%' 
-                  OR role LIKE '%$searchCriteria%'";
+// Count the total number of users based on the search criteria and filter criteria (without LIMIT)
+$sqlCountUsers = "SELECT COUNT(*) as total FROM User WHERE (username LIKE '%$searchCriteria%' )";
+
+if (!empty($filterCriteria)) {
+    $sqlCountUsers .= " AND role = '$filterCriteria'";
+}
+
 $resultCountUsers = mysqli_query($con, $sqlCountUsers);
 $rowCount = mysqli_fetch_assoc($resultCountUsers)['total'];
 
@@ -39,26 +53,42 @@ mysqli_close($con);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User Management</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
     <link rel="stylesheet" href="manageuser.css">
     <?php include("./adminHeader.html"); ?>
 </head>
 
 <body>
     <div class="container mt-5">
-        <a href="dashboard.php" class="btn btn-secondary mb-3"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
-        <h2>User Management</h2>
-        <form action="" method="GET">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" name="search" placeholder="Search by Username, Role"
+        <a href="dashboard.php" class="btn btn-secondary mb-3">
+            <i class="uil uil-angle-left"></i>Back to Dashboard
+        </a>
+        <h2><br>User Management</h2>
+
+        <form action="" method="GET" class="form-inline">
+            <div class="form-group">
+                <input type="text" class="form-control" name="search" placeholder="Search by Username"
                     value="<?php echo htmlspecialchars($searchCriteria); ?>">
-                <div class="input-group-append">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </div>
             </div>
-            <input type="hidden" name="page" value="<?php echo $page; ?>">
+            <div class="form-group mx-2">
+                <select class="form-control" name="filter">
+                    <option value="" <?php echo ($filterCriteria == '') ? 'selected' : ''; ?>>All Roles</option>
+                    <?php while ($row = mysqli_fetch_assoc($resultFilter)): ?>
+                        <option value="<?php echo $row['role']; ?>" <?php echo ($filterCriteria == $row['role']) ? 'selected' : ''; ?>>
+                            <?php echo $row['role']; ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+
         </form>
+
         <div class="d-flex justify-content-end mb-3">
-            <a href="add_user.php" class="btn btn-success"><i class="fas fa-plus"></i> New User</a>
+            <a href="add_user.php" class="btn btn-success">
+                <i class="uil uil-user-plus"></i> New User
+            </a>
         </div>
 
         <table class="table table-striped">
@@ -72,29 +102,35 @@ mysqli_close($con);
                 </tr>
             </thead>
             <tbody>
-                <?php while ($row = mysqli_fetch_assoc($resultGetUsers)): ?>
+                <?php if (mysqli_num_rows($resultGetUsers) > 0): ?>
+                    <?php while ($row = mysqli_fetch_assoc($resultGetUsers)): ?>
+                        <tr>
+                            <td>
+                                <?php echo $row['userID']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row['username']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row['email']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row['role']; ?>
+                            </td>
+                            <td><a href="edit_user.php?userID=<?php echo $row['userID']; ?>" class="btn btn-primary"><i
+                                        class="fas fa-edit"></i> Edit</a></td>
+                            <td><button class="btn btn-danger delete-user" data-user-id="<?php echo $row['userID']; ?>"><i
+                                        class="fas fa-trash"></i> Delete</button></td>
+                        </tr>
+                    <?php endwhile; ?>
+                <?php else: ?>
                     <tr>
-                        <td>
-                            <?php echo $row['userID']; ?>
-                        </td>
-                        <td>
-                            <?php echo $row['username']; ?>
-                        </td>
-                        <td>
-                            <?php echo $row['email']; ?>
-                        </td>
-                        <td>
-                            <?php echo $row['role']; ?>
-                        </td>
-                        <td><a href="edit_user.php?userID=<?php echo $row['userID']; ?>" class="btn btn-primary"><i
-                                    class="fas fa-edit"></i> Edit</a></td>
-                        <td><button class="btn btn-danger delete-user" data-user-id="<?php echo $row['userID']; ?>"><i
-                                    class="fas fa-trash"></i> Delete</button></td>
+                        <td colspan="6">No users found.</td>
                     </tr>
-                <?php endwhile; ?>
+                <?php endif; ?>
             </tbody>
-        </table>
 
+        </table>
 
         <ul class="pagination">
             <?php if ($page > 1): ?>
