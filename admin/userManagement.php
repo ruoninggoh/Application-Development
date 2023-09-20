@@ -117,10 +117,8 @@ mysqli_close($con);
                             <td>
                                 <?php echo $row['role']; ?>
                             </td>
-                            <td><a href="edit_user.php?userID=<?php echo $row['userID']; ?>" class="btn btn-primary"><i
-                                        class="fas fa-edit"></i> Edit</a></td>
-                            <td><button class="btn btn-danger delete-user" data-user-id="<?php echo $row['userID']; ?>"><i
-                                        class="fas fa-trash"></i> Delete</button></td>
+                            <td><a href="edit_user.php?userID=<?php echo $row['userID']; ?>" class="btn btn-primary">Edit</a></td>
+                            <td><button class="btn btn-danger delete-user" data-user-id="<?php echo $row['userID']; ?>">Delete</button></td>
                         </tr>
                     <?php endwhile; ?>
                 <?php else: ?>

@@ -78,6 +78,7 @@ mysqli_close($con);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Add New User</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <?php include("./adminHeader.html"); ?>
     <style>
         /* Style for the Add New User form */
@@ -139,12 +140,38 @@ mysqli_close($con);
                 width: 90%;
             }
         }
+
+        .custom-link {
+            text-decoration: none;
+            color: #007bff;
+            /* Change the color to your preferred color */
+            font-size: 18px;
+            /* Adjust the font size as needed */
+            padding: 5px 10px;
+            /* Add padding to the link */
+            background-color: #f8f9fa;
+            /* Change the background color if necessary */
+            border: 1px solid #ccc;
+            /* Add a border if desired */
+            border-radius: 4px;
+            /* Add rounded corners */
+        }
+
+        .custom-link:hover {
+            background-color: #e2e6ea;
+            /* Change the background color on hover */
+            color: #0056b3;
+            /* Change the text color on hover */
+        }
     </style>
 </head>
 
 <body>
     <div class="container mt-5">
-        <h3>Add New User</h3>
+        <a href="userManagement.php" class="custom-link">
+            <i class="uil uil-angle-left"></i> Go Back
+        </a>
+        <h3><br>Add New User</h3>
         <form action="" method="POST">
             <div class="form-group">
                 <label for="newUsername">Username:</label>
