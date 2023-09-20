@@ -49,7 +49,7 @@ mysqli_close($con);
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            min-width: 700px;
+            min-width: 900px;
         }
 
         h2 {
@@ -71,14 +71,15 @@ mysqli_close($con);
             background-color: #fff;
         }
 
-        .table th,
         .table td {
             vertical-align: middle;
             text-align: center;
+            padding: 25px;
         }
 
         .thead-dark th {
             background-color: #343a40;
+            text-align: center;
             color: #fff;
         }
 
@@ -142,7 +143,7 @@ mysqli_close($con);
             text-decoration: none;
             border: 1px solid #ffc107;
             /* Border color */
-            padding: 5px 10px;
+            padding: 8px 10px;
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
         }
