@@ -26,8 +26,7 @@ h2, h4, p{
   margin:3rem auto 3rem auto;
   position:relative;
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
-  width: 21cm; /* Add this line */
-  height: 29.7cm; /* Add this line */;
+  
   
 }
 
