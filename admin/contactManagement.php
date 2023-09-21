@@ -25,6 +25,9 @@ $rowCount = mysqli_fetch_assoc($resultCountSubmissions)['total'];
 
 $totalPages = ceil($rowCount / $recordsPerPage);
 
+
+
+
 mysqli_close($con);
 ?>
 
@@ -40,16 +43,26 @@ mysqli_close($con);
 
     <?php include("./adminHeader.html"); ?>
     <style>
-        body {
-            background-color: #f4f4f4;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
+        /* Apply some styling to the body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        /* Style the container */
         .container {
             background-color: #fff;
             padding: 20px;
             border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            min-width: 900px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+            min-width: 700px;
         }
 
         h2 {
@@ -67,14 +80,17 @@ mysqli_close($con);
             background-color: #555;
         }
 
-        .table {
-            background-color: #fff;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
         }
 
-        .table td {
-            vertical-align: middle;
+        table th,
+        table td {
+            padding: 12px;
             text-align: center;
-            padding: 25px;
+            border-bottom: 1px solid #ddd;
         }
 
         .thead-dark th {
@@ -136,30 +152,60 @@ mysqli_close($con);
         }
 
         .reply-link {
-            color: #fff;
-            /* Text color */
+            display: inline-block;
+            vertical-align: middle;
+            color: white;
+            text-decoration: none;
+            margin-right: 10px;
+            /* Adjust the spacing between the icon and text */
+            padding: 7px 10px;
+            /* Add padding for better visual appearance */
+            border: 1px solid #ffc107;
+            /* Yellow border */
+            border-radius: 5px;
+            /* Add rounded corners */
             background-color: #ffc107;
             /* Yellow background color */
-            text-decoration: none;
-            border: 1px solid #ffc107;
-            /* Border color */
-            padding: 8px 10px;
-            border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
         }
 
         .reply-link:hover {
             background-color: #d39e00;
-            /* Hover background color (a darker yellow) */
+            /* Darker yellow on hover */
             color: #fff;
-            /* Hover text color */
+            /* Change text color on hover */
             text-decoration: none;
         }
 
-        .reply-link .reply-icon {
+        .reply-icon {
+            font-size: 16px;
+            /* Adjust the icon size */
+            vertical-align: middle;
+        }
+
+        .delete-btn {
+            color: #fff;
+            background-color: #dc3545;
+            /* Red background color */
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+            /* Hover background color (a darker red) */
+        }
+
+        .delete-btn .delete-icon {
             margin-right: 5px;
             /* Adjust the spacing between icon and text */
         }
+        .table-container {
+                overflow-x: auto; /* Add horizontal scrollbar if necessary */
+            }
     </style>
 </head>
 
@@ -178,7 +224,7 @@ mysqli_close($con);
             </div>
         </form>
 
-
+        <div class="table-container">
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
@@ -188,33 +234,69 @@ mysqli_close($con);
                     <th>Phone No</th>
                     <th>Subject</th>
                     <th>Description</th>
-                    <th>Action</th> <!-- Add the Action column -->
+                    <th colspan="2">Action</th> <!-- Add the Action column -->
                 </tr>
             </thead>
             <tbody>
-    <?php
-    // Check if there are search results
-    if (mysqli_num_rows($resultGetSubmissions) > 0) {
-        // Display the table headers and results
-        while ($row = mysqli_fetch_assoc($resultGetSubmissions)) {
-            echo '<tr>';
-            echo '<td>' . $row['contactFormID'] . '</td>';
-            echo '<td>' . $row['Name'] . '</td>';
-            echo '<td>' . $row['Email'] . '</td>';
-            echo '<td>' . $row['phoneNo'] . '</td>';
-            echo '<td>' . $row['Subject'] . '</td>';
-            echo '<td>' . $row['Description'] . '</td>';
-            echo '<td><a href="mailto:' . $row['Email'] . '?subject=Re: ' . $row['Subject'] . '" class="reply-link"><i class="uil uil-message reply-icon"></i>Reply</a></td>';
-            echo '</tr>';
-        }
-    } else {
-        // No results found, display a message
-        echo '<tr><td colspan="7">No results found.</td></tr>';
-    }
-    ?>
-</tbody>
-
+                <?php
+                // Check if there are search results
+                if (mysqli_num_rows($resultGetSubmissions) > 0) {
+                    // Display the table headers and results
+                    while ($row = mysqli_fetch_assoc($resultGetSubmissions)) {
+                        echo '<tr>';
+                        echo '<td>' . $row['contactFormID'] . '</td>';
+                        echo '<td>' . $row['Name'] . '</td>';
+                        echo '<td>' . $row['Email'] . '</td>';
+                        echo '<td>' . $row['phoneNo'] . '</td>';
+                        echo '<td>' . $row['Subject'] . '</td>';
+                        echo '<td>' . $row['Description'] . '</td>';
+                        echo '<td><a href="mailto:' . $row['Email'] . '?subject=Re: ' . $row['Subject'] . '" class="reply-link"><i class="uil uil-message reply-icon"></i>Reply</a></td>';
+                        echo '<td><button class="delete-btn" data-contactFormID="' . $row['contactFormID'] . '"><i class="uil uil-trash delete-icon"></i>Delete</button></td>';
+                        echo '</tr>';
+                    }
+                } else {
+                    // No results found, display a message
+                    echo '<tr><td colspan="7">No results found.</td></tr>';
+                }
+                ?>
+            </tbody>
         </table>
+
+        <!-- Add this script at the bottom of your HTML file -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // Handle delete button click
+                $('.delete-btn').click(function () {
+                    var contactFormID = $(this).data('contactformid');
+
+                    if (confirm('Are you sure you want to delete this submission?')) {
+                        // Send an AJAX request to delete the submission
+                        $.ajax({
+                            url: 'delete_submission.php',
+                            type: 'POST',
+                            data: { id: contactFormID },
+                            success: function (response) {
+                                // Check the response from the server
+                                if (response.success) {
+                                    // Deletion was successful, display a message
+                                    alert('Success: ' + response.message);
+
+                                    // Reload the page or update the table as needed
+                                    location.reload(); // Reload the page after deletion
+                                } else {
+                                    // Deletion failed, display an error message
+                                    alert('Error: ' + response.message);
+                                }
+                            },
+                            error: function () {
+                                alert('Error deleting submission.');
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
 
         <!-- Pagination -->
         <ul class="pagination">
