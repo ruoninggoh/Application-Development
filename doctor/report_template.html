@@ -1,0 +1,111 @@
+<div class="page" size="A4">
+  <div class="top-section">
+      <div class="address">
+          <div class="address-content">
+              <h2>UniHealth </h2>
+              <p>Pusat Kesihatan Universiti,
+                  Universiti Teknologi Malaysia,
+                  81110 Johor Bahru,<br>
+                  Johor Darul Ta’zim.</p>
+          </div>
+      </div>
+
+      <div class="contact">
+          <div class="contact-content">
+              <div class="email">Email: <span class="span">
+                      &nbsp;pku@utm.my
+                  </span></div>
+
+              <div class="number">Contact:<span class="span">
+                      &nbsp;+607 553 7233
+                      <br>
+                      Emergency (24 hours):&nbsp;+607 553 0999
+                  </span></div>
+          </div>
+      </div>
+  </div>
+
+  <div class="billing-invoice">
+      <div class="title">
+          UniHealth Medical Report
+      </div>
+      <div class="des">
+
+          <p class="issue"><span>{today}</span></p>
+      </div>
+
+  </div>
+
+  <div class="billing-to">
+      <div class="form">
+          <div class="title"><b>Personal Details</b></div>
+          <div class="fields">
+              <div class="input-field">
+                  <label>Full Name</label>
+                  <input type="text" name="full_name" id="full_name" value="{name}" readonly>
+              </div>
+
+              <div class="input-field">
+                  <label>Age</label>
+                  <input type="text" name="age" id="age" value="{age}" readonly>
+              </div>
+
+              <div class="input-field">
+                  <label>Email</label>
+                  <input type="text" name="email" id="email" value="{email}" readonly>
+              </div>
+
+              <div class="input-field">
+                  <label>Phone Number</label>
+                  <input type="text" name="phone" id="phone" value="{phone}" readonly>
+              </div>
+
+              <div class="input-field">
+                  <label>Gender</label>
+                  <input type="text" name="gender" id="gender" value="{gender}" readonly>
+              </div>
+
+              <div class="input-field">
+                  <label>Appointment Date and Time</label>
+                  <input type="text" value="{date} . {time}" readonly>
+              </div>
+          </div>
+      </div>
+
+      <div class="fields">
+          <div class="details ID">
+              <div class="title"><b>Diagnose Details</b></div>
+              <div class="input-field">
+                  <label for="diagnose">Diagnose:</label>
+                  <input type="text" name="diagnose" id="diagnose" rows="4" value="{diagnose}" readonly>
+              </div>
+
+              <div class="input-field">
+                  <label for="description">Summary:</label>
+                  <input type="text" name="description" id="description" rows="4" value="{description}" readonly>
+              </div>
+          </div>
+          <hr style="margin-bottom: 30px; border: none; border-top: 1px dotted #0c0c0c;">
+      </div>
+
+      <div class="sijil-fields">
+          <div class="third">
+              <div class="title"><b><u>Medical Certificate</u></b></div>
+            <div class="input-field">
+        <p>I have examined Mr./Mrs./Miss:&nbsp; &nbsp; <b><?php echo $name; ?></b>&nbsp; &nbsp;
+            on the appointment of&nbsp; &nbsp; <b><?php echo $date . '. ' . $time; ?></b> &nbsp;<br>
+            found that he/she is unfit for duty/attend school from &nbsp; <b><?php echo $startdate; ?></b> &nbsp; to <br>
+            <b><?php echo $enddate; ?></b> &nbsp;for days
+            <b><?php echo $interval; ?> days</b>.</p>
+    </div>
+              <div class="address">
+                  <h4>UniHealth </h4>
+                  <p>Pusat Kesihatan Universiti,</p>
+                  <p>Universiti Teknologi Malaysia,</p>
+                  <p>81110 Johor Bahru,</p>
+                  <p>Johor Darul Ta’zim.</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
