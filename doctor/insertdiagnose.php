@@ -166,6 +166,7 @@ if(isset($_GET['appointID'])){
             <div class="input-field">
             <label>End Date</label>
             <input type="date" name="end-date" required>
+            </div>
 
          
           </div>

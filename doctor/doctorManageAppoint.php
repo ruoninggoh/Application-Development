@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("doctorHeader.php");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -154,12 +155,17 @@ button {
                 })
             })
         });
+
+
+
         $(document).ready(function() {
-    var handled = false;
+        var handledInsert = false; // Variable to track "Insert" button click
+        var handledDownload = false; // Variable to track "Download" button click
+
 
     $("table").on("click", ".insert", function() {
-        if (handled) return;
-        handled = true;
+        if (handledInsert) return; // If the pop-up has already been shown, do nothing
+        handledInsert = true; // Mark the pop-up as shown
 
         console.log("Insert button clicked");
         var appointID = $(this).data("appointid");
@@ -174,14 +180,33 @@ button {
         }
         event.preventDefault(); // Prevent the default link behavior
 
-    });
+    
 });
 
-
-        $("table").on("click", ".download", function() {
+        $("table").on("click", ".download", function(e) {
+            if (handledDownload) return; // If the pop-up has already been shown, do nothing
+            handledDownload = true; // Mark the pop-up as shown
             var appointID = $(this).data("appointid");
-            window.location.href = "";
-        })
+            $.ajax({
+            type: "POST",
+            url: "checkDiagnosis.php", // Create a new PHP file for this purpose
+            data: {
+                appointID: appointID
+            },
+            success: function(response) {
+                if (response === "data_found") {
+                    // Data exists, allow the download action
+                    window.location.href = "downloadreport.php?appointID=" + appointID;
+                } else {
+                    // Data does not exist, show an error pop-up
+                    alert("No data found for this appointment.please insert the data first.");
+                }
+            }
+        });
+        
+        e.preventDefault(); // Prevent the default link behavior
+    });
+});
 
     </script>
 </head>
@@ -281,7 +306,8 @@ button {
                                             <table>
                                                 <tr>
                                                 <td style='border:none ;'><a href='insertdiagnose.php?appointID=$row[appointID]' class='insert' data-appointid='$row[appointID]'><i class='fa fa-book fa-2x'></i></a></td>
-                                                <td style='border:none;'><a href='#' class='download' data-appointid='$row[appointID]'><i class='fa fa-download fa-2x'></i></a></td>
+                                                
+                                                <td style='border:none;'><a href='downloadreport.php?appointID=$row[appointID]' class='download' data-appointid='$row[appointID]'><i class='fa fa-download fa-2x'></i></a></td>
                                                 </tr>
                                             </table>
                                         </td>";
