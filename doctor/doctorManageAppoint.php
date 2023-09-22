@@ -291,7 +291,7 @@ include("doctorHeader.php");
                 event.preventDefault(); // Prevent the default link behavior
 
     });
-});
+
 
 
             $("table").on("click", ".download", function(e) {
@@ -317,7 +317,7 @@ include("doctorHeader.php");
 
         e.preventDefault(); // Prevent the default link behavior
     });
-
+});
     </script>
 </head>
 
