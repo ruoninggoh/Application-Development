@@ -6,18 +6,25 @@ include("doctorHeader.php");
 include("../database/connectdb.php");
 
 
+$diagnose = '';
+$description='';
+$startdate='';
+$enddate='';
+
 if(isset($_GET['appointID'])){
   $appointID = $_GET['appointID'];
 
-  
-  // Get the diagnoseID from the URL
-  if(isset($_GET['diagnoseID'])){
-    $diagnoseID = $_GET['diagnoseID'];
-  } else {
-    // If diagnoseID is not in the URL, you might handle this case accordingly (e.g., set it to a default value)
-    $diagnoseID = null; // You can set it to an appropriate default value if needed
-  }
+  $sqlDiagnose="SELECT * FROM diagnose WHERE appointID=$appointID";
+  $resultDiagnose = mysqli_query($con, $sqlDiagnose);
 
+
+  if($resultDiagnose && mysqli_num_rows($resultDiagnose)> 0){
+    $diagnoseData = mysqli_fetch_assoc($resultDiagnose);
+    $diagnose = $diagnoseData['diagnosis'];
+    $description = $diagnoseData['description'];
+    $startdate = $diagnoseData['startdate'];
+    $enddate = $diagnoseData['enddate'];
+  }
 
   $sqlUser="SELECT up.* , u.email, a._date, a._time
   FROM user_profiles up
@@ -46,6 +53,8 @@ if(isset($_GET['appointID'])){
 } else {
   $errorMsg="Error: No appointID provided in the session";
 }
+
+
 ?>
 
 
@@ -111,7 +120,6 @@ if(isset($_GET['appointID'])){
 
         </div>
 
-
         <div class="fields">
 
         <div class="details ID">
@@ -119,12 +127,13 @@ if(isset($_GET['appointID'])){
           <table>
             <tr>
               <td style="font-size:13px; font-weight:500; color:#341111;"><label for="diagnose">Diagnose:</label></td>
-              <td><textarea name="diagnose" id="diagnose" rows="4" required></textarea></td>
+              <td><textarea name="diagnose" id="diagnose" rows="4" required><?php echo $diagnose;?></textarea>
+
             </tr>
 
             <tr>
               <td style="font-size:13px; font-weight:500; color:#341111;"><label for="description">Summary: </label></td>
-              <td><textarea name="description" id="description" rows="4" required></textarea></td>
+              <td><textarea name="description" id="description" rows="4" required><?php echo $description; ?></textarea></td>
             </tr>
           </table>
 
@@ -151,7 +160,7 @@ if(isset($_GET['appointID'])){
 
               <div class="input-field">
               <label>Start Date</label>
-              <input type="date" name="start_date" required>
+              <input type="date" name="start_date" required >
               </div>
 
             <div class="input-field">

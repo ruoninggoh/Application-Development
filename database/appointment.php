@@ -56,7 +56,7 @@
         $currentDate = date_create();
         date_time_set($currentDate,0,0,0);
         if ($userDate < $currentDate){
-            echo "<script>alert('Please choose a valid date'); window.location.href = '../user/appointment_form.php'</script>";
+            echo "<script>alert('Please choose a valid date'); window.location.href = '../user/appointment_form.php';</script>";
             exit();
         }
 

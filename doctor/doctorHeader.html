@@ -1,3 +1,38 @@
+<?php 
+if(session_status()===PHP_SESSION_NONE){
+  session_start();
+}
+
+include('../database/connectdb.php');
+
+if(!isset($_SESSION['userID'])){
+  header("Location:../signin.php");
+  exit();
+}
+$userID=$_SESSION['userID'];
+
+$sqlProfile = "SELECT * FROM user_profiles WHERE user_id = $userID";
+$resultProfile = mysqli_query($con, $sqlProfile);
+
+if($resultProfile){
+  $profileData = mysqli_fetch_assoc($resultProfile);
+}
+
+$sqlDoc = "SELECT full_name, picture FROM user_profiles WHERE user_id =$userID";
+$resultDoc = mysqli_query($con, $sqlDoc);
+
+$defaultUserName = "Doctor";
+$defaultProfilePicture = "../images/patients.png";
+
+if(!empty($profileData)){
+  $userName = "Doctor" . $profileData['full_name'];
+  $profilePicture = $profileData['picture'];
+} else{
+  $userName = $defaultUserName;
+  $profilePicture = $defaultProfilePicture;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +43,7 @@
 *{
   margin:0;
   padding: 0;
-  font-family:'Poppins', sans-serif !important;
+  font-family:'Poppins', sans-serif;
   box-sizing:border-box;
   
 }
@@ -96,7 +131,8 @@ nav ul li a:hover {
 }
 
 .user-info img{
-  width:40px;
+  width:50px;
+  height:50px;
   border-radius:50%;
   margin-right:15px;
 }
@@ -155,16 +191,17 @@ nav ul li a:hover {
       <img src="../images/LOGO.png" class="logo">
       <ul>
         <li><a href="./dashboard.php">Home</a> </li>
-        <li><a href="./userManagement.php">User Management</a></li>
-        <li><a href="./contactManagement.php">Contact Management</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="doctorManageAppoint.php"> Appointment</a></li>
+        <li><a href="#">Contact Us</a></li>
       </ul>
       <img src="../images/patients.png" class="user-pic" onclick="toggleMenu()">
 
       <div class="sub-menu-wrap" id="subMenu">
         <div class="sub-menu">
           <div class="user-info">
-            <img src="../images/patients.png">
-            <h3>Admin</h3>
+            <img src="<?php echo $profilePicture; ?>">
+            <h3 style="font-size:22px; padding-top:5px;"><?php echo $userName; ?></h3>
             </div>
             <hr>
 
@@ -209,4 +246,3 @@ nav ul li a:hover {
       subMenu.classList.toggle("open-menu");
     }
   </script>
-

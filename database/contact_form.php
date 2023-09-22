@@ -1,10 +1,19 @@
 <?php
-//create connection
+// Create connection
 include("connectdb.php");
+
+// Escape and quote the values
+$name = mysqli_real_escape_string($con, $_POST['name']);
+$email = mysqli_real_escape_string($con, $_POST['email']);
+$contact = mysqli_real_escape_string($con, $_POST['contact']);
+$subject = mysqli_real_escape_string($con, $_POST['subject']);
+$message = mysqli_real_escape_string($con, $_POST['message']);
+
 $sql = "INSERT INTO contactForm (Name, Email, phoneNo, Subject, Description)
-VALUES ('$_POST[name]','$_POST[email]','$_POST[phone]','$_POST[subject]','$_POST[description]')";
+        VALUES ('$name', '$email', '$contact', '$subject', '$message')";
+
 if (!mysqli_query($con, $sql)) {
-    die('Error: ' . mysqli_connect_error());
+    die('Error: ' . mysqli_error($con));
 }
 
 mysqli_close($con);

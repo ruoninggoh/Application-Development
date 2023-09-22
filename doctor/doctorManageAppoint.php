@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("doctorHeader.php");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -262,13 +263,19 @@ include("doctorHeader.php");
                         }
                     }
                 })
-            });
+            })
+        });
 
-            var handled = false;
 
-            $("table").on("click", ".insert", function() {
-                if (handled) return;
-                handled = true;
+
+        $(document).ready(function() {
+        var handledInsert = false; // Variable to track "Insert" button click
+        var handledDownload = false; // Variable to track "Download" button click
+
+
+    $("table").on("click", ".insert", function() {
+        if (handled) return;
+        handled = true;
 
                 console.log("Insert button clicked");
                 var appointID = $(this).data("appointid");
@@ -283,15 +290,15 @@ include("doctorHeader.php");
                 }
                 event.preventDefault(); // Prevent the default link behavior
 
-            });
+    });
+});
 
 
+        $("table").on("click", ".download", function() {
+            var appointID = $(this).data("appointid");
+            window.location.href = "";
+        })
 
-            $("table").on("click", ".download", function() {
-                var appointID = $(this).data("appointid");
-                window.location.href = "";
-            })
-        });
     </script>
 </head>
 
@@ -453,8 +460,8 @@ include("doctorHeader.php");
                     echo "<td>
                                             <table>
                                                 <tr>
-                                                <td style='border:none ;'><a href='insertdiagnose.php?appointID=$row[appointID]' class='insert' data-appointid='$row[appointID]'><i class='uil uil-edit' style='font-size: 35px;'></i></a></td>
-                                                <td style='border:none;'><a href='#' class='download' data-appointid='$row[appointID]'><i class='uil uil-file-download-alt' style='font-size: 35px'></i></a></td>
+                                                <td style='border:none ;'><a href='insertdiagnose.php?appointID=$row[appointID]' class='insert' data-appointid='$row[appointID]'><i class='fa fa-book fa-2x'></i></a></td>
+                                                <td style='border:none;'><a href='#' class='download' data-appointid='$row[appointID]'><i class='fa fa-download fa-2x'></i></a></td>
                                                 </tr>
                                             </table>
                                         </td>";
