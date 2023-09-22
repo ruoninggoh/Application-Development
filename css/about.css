@@ -8,9 +8,8 @@
 body{  
   width:100%;
   min-height:100vh;
-  background-image: url("../images/signin.jpg");
-  background-size: cover; 
-  background-repeat: no-repeat;
+  background: #F9F7F7;
+
 }
 
 .heading{
@@ -100,7 +99,9 @@ body{
 
 .container{
   text-align:center;
-  background: #F9F7F7;
+  background-image: url("../images/signin.jpg");
+  background-size: cover; 
+  background-repeat: no-repeat;
 }
 
 .header{
