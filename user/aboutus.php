@@ -21,6 +21,7 @@ if(!isset($_SESSION['userID'])){
   <body>
     <div class="heading">
       <h1>About Us</h1>
+      <hr>
     </div>
 
     <section class="about-us">
