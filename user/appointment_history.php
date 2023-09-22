@@ -218,6 +218,9 @@ session_start();
                 $('.form.second').removeClass('secActive');
             });
 
+            $(document).ready(function() {
+        var handledDownload = false; // Variable to track "Download" button click
+
             $('.report-button').click(function(){
                 var appointID = $(this).data('appointID');
                 var modalID = $(this).data('modal-id');
