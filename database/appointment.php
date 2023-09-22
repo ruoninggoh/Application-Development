@@ -50,14 +50,14 @@
         }
 
         if ($time == NULL){
-            echo "<script>alert('Please select a time slot'); window.location.href = '../user/appointment_form.php'</script>";
+            echo "<script>alert('Please select a time slot'); window.location.href = '../user/appointment_form.php';</script>";
         }
         $userDate = date_create($date);
         $currentDate = date_create();
         date_time_set($currentDate,0,0,0);
         if ($userDate < $currentDate){
             echo "<script>alert('Please choose a valid date'); window.location.href = '../user/appointment_form.php'</script>";
-            
+            exit();
         }
 
         $sql = "SELECT * FROM Appointment WHERE _date = '$date' AND _time = '$time' AND requestStatus = 'Approved'";
