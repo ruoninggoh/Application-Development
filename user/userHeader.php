@@ -238,7 +238,7 @@ nav ul li a:hover {
       <img src="../images/LOGO.png" class="logo">
       <ul>
         <li><a href="./userdashboard.php">Home</a> </li>
-        <li><a href="#">About Us</a></li>
+        <li><a href="./aboutus.php">About Us</a></li>
         <li class="dropdown">
           <a href="#" class="dropbtn">Appointment</a>
           <div class="dropdown-content">
