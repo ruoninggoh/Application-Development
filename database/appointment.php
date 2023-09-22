@@ -50,7 +50,7 @@
         }
 
         if ($time == NULL){
-            echo "<script>alert('Please select a time slot'); window.location.href = '../user/appointment_form.php'</script>";
+            echo "<script>alert('Please select a time slot'); window.location.href = '../user/appointment_form.php';</script>";
         }
         $userDate = date_create($date);
         $currentDate = date_create();
