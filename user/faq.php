@@ -12,6 +12,7 @@
     <style>
         /* Your CSS styles here */
         /* CSS for the background overlay with animation */
+        /* CSS for the white overlay effect with animation */
         body::after {
             content: "";
             position: fixed;
@@ -42,27 +43,30 @@
             animation: blurIn 1s ease-in-out forwards;
         }
 
-        /* Keyframes for the fade-in animation */
+        /* Animation for fading in the overlay */
         @keyframes fadeIn {
-            0% {
+            from {
                 background-color: rgba(255, 255, 255, 0);
             }
 
-            100% {
+            to {
                 background-color: rgba(255, 255, 255, 0.5);
+                /* Adjust the final opacity as needed */
             }
         }
 
-        /* Keyframes for the blur animation */
+        /* Animation for blurring the background image */
         @keyframes blurIn {
-            0% {
-                filter: blur(10px);
-            }
-
-            100% {
+            from {
                 filter: blur(0px);
             }
+
+            to {
+                filter: blur(4px);
+                /* Adjust the final blur intensity as needed */
+            }
         }
+
 
 
         .section-title {
