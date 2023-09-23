@@ -271,7 +271,7 @@ nav ul li a:hover {
 
             </a>
 
-            <a href="#" class="sub-menu-link">
+            <a href="faq.php" class="sub-menu-link">
               <img src="../images/help.png">
               <p>Help & Support</p>
               <span>></span>
