@@ -36,7 +36,6 @@ session_start();
             left: 0;
             width: 100%;
             height: 100%;
-
             background-color: rgba(0, 0, 0, 0.7);
             z-index: 1;
             
@@ -46,7 +45,7 @@ session_start();
             background-color: #F9F7F7;
             border-radius: 5px;
             padding: 20px;
-            width: 60%;
+            width: 600px;
             margin: 100px auto;
             max-height: 70%;
             
@@ -149,12 +148,13 @@ session_start();
             height: 100px;
             font-size: 14px;
             padding: 20px 15px;
-            width: 580px;
+            width: 500px;
             margin-top: 10px;
             text-align: left;
             outline: none;
             border-radius: 5px;
             border: 1px solid #aaa;
+            min-width: 300px;
         }
         .form.second{
             opacity: 0;
@@ -217,8 +217,42 @@ session_start();
                 $('.form.first').removeClass('hidden');
                 $('.form.second').removeClass('secActive');
             });
+
+            $(document).ready(function() {
+            var handledDownload = false; // Variable to track "Download" button click
+
+            $('.report-button').click(function(){
+                var appointID = $(this).data('appointID');
+                var modalID = $(this).data('modal-id');
+                console.log("Download report button clicked");
+                $.ajax({
+            type: "POST",
+            url: "checkDiagnosis.php", // Create a new PHP file for this purpose
+            data: {
+                appointID: appointID
+            },
+            success: function(response) {
+                if (response === "data_found") {
+                    // Data exists, allow the download action
+                    window.location.href = "../doctor/downloadreport.php?appointID=" + appointID;
+                } else {
+                    // Data does not exist, show an error pop-up
+                    alert("No data found for this appointment.please insert the data first.");
+                }
+            }
+        });
+        e.preventDefault(); // Prevent the default link behavior
+
+
+            })
                 
         });
+                        
+    });
+
+    function showErrorMessage() {
+        alert("You can only download the report for approved appointments.");
+    }
 
     </script>
     
@@ -255,7 +289,7 @@ session_start();
                     <th>Time</th>
                     <th>Details</th>
                     <th>Status</th>
-                    <!-- <th>Report</th> -->
+                    <th>Report</th>
                 </tr>
             </thead>
             <tbody>
@@ -268,7 +302,12 @@ session_start();
                     echo "<td>" . $row['_time'] . "</td>";
                     echo "<td><button style='border:none; background-color: white;' class='details-button' data-reason='" . $row['reason'] . "' data-modal-id='reasonModal$index'><i class='uil uil-info-circle' style='font-size:35px'></i></button></td>";
                     echo "<td>" . $row['requestStatus'] . "</td>";
-                    echo "</tr>";
+                    if ($row['requestStatus'] === "Approved") {
+                        echo "<td><a href='../doctor/downloadreport.php?appointID=" . $row['appointID'] . "' style='text-decoration:none;'><button style='border:none; background-color: white;' class='report-button' data-appointID='" . $row['appointID'] . "' data-modal-id='reasonModal$index'><i class='uil uil-file-download-alt' style='font-size: 35px'></i></button></a></td>";
+                    } else {
+                        echo "<td><button style='border:none; background-color: white;' class='report-button' data-appointID='" . $row['appointID'] . "' data-modal-id='reasonModal$index' onclick='showErrorMessage()'><i class='uil uil-file-download-alt' style='font-size: 35px'></i></button></td>";
+                    }
+                                        echo "</tr>";
 
                     
                     $name = $row['full_name'];

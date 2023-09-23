@@ -191,7 +191,7 @@ nav ul li a:hover {
       <img src="../images/LOGO.png" class="logo">
       <ul>
         <li><a href="./dashboard.php">Home</a> </li>
-        <li><a href="#">About Us</a></li>
+        <li><a href="../doctor/daboutus.php">About Us</a></li>
         <li><a href="doctorManageAppoint.php"> Appointment</a></li>
         <li><a href="#">Contact Us</a></li>
       </ul>
