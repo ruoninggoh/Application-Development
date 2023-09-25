@@ -21,7 +21,7 @@
             height: 100%;
             background-color: rgba(255, 255, 255, 0);
             /* Start with 0 opacity */
-            z-index: 0;
+            z-index: -1;
             animation: fadeIn 1s ease-in-out forwards;
         }
 
