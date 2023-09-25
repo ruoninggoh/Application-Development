@@ -1,6 +1,15 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['userID'])) {
+    header("Location: ../database/signin_form.php");
+    exit();
+}
+
+$userID = $_SESSION['userID'];
 ?>
+
+
 <!DOCTYPE html>
 <html>
 

@@ -2,6 +2,17 @@
 session_start();
 include("doctorHeader.php");
 
+include("../database/connectdb.php");
+
+    if(!isset($_SESSION['userID'])){
+      header("Location:../database/signin_form.php");
+      exit();
+    }
+      //If userID is set
+      //import database
+      include("../database/connectdb.php");
+      $userID = $_SESSION['userID'];
+
 ?>
 <!DOCTYPE html>
 <html>
