@@ -208,6 +208,18 @@ include("doctorHeader.php");
                 //var $row = $(this).closest("tr");
                 var date = $(this).closest("tr").find("td:eq(2)").text();
                 var time = $(this).closest("tr").find("td:eq(3)").text();
+                var rejectAppointID =[];    
+                $("table tbody tr").each(function() {
+                    var $currentRow = $(this);
+                    var rowDate = $currentRow.find("td:eq(2)").text();
+                    var rowTime = $currentRow.find("td:eq(3)").text();
+                    var appointIDToReject = $currentRow.find(".reject").data("appointid");
+
+                    if (rowDate === date && rowTime === time && appointID !== appointIDToReject) {
+                        rejectAppointID.push(appointIDToReject);
+                        
+                    }
+                });
 
                 $.ajax({
                     type: "POST",
@@ -223,27 +235,38 @@ include("doctorHeader.php");
                     }
                 });
 
-                $("table tbody tr").each(function() {
-                    var $currentRow = $(this);
-                    var rowDate = $currentRow.find("td:eq(2)").text();
-                    var rowTime = $currentRow.find("td:eq(3)").text();
-
-                    if (rowDate === date && rowTime === time && appointID !== $currentRow.find(".reject").data("appointid")) {
-                        var rejectLink = $currentRow.find(".reject");
-                        var appointIDToReject = rejectLink.data("appointid");
-
-                        if (rejectLink.length > 0) {
-                            $.ajax({
-                                type: "POST",
-                                url: "updateStatus.php",
-                                data: {
-                                    appointID: appointIDToReject,
-                                    status: "Rejected"
-                                },
-                            });
+                rejectAppointIDs.forEach(function(appointIDToReject) {
+                $.ajax({
+                        type: "POST",
+                        url: "updateStatus.php",
+                        data: {
+                            appointID: appointIDToReject,
+                            status: "Rejected"
                         }
-                    }
+                    });
                 });
+
+                // $("table tbody tr").each(function() {
+                //     var $currentRow = $(this);
+                //     var rowDate = $currentRow.find("td:eq(2)").text();
+                //     var rowTime = $currentRow.find("td:eq(3)").text();
+
+                //     if (rowDate === date && rowTime === time && appointID !== $currentRow.find(".reject").data("appointid")) {
+                //         var rejectLink = $currentRow.find(".reject");
+                //         var appointIDToReject = rejectLink.data("appointid");
+
+                //         if (rejectLink.length > 0) {
+                //             $.ajax({
+                //                 type: "POST",
+                //                 url: "updateStatus.php",
+                //                 data: {
+                //                     appointID: appointIDToReject,
+                //                     status: "Rejected"
+                //                 },
+                //             });
+                //         }
+                //     }
+                // });
             });
 
             $("table").on("click", ".reject", function() {
