@@ -1,6 +1,6 @@
 <?php
 // Create connection
-include("connectdb.php");
+include("../database/connectdb.php");
 
 // Escape and quote the values
 $name = mysqli_real_escape_string($con, $_POST['name']);
@@ -17,7 +17,7 @@ if (!mysqli_query($con, $sql)) {
 }
 
 mysqli_close($con);
-header("Location: ../user/contactuser.php?submitted=true");
+header("Location: contactuser.php?submitted=true");
 exit();
 ?>
 

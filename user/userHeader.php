@@ -263,13 +263,15 @@ nav ul li a:hover {
               <p>Edit Profile</p>
               <span>></span>
             </a>
-
+<!--
             <a href="#" class="sub-menu-link">
               <img src="../images/setting.png">
               <p>Settings & Privacy</p>
               <span>></span>
 
             </a>
+
+-->
 
             <a href="faq.php" class="sub-menu-link">
               <img src="../images/help.png">

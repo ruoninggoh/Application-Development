@@ -1,7 +1,4 @@
 <?php
-ob_start();
-session_start();
-
 if (isset($_GET['submitted']) && $_GET['submitted'] === 'true') {
   echo '<script>alert("Form submitted successfully.");</script>';
 }
@@ -19,7 +16,7 @@ if (isset($_GET['submitted']) && $_GET['submitted'] === 'true') {
   <link rel="stylesheet" href="../css/contact.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,800;1,100;1,400&display=swap"
         rel="stylesheet">
-  <?php include("userHeader.php"); ?>
+  <?php include("doctorHeader.php"); ?>
 </head>
 
 <body>
@@ -67,7 +64,7 @@ if (isset($_GET['submitted']) && $_GET['submitted'] === 'true') {
         </div>
 
         <div class="col-lg-8 mt-5 mt-lg-0">
-          <form action="contactuser_form.php" method="post" class="php-email-form">
+          <form action="dcontact.php" method="post" class="php-email-form">
             <div class="row">
               <div class="col-md-6 form-group">
                 <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
