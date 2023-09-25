@@ -160,7 +160,7 @@ session_start();
                       </table>
                     </p>
                     <div>
-                      <a href="./appointment_form.php">
+                      <a href="./doctorManageAppoint.php">
                         View My Appointment
                       </a>
                     </div>

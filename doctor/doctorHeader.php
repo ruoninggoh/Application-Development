@@ -191,9 +191,9 @@ nav ul li a:hover {
       <img src="../images/LOGO.png" class="logo">
       <ul>
         <li><a href="./dashboard.php">Home</a> </li>
-        <li><a href="#">About Us</a></li>
+        <li><a href="../doctor/daboutus.php">About Us</a></li>
         <li><a href="doctorManageAppoint.php"> Appointment</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="doctorcontactus.php">Contact Us</a></li>
       </ul>
       <img src="../images/patients.png" class="user-pic" onclick="toggleMenu()">
 
@@ -210,15 +210,15 @@ nav ul li a:hover {
               <p>Edit Profile</p>
               <span>></span>
             </a>
-
+<!--
             <a href="#" class="sub-menu-link">
               <img src="../images/setting.png">
               <p>Settings & Privacy</p>
               <span>></span>
 
             </a>
-
-            <a href="#" class="sub-menu-link">
+-->
+            <a href="faq.php" class="sub-menu-link">
               <img src="../images/help.png">
               <p>Help & Support</p>
               <span>></span>

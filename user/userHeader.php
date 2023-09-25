@@ -238,7 +238,7 @@ nav ul li a:hover {
       <img src="../images/LOGO.png" class="logo">
       <ul>
         <li><a href="./userdashboard.php">Home</a> </li>
-        <li><a href="#">About Us</a></li>
+        <li><a href="./aboutus.php">About Us</a></li>
         <li class="dropdown">
           <a href="#" class="dropbtn">Appointment</a>
           <div class="dropdown-content">
@@ -263,7 +263,7 @@ nav ul li a:hover {
               <p>Edit Profile</p>
               <span>></span>
             </a>
-
+<!--
             <a href="#" class="sub-menu-link">
               <img src="../images/setting.png">
               <p>Settings & Privacy</p>
@@ -271,7 +271,9 @@ nav ul li a:hover {
 
             </a>
 
-            <a href="#" class="sub-menu-link">
+-->
+
+            <a href="faq.php" class="sub-menu-link">
               <img src="../images/help.png">
               <p>Help & Support</p>
               <span>></span>
