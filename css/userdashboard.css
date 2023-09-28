@@ -156,6 +156,13 @@ table {
 }
 
 
+.dashboardPhoto{
+  max-width:100%;
+  max-height:400px;
+  width:auto;
+  height:auto;
+  
+}
 .dashboard-items{
   border: 2px solid #181f3e;
   border-radius: 10px;
