@@ -1,0 +1,20 @@
+**UniHealth Login Data**
+-----------
+ADMIN
+----------
+USERNAME: staff
+PASSWORD: staff123
+
+-----------
+DOCTOR
+-----------
+USERNAME: doctor
+PASSWORD: doctor123
+
+
+-----------
+USER
+-----------
+USERNAME: jiauting
+PASSWORD: 12345678
+
