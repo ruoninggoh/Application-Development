@@ -1,6 +1,12 @@
 <?php
 include("connectdb.php");
 
+$hashedPassword = password_hash('staff123', PASSWORD_DEFAULT);
+$hashedPassword1 = password_hash('doctor123', PASSWORD_DEFAULT);
+$hashedPassword2 = password_hash('12345678', PASSWORD_DEFAULT);
+
+
+
 $sql = "CREATE TABLE User (
         userID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
         username varchar(50),
@@ -18,9 +24,9 @@ if (mysqli_query($con, $sql)) {
 }
 
 $sql = "INSERT INTO user (userID, username, email, password, role)
-        VALUES (1, 'staff', 'staff@gmail.com', '$2y$10$GklumKETr8ZsMR./b6byJOdZQc3zDeV32/RW5Jogg.kyslSd1fqB2', 'Staff'),
-        (2, 'doctor', 'doctor@graduate.utm.my', md5('doctor123'), 'Doctor'),
-        (3, 'gohruoning', 'gohning@graduate.utm.my', md5('12345678'), 'Patient')";
+        VALUES (1, 'staff', 'staff@graduate.utm.my', '$hashedPassword', 'Staff'), (2, 'doctor', 'doctor@graduate.utm.my', '$hashedPassword1', 'Doctor'), (3, 'jiauting','jiauting@graduate.utm.my', '$hashedPassword2', 'Patient')";
+
+
 
 if (mysqli_query($con, $sql)) {
     echo "Users has been added to the database successfully.<br>";
