@@ -103,7 +103,7 @@ $sql = "CREATE TABLE contactForm (
         Email VARCHAR(191),
         phoneNo VARCHAR(20),
         Subject VARCHAR(50),
-        Description textarea(300)
+        Description varchar(300)
     )";
 if (mysqli_query($con, $sql)) {
     echo 'Table created successfully';
