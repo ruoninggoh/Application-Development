@@ -18,7 +18,7 @@ if (mysqli_query($con, $sql)) {
 }
 
 $sql = "INSERT INTO user (userID, username, email, password, role)
-        VALUES (1, 'staff', 'staff@gmail.com', md5('staff123'), 'Staff'),
+        VALUES (1, 'staff', 'staff@gmail.com', '$2y$10$GklumKETr8ZsMR./b6byJOdZQc3zDeV32/RW5Jogg.kyslSd1fqB2', 'Staff'),
         (2, 'doctor', 'doctor@graduate.utm.my', md5('doctor123'), 'Doctor'),
         (3, 'gohruoning', 'gohning@graduate.utm.my', md5('12345678'), 'Patient')";
 
