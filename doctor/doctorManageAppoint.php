@@ -365,7 +365,7 @@ include("../database/connectdb.php");
 
     $sql = "SELECT a.*, u.*
                     FROM appointment a
-                    INNER JOIN user_profiles u ON a.user_id = u.user_id
+                    INNER JOIN user u ON a.user_id = u.userID
                     WHERE a.requestStatus = 'Pending'";
 
     $result = mysqli_query($conn, $sql);
@@ -499,7 +499,7 @@ include("../database/connectdb.php");
                 $doctor_id = $_SESSION['userID'];
                 $sql2 = "SELECT a.*, u.*
                                         FROM appointment a
-                                        INNER JOIN user_profiles u ON  a.user_id = u.user_id
+                                        INNER JOIN user u ON  a.user_id = u.userID
                                         WHERE a.requestStatus = 'Approved' AND a.doctor_id = $doctor_id";
                 $approvedResult = mysqli_query($conn, $sql2);
                 $index = 0;

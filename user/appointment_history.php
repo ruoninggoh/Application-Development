@@ -277,7 +277,7 @@ $userID = $_SESSION['userID'];
     $userID = $_SESSION['userID'];
     $sql = "SELECT a.*, u.*
             FROM appointment AS a
-            INNER JOIN user_profiles AS u ON a.user_id = u.user_id
+            INNER JOIN user AS u ON a.user_id = u.userID
             WHERE a.user_id = $userID";
 
     $result = mysqli_query($conn, $sql);

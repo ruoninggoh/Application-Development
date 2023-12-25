@@ -4,10 +4,10 @@ include('../database/connectdb.php');
 $response = array(); // Initialize a response array
 
 if (isset($_POST['id'])) {
-    $contactFormID = $_POST['id'];
+    $inquiryID = $_POST['id'];
 
     // SQL query to delete the submission
-    $sqlDeleteSubmission = "DELETE FROM contactForm WHERE contactFormID = $contactFormID";
+    $sqlDeleteSubmission = "DELETE FROM inquiry WHERE inquiryID = $inquiryID";
 
     if (mysqli_query($con, $sqlDeleteSubmission)) {
         // Deletion successful

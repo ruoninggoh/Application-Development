@@ -46,7 +46,7 @@ session_start();
       include("../database/connectdb.php");
       $userID = $_SESSION['userID'];
 
-      $sqlProfile = "SELECT * FROM doctor_profiles WHERE doctor_id = $userID";
+      $sqlProfile = "SELECT * FROM user WHERE userID = $userID AND full_name!=''";
       $resultProfile = mysqli_query($con, $sqlProfile);
    
       if (mysqli_num_rows($resultProfile) === 0) {

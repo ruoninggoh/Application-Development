@@ -73,7 +73,7 @@ if(isset($_SESSION['upload'])){
     }
     */
     $userID = $_SESSION['userID'];
-    $sqlProfile = "SELECT * FROM admin_profiles WHERE admin_id = $userID";
+    $sqlProfile = "SELECT * FROM user WHERE userID = $userID AND full_name!=''";
     $resultProfile = mysqli_query($con, $sqlProfile);
    
    if (mysqli_num_rows($resultProfile) === 0) {
@@ -102,11 +102,11 @@ if(isset($_SESSION['upload'])){
             $today=date('Y-m-d');
             echo $today;
 
-            $userrow=mysqli_query($con, "select*from user");
+            $userrow=mysqli_query($con, "select * from user");
             $numUser=mysqli_num_rows($userrow);
 
 
-            $doctorrow=mysqli_query($con,"select * from doctor_profiles");
+            $doctorrow=mysqli_query($con,"select * from user where role='doctor'");
             $numDoc=mysqli_num_rows($doctorrow);
 
             $numbooking=0;

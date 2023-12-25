@@ -14,45 +14,11 @@ if (!isset($_SESSION['userID'])) {
 $userID = $_SESSION['userID'];
 
 // Fetch user's profile data
-$sqlProfile = "SELECT * FROM user_profiles WHERE user_id = $userID";
+$sqlProfile = "SELECT * FROM user WHERE userID = $userID";
 $resultProfile = mysqli_query($con, $sqlProfile);
 
 if ($resultProfile) {
     $profileData = mysqli_fetch_assoc($resultProfile);
-}
-
-// Fetch the username and email from the User table.
-$sqlUser = "SELECT username, email FROM User WHERE userID = $userID";
-$resultUser = mysqli_query($con, $sqlUser);
-
-if ($resultUser) {
-    $userData1 = mysqli_fetch_assoc($resultUser);
-}
-
-// Check if the user's role is Staff
-$sqlUserRole = "SELECT role FROM User WHERE userID = $userID";
-$resultUserRole = mysqli_query($con, $sqlUserRole);
-
-if ($resultUserRole) {
-    $userData = mysqli_fetch_assoc($resultUserRole);
-    $userRole = $userData['role'];
-
-    if ($userRole === 'Patient') {
-        // Check if the user already has a profile in user_profiles
-        $sqlCheckProfile = "SELECT * FROM user_profiles WHERE user_id = $userID";
-        $resultCheckProfile = mysqli_query($con, $sqlCheckProfile);
-
-        if (!$resultCheckProfile || mysqli_num_rows($resultCheckProfile) == 0) {
-            // User is a Staff and doesn't have a profile in user_profiles, so create one
-            $sqlCreateProfile = "INSERT INTO user_profiles (user_id) VALUES ($userID)";
-            if (mysqli_query($con, $sqlCreateProfile)) {
-                // Profile created successfully or already existed
-                // You can add further logic here if needed
-            } else {
-                echo "Error creating staff profile: " . mysqli_error($con);
-            }
-        }
-    }
 }
 
 mysqli_close($con);

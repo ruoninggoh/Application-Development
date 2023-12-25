@@ -27,10 +27,9 @@ if(isset($_GET['appointID'])){
     $enddate = $diagnoseData['enddate'];
   }
 
-  $sqlUser="SELECT up.* , u.email, a._date, a._time
-  FROM user_profiles up
-  INNER JOIN appointment a ON up.user_id=a.user_id
-  INNER JOIN User u ON up.user_id = u.userID
+  $sqlUser="SELECT u.*, a._date, a._time
+  FROM user u
+  INNER JOIN appointment a ON u.userID=a.user_id
   WHERE a.appointID = $appointID";
 
   $resultUser = mysqli_query($con, $sqlUser);

@@ -15,11 +15,11 @@ $searchCriteria = isset($_GET['search']) ? mysqli_real_escape_string($con, $_GET
 $offset = ($page - 1) * $recordsPerPage;
 
 // SQL query for filtering by name or subject
-$sqlGetSubmissions = "SELECT * FROM contactForm WHERE (Name LIKE '%$searchCriteria%' OR Subject LIKE '%$searchCriteria%') LIMIT $offset, $recordsPerPage";
+$sqlGetSubmissions = "SELECT * FROM inquiry WHERE (Name LIKE '%$searchCriteria%' OR Subject LIKE '%$searchCriteria%') LIMIT $offset, $recordsPerPage";
 $resultGetSubmissions = mysqli_query($con, $sqlGetSubmissions);
 
 // Count the total number of contact form submissions based on the search criteria (without LIMIT)
-$sqlCountSubmissions = "SELECT COUNT(*) as total FROM contactForm WHERE (Name LIKE '%$searchCriteria%' OR Subject LIKE '%$searchCriteria%')";
+$sqlCountSubmissions = "SELECT COUNT(*) as total FROM inquiry WHERE (Name LIKE '%$searchCriteria%' OR Subject LIKE '%$searchCriteria%')";
 $resultCountSubmissions = mysqli_query($con, $sqlCountSubmissions);
 $rowCount = mysqli_fetch_assoc($resultCountSubmissions)['total'];
 
@@ -244,14 +244,14 @@ mysqli_close($con);
                     // Display the table headers and results
                     while ($row = mysqli_fetch_assoc($resultGetSubmissions)) {
                         echo '<tr>';
-                        echo '<td>' . $row['contactFormID'] . '</td>';
+                        echo '<td>' . $row['inquiryID'] . '</td>';
                         echo '<td>' . $row['Name'] . '</td>';
                         echo '<td>' . $row['Email'] . '</td>';
                         echo '<td>' . $row['phoneNo'] . '</td>';
                         echo '<td>' . $row['Subject'] . '</td>';
                         echo '<td>' . $row['Description'] . '</td>';
                         echo '<td><a href="mailto:' . $row['Email'] . '?subject=Re: ' . $row['Subject'] . '" class="reply-link"><i class="uil uil-message reply-icon"></i>Reply</a></td>';
-                        echo '<td><button class="delete-btn" data-contactFormID="' . $row['contactFormID'] . '"><i class="uil uil-trash delete-icon"></i>Delete</button></td>';
+                        echo '<td><button class="delete-btn" data-inquiryID="' . $row['inquiryID'] . '"><i class="uil uil-trash delete-icon"></i>Delete</button></td>';
                         echo '</tr>';
                     }
                 } else {
@@ -268,14 +268,14 @@ mysqli_close($con);
             $(document).ready(function () {
                 // Handle delete button click
                 $('.delete-btn').click(function () {
-                    var contactFormID = $(this).data('contactformid');
+                    var inquiryID = $(this).data('inquiryid');
 
                     if (confirm('Are you sure you want to delete this submission?')) {
                         // Send an AJAX request to delete the submission
                         $.ajax({
                             url: 'delete_submission.php',
                             type: 'POST',
-                            data: { id: contactFormID },
+                            data: { id: inquiryID },
                             success: function (response) {
                                 // Check the response from the server
                                 if (response.success) {

@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $targetFile = $targetDirectory . basename($_FILES["profilePicture"]["name"]);
         if (move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $targetFile)) {
             // Update the profile picture in the database
-            $sqlUpdatePicture = "UPDATE user_profiles SET picture = '$targetFile' WHERE user_id = $userID";
+            $sqlUpdatePicture = "UPDATE user SET picture = '$targetFile' WHERE userID = $userID";
             mysqli_query($con, $sqlUpdatePicture);
         } else {
             echo "Failed to upload profile picture.";
@@ -83,11 +83,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit(); // Exit the script
     }
     // Check for empty values and construct the update queries
-    $updateProfile = "UPDATE user_profiles 
+    $updateProfile = "UPDATE user 
                       SET full_name = '$fullname', phone = '$contactNo', gender = '$gender',
                           age = $age, street = '$street', city = '$city', state = '$state',
                           zip_code = '$zip_code'
-                      WHERE user_id = $userID";
+                      WHERE userID = $userID";
 
     $updateUser = "UPDATE User SET username = '$username', email = '$email' WHERE userID = $userID";
 

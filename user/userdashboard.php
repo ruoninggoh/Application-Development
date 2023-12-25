@@ -41,8 +41,8 @@
    
    $userID = $_SESSION['userID'];
    
-   // Check if user_profiles table has data for the user
-   $sqlProfile = "SELECT * FROM user_profiles WHERE user_id = $userID";
+   // Check if user table has data for the user
+   $sqlProfile = "SELECT * FROM user WHERE userID = $userID AND full_name !=''";
    $resultProfile = mysqli_query($con, $sqlProfile);
    
    if (mysqli_num_rows($resultProfile) === 0) {
@@ -513,8 +513,8 @@
 <?php
  $userID = $_SESSION['userID'];
    
- // Check if user_profiles table has data for the user
- $sqlProfile = "SELECT * FROM user_profiles WHERE user_id = $userID";
+ // Check if user table has data for the user
+ $sqlProfile = "SELECT * FROM user WHERE userID = $userID";
  $resultProfile = mysqli_query($con, $sqlProfile);
  
  if (mysqli_num_rows($resultProfile) === 0) {
