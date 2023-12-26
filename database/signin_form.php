@@ -35,8 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } else {
 
-        
-
         $error = "<script>
                 var signInAgain = confirm('Wrong Username/ Password/ Role! Please try again...'); 
                 if (signInAgain) {

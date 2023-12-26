@@ -32,7 +32,7 @@ mysqli_close($con);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>View Profile</title>
     <!-- Link to your custom CSS file -->
-    <link rel="stylesheet" type="text/css" href="profile.css">
+    <link rel="stylesheet" type="text/css" href="../css/profile.css">
     <?php include("./adminHeader.html");?>
 </head>
 

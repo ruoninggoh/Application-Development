@@ -9,7 +9,7 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,800;1,100;1,400&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="css/signup.css">
+    <link rel="stylesheet" href="../css/signup.css">
     <?php include("landingHeader.html"); ?>
    
 </head>
@@ -20,7 +20,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <form action="database/signin_form.php" method="POST">
+                        <form action="../index.php" method="POST">
                             <div>
                                 <h4>Sign In</h4><br>
                             </div>
@@ -44,10 +44,12 @@
                                 <div class="text-left mt-3">
                                     <a href="recover_psw.php">Forgot Password?</a></h>
                                 </div><br>
-                                <button type="submit" class="btn custom-btn-signin">Sign In</button>
+                                <button type="submit" class="btn custom-btn-signin" name="loginSubmit">Sign In</button>
                                 <div class="text-center mt-3">
                                     <h>New user? <a href="signup.php">Sign Up Now</a></h>
                                 </div>
+                                <input type="hidden" name="action" value="validateUser" />
+                                <input type="hidden" name="controller" value="LoginController" />
                         </form>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 <?php
-include('database/connectdb.php');
+include('../database/connectdb.php');
 
 if (isset($_POST["register"])) {
     $email = $_POST["email"];
@@ -88,7 +88,7 @@ if (isset($_POST["register"])) {
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,800;1,100;1,400&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link rel="stylesheet" href="css/signup.css" ;>
+    <link rel="stylesheet" href="../css/signup.css" ;>
     <?php include("landingHeader.html"); ?>
 </head>
 
@@ -107,7 +107,7 @@ if (isset($_POST["register"])) {
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <form action="database/signup_form.php" method="POST">
+                        <form action="../index.php" method="POST">
                             <div>
                                 <h4>Sign Up</h4>
                             </div>
@@ -133,10 +133,14 @@ if (isset($_POST["register"])) {
                                     <i class="far fa-eye-slash" id="toggleConfirmPassword"></i>
                             </div>
                             <div id="passwordMismatch" class="text-danger"></div>
-                            <button type="submit" class="btn custom-btn-signup">Sign Up</button>
+                            <button type="submit" name="registerSubmit" class="btn custom-btn-signup">Sign Up</button>
                             <div class="text-center mt-3">
                                 <h>Already sign up? <a href="signin.php">Sign In Now</a></h>
                             </div>
+
+                            <input type="hidden" name="action" value="validate" />
+                            <input type="hidden" name="controller" value="RegistrationController" />
+
                         </form>
                     </div>
                 </div>

@@ -17,7 +17,7 @@ include('database/connectdb.php');
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
     <link rel="icon" href="Favicon.png">
 
@@ -26,7 +26,7 @@ include('database/connectdb.php');
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
   
     <title>Login Form</title>
-    <link rel="stylesheet" href="css/recover_psw.css">
+    <link rel="stylesheet" href="../css/recover_psw.css">
     <?php include("landingHeader.html"); ?>
 </head>
 <body>
@@ -38,7 +38,7 @@ include('database/connectdb.php');
                 <div class="card">
                     <div class="card-header">Reset Your Password</div>
                     <div class="card-body">
-                        <form action="#" method="POST" name="login">
+                        <form action="../index.php" method="POST" name="login">
 
                             <div class="form-group row">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">New Password</label>
@@ -51,6 +51,9 @@ include('database/connectdb.php');
                             <div class="col-md-6 offset-md-4">
                                 <input type="submit" value="Reset" name="reset">
                             </div>
+
+                            <input type="hidden" name="controller" value="ForgotPasswordController">
+                            <input type="hidden" name="action" value="saveNewPassword">
                     </div>
                     </form>
                 </div>
@@ -62,42 +65,7 @@ include('database/connectdb.php');
 </main>
 </body>
 </html>
-<?php
-if (isset($_SESSION["token"]) && isset($_SESSION["email"])) {
-    $Email = $_SESSION['email'];
 
-    if (isset($_POST["reset"])) {
-        $psw = $_POST["password"];
-
-        $hash = password_hash($psw, PASSWORD_DEFAULT);
-
-        $sql = mysqli_query($con, "SELECT * FROM User WHERE email='$Email'");
-        $query = mysqli_num_rows($sql);
-        $fetch = mysqli_fetch_assoc($sql);
-
-        if ($query > 0) {
-            $new_pass = $hash;
-            mysqli_query($con, "UPDATE User SET password='$new_pass' WHERE email='$Email'");
-            ?>
-            <script>
-                window.location.replace("signin.php");
-                alert("<?php echo "Your password has been successfully reset"?>");
-            </script>
-            <?php
-        } else {
-            ?>
-            <script>
-                alert("<?php echo "Please try again"?>");
-            </script>
-            <?php
-        }
-    }
-} else {
-    // Handle the case where "token" or "email" is not set in the session
-    // You may want to redirect the user or display an error message
-    echo "Session data is missing. Please check your session handling logic.";
-}
-?>
 <script>
     const toggle = document.getElementById('togglePassword');
     const password = document.getElementById('password');

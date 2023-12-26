@@ -32,7 +32,7 @@ mysqli_close($con);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>View Profile</title>
     <!-- Link to your custom CSS file -->
-    <link rel="stylesheet" type="text/css" href="profile.css">
+    <link rel="stylesheet" type="text/css" href="../css/profile.css">
     <?php include("userHeader.php");?>
 </head>
 
@@ -53,7 +53,7 @@ mysqli_close($con);
                 <?php endif; ?>
                     </div>
                     <div class="profile-name">
-                        <?= $userData1['username'] ?>
+                        <?= $profileData['username'] ?>
                     </div>
                 </div>
                 <div class="profile-details">
@@ -68,7 +68,7 @@ mysqli_close($con);
                         <tr>
                             <th>Email</th>
                             <td>
-                                <?= !empty($userData1['email']) ? $userData1['email'] : '-' ?>
+                                <?= !empty($profileData['email']) ? $profileData['email'] : '-' ?>
                             </td>
                         </tr>
                         <tr>

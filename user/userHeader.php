@@ -231,27 +231,67 @@ if (!empty($profileData)) {
 </head>
 <body>
 
+<?php
+if(isset($SESSION['role'])){
+  $role = $SESSION['role'];
+} else {
+  $role = "Patient";
+}
+?>
+
     <nav>
       <img src="../images/LOGO.png" class="logo">
       <ul>
-        <li><a href="./userdashboard.php">Home</a> </li>
-        <li><a href="./aboutus.php">About Us</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropbtn">Appointment</a>
-          <div class="dropdown-content">
-            <a href="appointment_form.php">Make Appointment</a>
-            <a href="appointment_history.php">Appointment History</a>
-          </div>
-        </li>
-        <li><a href="contactuser.php">Contact Us</a></li>
+
+        <?php
+        
+        if($role == "Doctor"){
+        ?>
+          <li><a href="./dashboard.php">Home</a> </li>
+          <li><a href="../doctor/daboutus.php">About Us</a></li>
+          <li><a href="doctorManageAppoint.php"> Appointment</a></li>
+          <li><a href="doctorcontactus.php">Contact Us</a></li>
+        <?php
+        } else if($role == "Staff"){
+        ?>
+
+          <li><a href="./dashboard.php">Home</a> </li>
+          <li><a href="./userManagement.php">User Management</a></li>
+          <li><a href="./contactManagement.php">Contact Management</a></li>
+
+        <?php } else {?>
+
+          <li><a href="./userdashboard.php">Home</a> </li>
+          <li><a href="./aboutus.php">About Us</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropbtn">Appointment</a>
+            <div class="dropdown-content">
+              <a href="appointment_form.php">Make Appointment</a>
+              <a href="appointment_history.php">Appointment History</a>
+            </div>
+          </li>
+          <li><a href="contactuser.php">Contact Us</a></li>
+
+        <?php }  ?>
       </ul>
       <img src="../images/patients.png" class="user-pic" onclick="toggleMenu()">
 
       <div class="sub-menu-wrap" id="subMenu">
         <div class="sub-menu">
           <div class="user-info">
-          <img src="<?php echo $profilePicture; ?>">
-          <h3 style="font-size:22px; padding-top:5px;"><?php echo $userName; ?></h3>
+          <?php
+          if($role == "Staff"){
+          ?>
+
+            <img src="../images/patients.png">
+            <h3>Admin</h3>
+
+          <?php }else{ ?>
+
+            <img src="<?php echo $profilePicture; ?>">
+            <h3 style="font-size:22px; padding-top:5px;"><?php echo $userName; ?></h3>
+
+          <?php } ?>
             </div>
             <hr>
 
@@ -260,23 +300,14 @@ if (!empty($profileData)) {
               <p>Edit Profile</p>
               <span>></span>
             </a>
-<!--
-            <a href="#" class="sub-menu-link">
-              <img src="../images/setting.png">
-              <p>Settings & Privacy</p>
-              <span>></span>
 
-            </a>
-
--->
-
-            <a href="faq.php" class="sub-menu-link">
+            <a href="../view/faq.php" class="sub-menu-link">
               <img src="../images/help.png">
               <p>Help & Support</p>
               <span>></span>
             </a>
 
-            <a href="../sign_out.php" class="sub-menu-link" onclick="return confirm('Are you sure you want to log out?');">
+            <a href="../index.php?controller=LoginController&action=logout" class="sub-menu-link" onclick="return confirm('Are you sure you want to log out?');">
               <img src="../images/logout.png">
               <p>Logout</p>
               <span>></span>

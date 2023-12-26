@@ -6,7 +6,7 @@ include('../database/connectdb.php');
 
 // Check if the user is logged in. Redirect to the login page if not.
 if (!isset($_SESSION['userID'])) {
-    header("Location: ../signin.php"); // Replace with your login page URL
+    header("Location: ./signin.php"); // Replace with your login page URL
     exit();
 }
 
@@ -32,7 +32,7 @@ mysqli_close($con);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>View Profile</title>
     <!-- Link to your custom CSS file -->
-    <link rel="stylesheet" type="text/css" href="profile.css">
+    <link rel="stylesheet" type="text/css" href="../css/profile.css">
     <?php include("./doctorHeader.php");?>
 </head>
 
@@ -54,7 +54,7 @@ mysqli_close($con);
                 <?php endif; ?>
                     </div>
                     <div class="profile-name">
-                        <?= $userData1['username'] ?>
+                        <?= $profileData['username'] ?>
                     </div>
                 </div>
                 <div class="profile-details">
@@ -69,7 +69,7 @@ mysqli_close($con);
                         <tr>
                             <th>Email</th>
                             <td>
-                                <?= !empty($userData1['email']) ? $userData1['email'] : '-' ?>
+                                <?= !empty($profileData['email']) ? $profileData['email'] : '-' ?>
                             </td>
                         </tr>
                         <tr>
@@ -103,7 +103,6 @@ mysqli_close($con);
                 </div>
             </div>
     
-
         <div class="profile-actions">
             <a href="profile-edit.php" class="btn btn-edit">Edit Profile</a>
         </div>
