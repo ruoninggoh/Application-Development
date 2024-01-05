@@ -17,6 +17,6 @@ if (!mysqli_query($con, $sql)) {
 }
 
 mysqli_close($con);
-header("Location: ../contact.php?submitted=true");
+header("Location: ../view/contact.php?submitted=true");
 exit();
 ?>
