@@ -23,7 +23,12 @@ $defaultProfilePicture = "../images/patients.png";
 
 if(!empty($profileData)){
   $userName = "Dr." ." ". $profileData['full_name'];
-  $profilePicture = $profileData['picture'];
+  if(($profileData['picture']) == null){
+    $profilePicture = "../images/patients.png";
+  }else{
+    $profilePicture = $profileData['picture'];
+  }
+  
 } else{
   $userName = $defaultUserName;
   $profilePicture = $defaultProfilePicture;
