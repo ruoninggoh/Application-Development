@@ -99,4 +99,4 @@ if (isset($_GET['submitted']) && $_GET['submitted'] === 'true') {
 
 </html>
 
-<?php include("../landingfooter.html"); ?>
+<?php include("../view/landingfooter.html"); ?>
