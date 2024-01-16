@@ -44,7 +44,6 @@ $totalPages = ceil($rowCount / $recordsPerPage);
 
 mysqli_close($con);
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -86,7 +85,7 @@ mysqli_close($con);
         </form>
 
         <div class="d-flex justify-content-end mb-3">
-            <a href="add_user.php" class="btn btn-success">
+            <a href="../index.php?controller=UserManagementController&action=addUser" class="btn btn-success">
                 <i class="uil uil-user-plus"></i> New User
             </a>
         </div>
@@ -117,8 +116,8 @@ mysqli_close($con);
                             <td>
                                 <?php echo $row['role']; ?>
                             </td>
-                            <td><a href="edit_user.php?userID=<?php echo $row['userID']; ?>" class="btn btn-primary">Edit</a></td>
-                            <td><button class="btn btn-danger delete-user" data-user-id="<?php echo $row['userID']; ?>">Delete</button></td>
+                            <td><a href="../index.php?controller=UserManagementController&action=editUser&userID=<?php echo $row['userID']; ?>" class="btn btn-primary">Edit</a></td>
+                            <td><button class="btn btn-danger delete-user" data-user-id="<?php echo $row['userID']; ?>">Delete</buuton></td>
                         </tr>
                     <?php endwhile; ?>
                 <?php else: ?>
@@ -162,7 +161,7 @@ mysqli_close($con);
                     const confirmation = confirm("Are you sure you want to delete this user?");
                     if (confirmation) {
                         // Redirect to a PHP script to handle the deletion
-                        window.location.href = `delete_user.php?userID=${userID}`;
+                        window.location.href = `../index.php?controller=UserManagementController&action=deleteUser&userID=${userID}`;
                     }
                 });
             });

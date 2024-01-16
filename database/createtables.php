@@ -67,7 +67,7 @@ $sql = "CREATE TABLE Appointment (
     requestStatus varchar(30) DEFAULT 'Pending',
     user_id int NOT NULL,
     doctor_id int,
-    FOREIGN KEY (userID) REFERENCES user(userID)
+    FOREIGN KEY (user_id) REFERENCES user(userID)
 )";
 if (mysqli_query($con, $sql)) {
     echo 'Table created successfully';

@@ -123,9 +123,10 @@ class UserModel{
     
     public function updatePassword($email, $password) {
         
-        $status = mysqli_query($this->con, "UPDATE User SET password='$new_pass' WHERE email='$Email'");
+        $status = mysqli_query($this->con, "UPDATE User SET password='$password' WHERE email='$email'");
 
         return $status;
     }
+
 
 }
