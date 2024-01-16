@@ -1,35 +1,33 @@
 <?php
-include_once 'config.php';
+    include_once 'config.php';
+    spl_autoload_register(function ($class) {
+        if(file_exists('controller/'.$class.'.php')){
+            include_once 'controller/' . $class . '.php';
+        }
 
-// Include the necessary files
-include_once 'controller/LoginController.php';
-include_once 'controller/UserManagementController.php';
+        if(file_exists('model/'.$class.'.php')){
+            include_once 'model/' . $class . '.php';
+        }
+        
+    });
 
-spl_autoload_register(function ($class) {
-    if (file_exists('controller/' . $class . '.php')) {
-        include_once 'controller/' . $class . '.php';
+    $controllerName = isset($_POST['controller']) ? $_POST['controller'] : null;
+
+    if ($controllerName === null) {
+        $controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'LoginController';
     }
+    
+    $controllerName = $controllerName ?: 'LoginController';
+    
+    $controllerClassName = ucfirst($controllerName);
 
-    if (file_exists('model/' . $class . '.php')) {
-        include_once 'model/' . $class . '.php';
-    }
-});
+    if (class_exists($controllerClassName)) {
 
-$controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'LoginController';
-$action = isset($_GET['action']) ? $_GET['action'] : 'actionHandler';
+        $controller = new $controllerClassName();
+        $controller->actionHandler();
 
-$controllerClassName = ucfirst($controllerName);
-
-if (class_exists($controllerClassName)) {
-    $controller = new $controllerClassName();
-
-    // Check if the specified action method exists, otherwise call the default actionHandler
-    if (method_exists($controller, $action)) {
-        $controller->$action();
     } else {
-        echo 'Action not found.';
+        echo 'Controller not found.';
     }
-} else {
-    echo 'Controller not found.';
-}
+
 ?>

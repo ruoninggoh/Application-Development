@@ -128,5 +128,111 @@ class UserModel{
         return $status;
     }
 
+    public function addUser($username, $password, $email, $role){
+        $status = "none";
 
+        $newUsername = mysqli_real_escape_string($this->con, $username);
+        $newEmail = mysqli_real_escape_string($this->con, $email);
+        $newPassword = mysqli_real_escape_string($this->con, $password);
+        $newRole = mysqli_real_escape_string($this->con, $role);
+
+        if (strpos($newEmail, "@graduate.utm.my") === false) {
+            return "emailFormatError";
+        }
+    
+        $emailExistsQuery = "SELECT COUNT(*) FROM User WHERE email = '$newEmail'";
+        $usernameExistsQuery = "SELECT COUNT(*) FROM User WHERE username = '$newUsername'";
+    
+        $emailExistsResult = mysqli_query($this->con, $emailExistsQuery);
+        $usernameExistsResult = mysqli_query($this->con, $usernameExistsQuery);
+    
+        if (!$emailExistsResult || !$usernameExistsResult) {
+            // echo "Error checking email and username existence: " . mysqli_error($con);
+            return "error";
+        }
+    
+        $emailExists = mysqli_fetch_row($emailExistsResult)[0];
+        $usernameExists = mysqli_fetch_row($usernameExistsResult)[0];
+    
+        if ($emailExists > 0) {
+            $status = "emailExist";
+            
+        } elseif ($usernameExists > 0) {
+            $status = "usernameExist";
+        }
+        
+        
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+        $sqlAddUser = "INSERT INTO User (username, email, password, role) 
+                    VALUES ('$newUsername', '$newEmail', '$hashedPassword', '$newRole')";
+
+        if (mysqli_query($this->con, $sqlAddUser)) {
+            $status = "success";
+        } else {
+            
+            return "error";
+        }
+
+        return $status;
+    }
+        
+    public function editUser($userID, $username, $email, $role){
+        $status = "none";
+
+        $newUsername = mysqli_real_escape_string($this->con, $username);
+        $newEmail = mysqli_real_escape_string($this->con, $email);
+        $userID = mysqli_real_escape_string($this->con, $userID);
+        $newRole = mysqli_real_escape_string($this->con, $role);
+
+        if (strpos($newEmail, "@graduate.utm.my") === false) {
+            return "emailFormatError";
+        }
+
+        $checkUsernameQuery = "SELECT COUNT(*) FROM User WHERE username = '$newUsername' AND userID != '$userID'";
+        $checkEmailQuery = "SELECT COUNT(*) FROM User WHERE email = '$newEmail' AND userID != '$userID'";
+
+        $usernameExistsResult = mysqli_query($this->con, $checkUsernameQuery);
+        $emailExistsResult = mysqli_query($this->con, $checkEmailQuery);
+
+        if (!$usernameExistsResult || !$emailExistsResult) {
+            //echo "Error checking username and email existence: " . mysqli_error($con);
+            return "error";
+        }
+    
+        $emailExists = mysqli_fetch_row($emailExistsResult)[0];
+        $usernameExists = mysqli_fetch_row($usernameExistsResult)[0];
+    
+        if ($emailExists > 0) {
+            return "emailExist";
+            
+        } elseif ($usernameExists > 0) {
+            return "usernameExist";
+        }
+
+        $sqlUpdateUser = "UPDATE User SET username = '$newUsername', email = '$newEmail', role = '$newRole' WHERE userID = '$userID'";
+        if (mysqli_query($this->con, $sqlUpdateUser)) {
+            return "success";
+        } else {
+            return "error";
+        }
+
+        return $status;
+    }
+    
+    public function delete($userID){
+        $status = "none";
+
+        $sqlDeleteUser = "DELETE FROM User WHERE userID = '$userID'";
+        if (mysqli_query($this->con, $sqlDeleteUser)) {
+            mysqli_commit($this->con);
+            $successMessage = "User deleted successfully.";
+            return "success";
+            
+        } else {
+            return "error";
+            
+        }
+    } 
+    
 }
